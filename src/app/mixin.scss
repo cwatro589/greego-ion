@@ -1,0 +1,46 @@
+$color-font-dark : #333333;
+$color-font-light : #ffffff;
+$color-font-label : #aaaaaa;
+$color-main1 : #15c8a0;
+$color-main2 : #0b3646;
+$color-main3 : #3d589b;
+$color-google: #dc4a38;
+$font-family: 'Roboto', sans-serif;
+$font-size-default : 14px;
+$font-size-sm : 0.8em;
+$font-size-lg : 1.4em;
+$font-color : $color-font-dark;
+$margin-multipleButton : 20px;
+
+@mixin button($count) {
+    @if $count == 1 {
+        width: 100%;
+    }
+    @else {
+        width: 100% / $count - 2;
+        :first-child {
+            margin: 0 1%;
+        }
+    }
+    // padding: 5px 10px;
+    // color: $color-font-light;
+    // background-color: $color-main1;
+    // box-sizing: border-box;
+}
+
+@mixin button-white() {
+    width: 100%;
+}
+
+@mixin frameMargin() {
+  margin: 0;
+  padding: 0;
+}
+
+@mixin fadein($seconds) {
+  -webkit-animation: fadein $seconds; /* Safari, Chrome and Opera > 12.1 */
+     -moz-animation: fadein $seconds; /* Firefox < 16 */
+      -ms-animation: fadein $seconds; /* Internet Explorer */
+       -o-animation: fadein $seconds; /* Opera < 12.1 */
+          animation: fadein $seconds;
+}

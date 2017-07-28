@@ -1,3 +1,27 @@
+@import '../../app/mixin';
 page-home {
-
+    height: 100vh;
+    color: $color-font-light;
+    background-position: center;
+    .content {
+        background-color: $color-main2;
+    };
+    .buttonContainer {
+        button {
+            @include button(2);
+        }
+    }
+  .logo-title {
+    height: 30vh;
+    margin: auto;
+    };
+    .title {
+        height: 80vh;
+        display: flex;
+        background-image: url(../assets/map.svg), none;
+        background-size: 150vw;
+        background-position: center;
+        background-repeat: no-repeat;
+        @include fadein(2s);
+    }
 }
