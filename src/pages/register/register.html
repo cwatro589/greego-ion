@@ -7,12 +7,23 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>register</ion-title>
+    <ion-title>Select Type</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding>
-
+  <ion-grid>
+    <ion-row class="headerTitle">
+      <h2>Please choose one of following account type options</h2>
+    </ion-row>
+    <ion-row>
+      <div class="registerText" text-center>
+         I want to register as
+      </div>
+      <button ion-button block (click)="goto('PhoneupdatePage')">User</button>
+      <button ion-button block color="secondary" (click)="goto('PhoneupdatePage')">Driver</button>
+    </ion-row>
+  </ion-grid>
 </ion-content>

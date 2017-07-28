@@ -24,7 +24,7 @@ body {
   color: $font-color;
   @include frameMargin;
 }
-page-home, page-login, page-login-verify, page-phoneupdate {
+page-home, page-login, page-login-verify, page-phoneupdate, page-forgot-password, page-register {
   h2 {
     text-transform: uppercase;
   }
