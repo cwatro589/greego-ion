@@ -24,6 +24,29 @@ body {
   color: $font-color;
   @include frameMargin;
 }
+page-home, page-login, page-login-verify, page-phoneupdate {
+  h2 {
+    text-transform: uppercase;
+  }
+  .content {
+    color: white;
+    background-color: $color-main2;
+  };
+  .item-ios {
+    color: $color-font-light;
+    background: none;
+  };
+  ion-footer .ion-toolbar {
+    text-align: center;
+  }
+  ion-footer .toolbar-background-ios {
+    border-width: 0 !important;
+    background: none;
+  };
+  [padding] .item-ios {
+    padding-left: 0;
+  }
+}
 .buttonContainer {
   width: 100%;
   position: absolute;
@@ -39,7 +62,9 @@ body {
     }
   }
 }
-
+.section {
+  margin : 40px 0;
+}
 
 /* Anmation */
 

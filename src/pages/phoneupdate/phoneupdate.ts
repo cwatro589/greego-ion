@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { LoginVerifyPage } from '../login-verify/login-verify';
 
 /**
- * Generated class for the RegisterPage page.
+ * Generated class for the PhoneupdatePage page.
  *
  * See http://ionicframework.com/docs/components/#navigation for more info
  * on Ionic pages and navigation.
@@ -10,18 +11,18 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
 @IonicPage()
 @Component({
-  selector: 'page-register',
-  templateUrl: 'register.html',
+  selector: 'page-phoneupdate',
+  templateUrl: 'phoneupdate.html',
 })
-export class RegisterPage {
+export class PhoneupdatePage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad RegisterPage');
+    console.log('ionViewDidLoad PhoneupdatePage');
   }
-
+  
   goto(a) {
     this.navCtrl.push(a);
   }

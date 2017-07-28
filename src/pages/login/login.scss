@@ -1,3 +1,29 @@
 page-login {
-
+    .buttonContainer {
+        position: static;
+    }
+    .forgotPassword {
+        margin: 10px 0;
+        text-align: center;
+    }
+    .loginTitle {
+        color: white;
+        height: 40vh;
+        position: relative;
+        padding: 16px;
+        background-image: url("../../assets/loginscreen.jpg");
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: cover;
+        .loginText {
+            position: absolute;
+            bottom: 3%;
+            h1 {
+                text-transform: uppercase;
+            }
+            p {
+                line-height: 1.5em;
+            }
+        }
+    }
 }

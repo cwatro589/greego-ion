@@ -3,17 +3,12 @@ page-home {
     height: 100vh;
     color: $color-font-light;
     background-position: center;
-    .content {
-        background-color: $color-main2;
-    };
-    .buttonContainer {
-        button {
-            @include button(2);
-        }
+    button {
+        @include button(2);
     }
-  .logo-title {
-    height: 30vh;
-    margin: auto;
+    .logo-title {
+        height: 30vh;
+        margin: auto;
     };
     .title {
         height: 80vh;
@@ -23,5 +18,9 @@ page-home {
         background-position: center;
         background-repeat: no-repeat;
         @include fadein(2s);
+    }
+    .toolbar-background {
+        background: none;
+        border-width: 0 !important;
     }
 }
