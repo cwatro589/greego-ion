@@ -21,5 +21,7 @@ export class RegisterCarInfoPage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad RegisterCarInfoPage');
   }
-
+  goto(a) {
+    this.navCtrl.push(a);
+  }
 }

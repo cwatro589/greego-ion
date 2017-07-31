@@ -7,12 +7,75 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>register-carInfo</ion-title>
+    <ion-title>Car Information</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding>
-
+  <ion-grid>
+    <ion-row class="headerTitle">
+      <div>
+        <h1>Car Information</h1>
+      </div>
+      Please select your car’s brand, model and types below.
+    </ion-row>
+    <ion-row>
+      <ion-item>
+        <ion-label>Choose Year</ion-label>
+        <ion-select>
+          <ion-option value="year">year</ion-option>
+        </ion-select>
+      </ion-item>
+    </ion-row>
+    <ion-row>
+      <ion-item>
+        <ion-label>Choose Brand</ion-label>
+        <ion-select>
+          <ion-option value="year">Brand</ion-option>
+        </ion-select>
+      </ion-item>
+    </ion-row>
+    <ion-row>
+      <ion-item>
+        <ion-label>Choose Model</ion-label>
+        <ion-select>
+          <ion-option value="year">Model</ion-option>
+        </ion-select>
+      </ion-item>
+    </ion-row>
+    <ion-row>
+      <ion-item>
+        <ion-label>Choose Trim</ion-label>
+        <ion-select>
+          <ion-option value="year">Trim</ion-option>
+        </ion-select>
+      </ion-item>
+    </ion-row>
+    <ion-row>
+      <ion-item>
+        <ion-label color="primary" stacked>Color</ion-label>
+        <ion-input type="text" placeholder="Enter a car color"></ion-input>
+      </ion-item>
+    </ion-row>
+    <ion-row>
+      <ion-list radio-group>
+        <ion-label color="primary" stacked>Transmittion Type</ion-label>
+        <ion-item>
+          <ion-label>Automatic</ion-label>
+          <ion-radio checked="true" value="automatic"></ion-radio>
+        </ion-item>
+        <ion-item>
+          <ion-label>Manual</ion-label>
+          <ion-radio value="manual"></ion-radio>
+        </ion-item>
+      </ion-list>
+    </ion-row>
+    <ion-row>
+      <div class="buttonContainer">
+        <button ion-button block id="btnLogin" class="btn" (click)="goto('RegisterUserAgreementPage')">Next</button>
+      </div>
+    </ion-row>
+  </ion-grid>
 </ion-content>

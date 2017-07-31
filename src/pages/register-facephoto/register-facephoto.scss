@@ -1,3 +1,21 @@
+@import '../../app/mixin';
 page-register-facephoto {
-
+    .facePhoto {
+        width: 40vh;
+        height: 40vh;
+        border-radius: 20vh;
+        text-align: center;
+        border: 4px solid $color-main1;
+        background-color: saturate($color-main2, 50%);
+        margin: 3vh auto;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        padding: 4vh;
+        color: white;
+    }
+    .fa-camera {
+        font-size: 8vh;
+        margin-bottom: 20px;
+    }
 }

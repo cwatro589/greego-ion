@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { RegisterFacephotoPage } from '../register-facephoto/register-facephoto';
 
 /**
  * Generated class for the RegisterUserPage page.
@@ -21,5 +22,7 @@ export class RegisterUserPage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad RegisterUserPage');
   }
-
+  goto(a) {
+    this.navCtrl.push(a);
+  }
 }

@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { LoginPage } from '../login/login';
 
 /**
  * Generated class for the RegisterUserCompletedPage page.
@@ -21,5 +22,7 @@ export class RegisterUserCompletedPage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad RegisterUserCompletedPage');
   }
-
+  goto(a) {
+    this.navCtrl.push(a);
+  }
 }

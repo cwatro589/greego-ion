@@ -1,3 +1,13 @@
 page-register-user-completed {
-
+    ion-row {
+        text-align: center;
+    }
+    .fa-check {
+        font-size: 20vh;
+        color: $color-main1;
+    }
+    .scroll-content {
+        display: flex;
+        align-items: center;
+    }
 }

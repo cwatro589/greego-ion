@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { RegisterCarInfoPage } from '../register-car-info/register-car-info';
 
 /**
  * Generated class for the RegisterFacephotoPage page.
@@ -21,5 +22,7 @@ export class RegisterFacephotoPage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad RegisterFacephotoPage');
   }
-
+  goto(a) {
+    this.navCtrl.push(a);
+  }
 }

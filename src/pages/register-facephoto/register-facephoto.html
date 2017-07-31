@@ -7,12 +7,28 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>register-facephoto</ion-title>
+    <ion-title>Face Photo</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding>
-
+    <ion-row class="headerTitle">
+      <h1>Face Photo</h1>
+      Please take a picture of the face that will be used in your profile so the driver can find you quickly but you can skip this step.
+    </ion-row>
+    <ion-row>
+      <div class="facePhoto">
+        <div class="fullWidth">
+          <i class="fa fa-camera"></i>
+          <div>Please click on here to upload a picture of your face</div>
+        </div>  
+      </div>
+    </ion-row>
+    <ion-row>
+      <div class="buttonContainer">
+        <button ion-button block id="btnLogin" class="btn" (click)="goto('RegisterCarInfoPage')">Next</button>
+      </div>
+    </ion-row>
 </ion-content>

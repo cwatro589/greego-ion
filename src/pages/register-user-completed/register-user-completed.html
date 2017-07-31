@@ -7,12 +7,29 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>register-user-completed</ion-title>
+    <ion-title>Sign-Up Completed</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding>
-
+  <ion-row>
+    <i class="fa fa-check fullWidth imageRotateHorizontal"></i>
+    <div class="fullWidth">
+      <h1>
+        Completed to Sign-Up
+      </h1>
+    </div>
+    <p>
+      Thank you for sign up the Rider account. <br>Please login and enjoy the our providing Greego service.
+    </p>
+  </ion-row>
 </ion-content>
+<ion-footer>
+  <ion-toolbar position="bottom" padding>
+     <div class="buttonContainer">
+      <button ion-button block id="btnLogin" class="btn" (click)="goto('LoginPage')">Go Back to Log in</button>
+    </div>
+	</ion-toolbar>
+</ion-footer>
