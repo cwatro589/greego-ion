@@ -20,8 +20,12 @@
   <div class="title">
     <img src="../assets/logo-start.svg" class="logo-title" alt="GREEGO Logo">
   </div>
-  <div position="bottom" padding>
+</ion-content>
+<ion-footer>
+  <ion-toolbar position="bottom" padding>
+     <div class="buttonContainer">
       <button ion-button id="btnLogin" class="btn" (click)="goto('LoginPage')">Login</button>
       <button ion-button color="secondary" id="btnRegister" class="btn" (click)="goto('RegisterPage')">Register</button>
-	</div>
-</ion-content>
+    </div>
+	</ion-toolbar>
+</ion-footer>

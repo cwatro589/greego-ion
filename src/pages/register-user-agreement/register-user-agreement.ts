@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { RegisterUserCompletedPage } from '../register-user-completed/register-user-completed';
+import { LoadingController } from 'ionic-angular';
 
 /**
  * Generated class for the RegisterUserAgreementPage page.
@@ -15,7 +16,7 @@ import { RegisterUserCompletedPage } from '../register-user-completed/register-u
   templateUrl: 'register-user-agreement.html',
 })
 export class RegisterUserAgreementPage {
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public loadingCtrl: LoadingController) {
   }
 
   ionViewDidLoad() {
@@ -23,6 +24,11 @@ export class RegisterUserAgreementPage {
   }
 
   goto(a) {
+    let loader = this.loadingCtrl.create({
+      content: "Please wait...",
+      duration: 3000
+    });
+    loader.present();
     this.navCtrl.push(a);
   }
 }
