@@ -1,6 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { RegisterCarInfoPage } from '../register-car-info/register-car-info';
+import { RegisterDriverPrefPage } from '../register-driver-pref/register-driver-pref';
+
+import { FacePhoto, RegisterType } from '../../form/formData.model';
+import { FormDataService } from '../../form/formData.service';
 
 /**
  * Generated class for the RegisterFacephotoPage page.
@@ -15,14 +19,31 @@ import { RegisterCarInfoPage } from '../register-car-info/register-car-info';
   templateUrl: 'register-facephoto.html',
 })
 export class RegisterFacephotoPage {
+  registerType: RegisterType;
+  facePhoto: FacePhoto;
+  form: any;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private formDataService: FormDataService) {
+  }
+
+  ngOnInit() {
+      this.registerType = this.formDataService.getType();
+      this.facePhoto = this.formDataService.getFacePhoto();
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad RegisterFacephotoPage');
   }
-  goto(a) {
-    this.navCtrl.push(a);
+  
+  goto() {
+    this.formDataService.setFacePhoto(this.facePhoto);
+    this.formDataService.setType(this.registerType);
+    
+    if (this.registerType.userType == 'rider') {
+      this.navCtrl.push(RegisterCarInfoPage);
+    }
+    else {
+      this.navCtrl.push(RegisterDriverPrefPage);
+    }
   }
 }

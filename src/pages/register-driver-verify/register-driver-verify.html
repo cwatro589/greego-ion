@@ -14,5 +14,38 @@
 
 
 <ion-content padding>
-
+  <ion-grid>
+    <ion-row class="headerTitle">
+      <div>
+        <h1>Driver Verification</h1>
+      </div>
+      Please take a photo for Driver License and Vehicle Insurance Card.
+    </ion-row>
+    <ion-row>
+      <ion-label>Driver's License</ion-label>
+      <button ion-button block>
+        <i class="fa fa-camera"></i>
+        Take a Photo1
+      </button>
+    </ion-row>
+    <ion-row>
+      <ion-label>Passport or Birth Certificate.</ion-label>
+      <button ion-button block>
+        <i class="fa fa-camera"></i>
+        Take a Photo2
+      </button>
+    </ion-row>
+    <ion-row>
+      <ion-label>Vehicle Insurance</ion-label>
+      <button ion-button block>
+        <i class="fa fa-camera"></i>
+        Take a Photo3
+      </button>
+    </ion-row>
+    <ion-row>
+      <div class="buttonContainer">
+        <button ion-button block id="btnLogin" class="btn" (click)="goto('RegisterUserAgreementPage')">Next</button>
+      </div>
+    </ion-row>
+  </ion-grid>
 </ion-content>

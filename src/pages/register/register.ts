@@ -1,6 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { RegisterUserPage } from '../register-user/register-user';
+import { RegisterDriverVerifyPage } from '../register-driver-verify/register-driver-verify';
+
+import { RegisterType } from '../../form/formData.model';
+import { FormDataService } from '../../form/formData.service';
 
 /**
  * Generated class for the RegisterPage page.
@@ -14,16 +18,23 @@ import { RegisterUserPage } from '../register-user/register-user';
   selector: 'page-register',
   templateUrl: 'register.html',
 })
-export class RegisterPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+export class RegisterPage implements OnInit {
+  registerType: RegisterType;
+
+  constructor(public navCtrl: NavController, public navParams: NavParams,  private formDataService: FormDataService) {
+
+  }
+  ngOnInit() {
+      this.registerType = this.formDataService.getType();
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad RegisterPage');
   }
 
-  goto(a) {
-    this.navCtrl.push(a);
+  goto(type) {
+    this.registerType.userType = type;
+    this.formDataService.setType(this.registerType);
+    this.navCtrl.push(RegisterUserPage);
   }
 }

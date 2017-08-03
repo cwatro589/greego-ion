@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { RegisterDriverBankPage } from '../register-driver-bank/register-driver-bank';
+import { RegisterDriverVerifyPage } from '../register-driver-verify/register-driver-verify';
 
 /**
- * Generated class for the RegisterDriverVerifyPage page.
+ * Generated class for the RegisterDriverPrefPage page.
  *
  * See http://ionicframework.com/docs/components/#navigation for more info
  * on Ionic pages and navigation.
@@ -11,20 +11,19 @@ import { RegisterDriverBankPage } from '../register-driver-bank/register-driver-
 
 @IonicPage()
 @Component({
-  selector: 'page-register-driver-verify',
-  templateUrl: 'register-driver-verify.html',
+  selector: 'page-register-driver-pref',
+  templateUrl: 'register-driver-pref.html',
 })
-export class RegisterDriverVerifyPage {
+export class RegisterDriverPrefPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad RegisterDriverVerifyPage');
+    console.log('ionViewDidLoad RegisterDriverPrefPage');
   }
-
   registerType = this.navParams.data;
   goto() {
-    this.navCtrl.push(RegisterDriverBankPage, this.registerType);
+    this.navCtrl.push(RegisterDriverVerifyPage, this.registerType);
   }
 }

@@ -14,68 +14,70 @@
 
 
 <ion-content padding>
-  <ion-grid>
-    <ion-row class="headerTitle">
-      <div>
-        <h1>Car Information</h1>
-      </div>
-      Please select your car’s brand, model and types below.
-    </ion-row>
-    <ion-row>
-      <ion-item>
-        <ion-label>Choose Year</ion-label>
-        <ion-select>
-          <ion-option value="year">year</ion-option>
-        </ion-select>
-      </ion-item>
-    </ion-row>
-    <ion-row>
-      <ion-item>
-        <ion-label>Choose Brand</ion-label>
-        <ion-select>
-          <ion-option value="year">Brand</ion-option>
-        </ion-select>
-      </ion-item>
-    </ion-row>
-    <ion-row>
-      <ion-item>
-        <ion-label>Choose Model</ion-label>
-        <ion-select>
-          <ion-option value="year">Model</ion-option>
-        </ion-select>
-      </ion-item>
-    </ion-row>
-    <ion-row>
-      <ion-item>
-        <ion-label>Choose Trim</ion-label>
-        <ion-select>
-          <ion-option value="year">Trim</ion-option>
-        </ion-select>
-      </ion-item>
-    </ion-row>
-    <ion-row>
-      <ion-item>
-        <ion-label color="primary" stacked>Color</ion-label>
-        <ion-input type="text" placeholder="Enter a car color"></ion-input>
-      </ion-item>
-    </ion-row>
-    <ion-row>
-      <ion-list radio-group>
-        <ion-label color="primary" stacked>Transmittion Type</ion-label>
+  <form #riderForm="ngForm" class="editForm" novalidate>
+    <ion-grid>
+      <ion-row class="headerTitle">
+        <div>
+          <h1>Car Information</h1>
+        </div>
+        Please select your car’s brand, model and types below.
+      </ion-row>
+      <ion-row>
         <ion-item>
-          <ion-label>Automatic</ion-label>
-          <ion-radio checked="true" value="automatic"></ion-radio>
+          <ion-label>Choose Year</ion-label>
+          <ion-select #caryear="ngModel" required id="caryear" name="caryear" [(ngModel)]="rider.carYear">
+            <ion-option value="2000">2000</ion-option>
+          </ion-select>
         </ion-item>
+      </ion-row>
+      <ion-row>
         <ion-item>
-          <ion-label>Manual</ion-label>
-          <ion-radio value="manual"></ion-radio>
+          <ion-label>Choose Brand</ion-label>
+          <ion-select #carbrand="ngModel" required id="carbrand" name="carbrand" [(ngModel)]="rider.carBrand">
+            <ion-option value="honda">Honda</ion-option>
+          </ion-select>
         </ion-item>
-      </ion-list>
-    </ion-row>
-    <ion-row>
-      <div class="buttonContainer">
-        <button ion-button block id="btnLogin" class="btn" (click)="goto('RegisterUserAgreementPage')">Next</button>
-      </div>
-    </ion-row>
-  </ion-grid>
+      </ion-row>
+      <ion-row>
+        <ion-item>
+          <ion-label>Choose Model</ion-label>
+          <ion-select #carmodel="ngModel" required id="carmodel" name="carmodel" [(ngModel)]="rider.carModel">
+            <ion-option value="Civic">Civic</ion-option>
+          </ion-select>
+        </ion-item>
+      </ion-row>
+      <ion-row>
+        <ion-item>
+          <ion-label>Choose Trim</ion-label>
+          <ion-select #cartrim="ngModel" required id="cartrim" name="cartrim" [(ngModel)]="rider.carTrim">
+            <ion-option value="EX">EX</ion-option>
+          </ion-select>
+        </ion-item>
+      </ion-row>
+      <ion-row>
+        <ion-item>
+          <ion-label color="primary" stacked [hidden]="!carcolor.valid">Color</ion-label>
+          <ion-input type="text" #carcolor="ngModel" required id="carcolor" name="carcolor" [(ngModel)]="rider.carColor" placeholder="Enter a car color"></ion-input>
+        </ion-item>
+      </ion-row>
+      <ion-row>
+        <ion-list radio-group #cartransmittion="ngModel" id="cartransmittion" name="cartransmittion" [(ngModel)]="rider.carTransmittion">
+          <ion-label color="primary" stacked>Transmittion Type</ion-label>
+          <ion-item>
+            <ion-label>Automatic</ion-label>
+            <ion-radio checked="true" value="automatic"></ion-radio>
+          </ion-item>
+          <ion-item>
+            <ion-label>Manual</ion-label>
+            <ion-radio value="manual"></ion-radio>
+          </ion-item>
+        </ion-list>
+      </ion-row>
+      <ion-row>
+        <div class="buttonContainer">
+          <button ion-button block id="btnLogin" class="btn" [disabled]="!riderForm.valid" (click)="goto()">Next</button>
+        </div>
+      </ion-row>
+    </ion-grid>
+  </form>
 </ion-content>

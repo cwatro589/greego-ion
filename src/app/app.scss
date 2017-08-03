@@ -100,7 +100,9 @@ hr.splitLine.or:after {
   }
 }
 ion-row {
-  margin-top: 1.1em;
+  &.margin-top {
+    margin-top: 1.1em;
+  }
   &:first-child {
     margin-top: 0;
   }
@@ -130,6 +132,20 @@ ion-footer {
     -o-animation: spinHorizontal 5s infinite linear;    
     -webkit-animation: spinHorizontal 5s infinite linear;
     animation: spinHorizontal 5s infinite linear;
+}
+
+ion-item.item-input .input-wrapper {
+  height: 3.7em;
+}
+ion-item ion-input ~ ion-label {
+  position: absolute;
+}
+ion-item.item-radio ~ ion-label {
+  margin-top: 2em;
+}
+ion-input {
+  display: flex;
+  align-items: flex-end;
 }
 /* Anmation */
 

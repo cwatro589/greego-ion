@@ -21,9 +21,15 @@
         Completed to Sign-Up
       </h1>
     </div>
-    <p>
-      Thank you for sign up the Rider account. <br>Please login and enjoy the our providing Greego service.
-    </p>
+    <div [ngSwitch]="regtype">
+      <p *ngSwitchDefault>
+        Thank you for sign up the Rider account. <br>Please login and enjoy the our providing Greego service.
+      </p>
+      <p *ngSwitchCase="'driver'">
+        Thank you for apply the Greego Driver!<br>
+        Greego will review your driver application and process can take 1~2 weeks or more, so keep an eye out for dates from email.
+      </p>
+    </div>
   </ion-row>
 </ion-content>
 <ion-footer>

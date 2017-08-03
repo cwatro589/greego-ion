@@ -7,12 +7,13 @@ import { RegisterPage } from '../register/register';
   selector: 'page-home',
   templateUrl: 'home.html'
 })
-export class HomePage {
 
+export class HomePage {
+  
   constructor(public navCtrl: NavController) {
     
   }
-  goto(a) {
-    this.navCtrl.push(a);
+  gotoRegisterPage() {
+    this.navCtrl.push(RegisterPage);
   }
 }

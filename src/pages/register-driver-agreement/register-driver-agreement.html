@@ -7,12 +7,34 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>register-driverAgreement</ion-title>
+    <ion-title>Terms and Condition</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding>
-
+  <ion-grid>
+    <ion-row class="headerTitle">
+      <div>
+        <h1>Terms and Condition</h1>
+      </div>
+    </ion-row>
+    <ion-row>
+      <ion-list>
+          <button ion-item *ngFor="let item of agreementList | matchesCategory" (click)="openModal(item.page)">
+            {{ item.name }}
+          </button>
+      </ion-list>
+    </ion-row>
+  </ion-grid>
 </ion-content>
+<ion-footer class="split">
+  <ion-toolbar position="bottom" padding>
+     <ion-item>
+        <ion-label>Agree the Terms and Condition</ion-label>
+        <ion-checkbox color="dark" [(ngModel)]="checkAgreement"></ion-checkbox>
+      </ion-item>
+      <button ion-button block id="btnLogin" class="btn" [disabled]="!checkAgreement" (click)="goto('RegisterUserCompletedPage')">Next</button>
+	</ion-toolbar>
+</ion-footer>

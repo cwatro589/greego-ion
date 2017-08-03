@@ -14,72 +14,74 @@
 
 
 <ion-content padding>
-  <ion-grid>
-    <ion-row class="headerTitle">
-      <div>
-        <h1>Sign Up</h1>
-      </div>
-      <p>Please enter your informaton below or you can sign up and sign in using Facebook account.</p>
-    </ion-row>
-    <ion-row>
-      <button ion-button block (click)="goto('PhoneupdatePage')" color="danger">
-        <ion-icon name="logo-google"></ion-icon>
-          Google
-      </button>
-    </ion-row>
-    <ion-row>
-      <hr class="splitLine or">
-    </ion-row>
-    <ion-row>
-      <ion-col col-6>
-        <ion-item>
-          <ion-label color="primary" stacked>First Name</ion-label>
-          <ion-input type="text" placeholder="Enter the your first name"></ion-input>
-        </ion-item>
-      </ion-col>
-      <ion-col col-6>
-        <ion-item>
-          <ion-label color="primary" stacked>Last Name</ion-label>
-          <ion-input type="text" placeholder="Enter the your last name"></ion-input>
-        </ion-item>
-      </ion-col>
-    </ion-row>
-    <ion-row>
-      <ion-col col-12>
-        <ion-item>
-          <ion-label color="primary" stacked>Email</ion-label>
-          <ion-input type="email" placeholder="Enter the your email address"></ion-input>
-        </ion-item>
-      </ion-col>
-    </ion-row>
-    <ion-row>
-      <ion-col col-12>
-        <ion-item>
-          <ion-label color="primary" stacked>Phone Number</ion-label>
-          <ion-input type="tel" pattern="[789][0-9]{9}" placeholder="Enter the your phone number"></ion-input>
-        </ion-item>
-      </ion-col>
-    </ion-row>
-    <ion-row>
-      <ion-col col-12>
-        <ion-item>
-          <ion-label color="primary" stacked>Password</ion-label>
-          <ion-input type="password" placeholder="Enter the your password"></ion-input>
-        </ion-item>
-      </ion-col>
-    </ion-row>
-    <ion-row>
-      <ion-col col-12>
-        <ion-item>
-          <ion-label color="primary" stacked>Password Confirm</ion-label>
-          <ion-input type="password" placeholder="Enter the your password again"></ion-input>
-        </ion-item>
-      </ion-col>
-    </ion-row>
-    <ion-row>
-      <div class="buttonContainer">
-        <button ion-button block id="btnLogin" class="btn" (click)="goto('RegisterFacephotoPage')">Next</button>
-      </div>
-    </ion-row>
-  </ion-grid>
+  <form #personalForm="ngForm" class="editForm" novalidate>
+    <ion-grid>
+      <ion-row class="headerTitle">
+        <div>
+          <h1>Sign Up</h1>
+        </div>
+        <p>Please enter your informaton below or you can sign up and sign in using Facebook account.</p>
+      </ion-row>
+      <ion-row>
+        <button ion-button block (click)="goto('PhoneupdatePage')" color="danger">
+          <ion-icon name="logo-google"></ion-icon>
+            Google
+        </button>
+      </ion-row>
+      <ion-row class="margin-top">
+        <hr class="splitLine or">
+      </ion-row>
+      <ion-row>
+        <ion-col col-6>
+          <ion-item>
+            <ion-label color="labelLight" stacked [hidden]="!firstname.valid">First Name</ion-label>
+            <ion-input type="text" #firstname="ngModel" required id="firstname" name="firstname" [(ngModel)]="personal.firstName" placeholder="First Name"></ion-input>
+          </ion-item>
+        </ion-col>
+        <ion-col col-6>
+          <ion-item>
+            <ion-label color="labelLight" stacked [hidden]="!lastname.valid">Last Name</ion-label>
+            <ion-input type="text" #lastname="ngModel" required id="lastname" name="lastname" [(ngModel)]="personal.lastName" placeholder="Last Name"></ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col col-12>
+          <ion-item>
+            <ion-label color="labelLight" stacked [hidden]="!email.valid">Email Address</ion-label>
+            <ion-input type="email"  #email="ngModel" required id="email" name="email" [(ngModel)]="personal.email" placeholder="Email Address"></ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col col-12>
+          <ion-item>
+            <ion-label color="labelLight" stacked [hidden]="!phone.valid">Phone Number</ion-label>
+            <ion-input type="tel" #phone="ngModel" required id="phone" name="phone" [(ngModel)]="personal.phone" placeholder="Phone Number"></ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col col-12>
+          <ion-item>
+            <ion-label color="labelLight" stacked [hidden]="!password.valid">Password</ion-label>
+            <ion-input type="password" #password="ngModel" required id="password" name="password" [(ngModel)]="personal.password" placeholder="Password"></ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col col-12>
+          <ion-item>
+            <ion-label color="labelLight" stacked [hidden]="!confirm.valid">Password Confirm</ion-label>
+            <ion-input type="password" #confirm="ngModel" required id="confirm" name="confirm" [(ngModel)]="personal.confirm" placeholder="Password Confirm"></ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <div class="buttonContainer">
+          <button ion-button block id="btnLogin" class="btn" (click)="goto(personalForm)" [disabled]="!personalForm.valid">Next</button>
+        </div>
+      </ion-row>
+    </ion-grid>
+  </form>
 </ion-content>
