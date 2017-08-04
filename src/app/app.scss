@@ -25,8 +25,17 @@ body {
   color: $font-color;
   @include frameMargin;
 }
-page-home, page-login, page-login-verify, page-phoneupdate, page-forgot-password, page-register, page-register-user, page-register-car-info, page-register-facephoto, page-register-user-agreement, page-register-user-completed {
+page-home, page-login, page-login-verify, page-phoneupdate, page-forgot-password, page-register, page-register-user, page-register-car-info, page-register-facephoto, page-register-driver-agreement, page-register-user-completed, page-register-driver-agreement, page-register-driver-bank, page-register-driver-pref, page-register-driver-verify, page-register-insurance, page-register-driver-insurance-verify, page-register-agreement1, page-register-agreement2, page-register-agreement3, page-register-agreement4 {
+  ion-header {
+    color: $color-font-label;
+  }
   h2 {
+    color: white;
+    text-transform: uppercase;
+  }
+  h5 {
+    font-size: 1.5rem;
+    margin-top: 0.5em;
     text-transform: uppercase;
   }
   .content {
@@ -37,6 +46,9 @@ page-home, page-login, page-login-verify, page-phoneupdate, page-forgot-password
     color: $color-font-light;
     background: none;
   };
+  ion-row {
+    margin-top: 1.5em;
+  }
   ion-footer .ion-toolbar {
     text-align: center;
   }
@@ -46,6 +58,28 @@ page-home, page-login, page-login-verify, page-phoneupdate, page-forgot-password
   };
   [padding] .item {
     padding-left: 0;
+  }
+  .item-ios.item-block.item-checkbox {
+    &.item-checkbox-checked ion-label {
+      color: $color-main1;
+    }
+    .item-inner {
+      border-bottom: 0;
+    }
+  }
+  ion-list .item-ios {
+    padding-left: 0;
+    .item-inner {
+      padding-left: 16px;
+    }
+    &.item-radio {
+      .item-inner {
+        padding-left: 0;
+      }
+    }
+  }
+  .item-ios.activated {
+    background-color: $color-main1
   }
 }
 p {
@@ -133,9 +167,16 @@ ion-footer {
     -webkit-animation: spinHorizontal 5s infinite linear;
     animation: spinHorizontal 5s infinite linear;
 }
-
-ion-item.item-input .input-wrapper {
-  height: 3.7em;
+ion-item.item-input {
+  ion-label{
+    margin-top: 0;
+  }
+  .item-label-stacked {
+    margin-top: 10px;
+  }
+  .input-wrapper {
+    height: 3em;
+  } 
 }
 ion-item ion-input ~ ion-label {
   position: absolute;
@@ -146,6 +187,9 @@ ion-item.item-radio ~ ion-label {
 ion-input {
   display: flex;
   align-items: flex-end;
+}
+.noMargin {
+  margin: 0 !important;
 }
 /* Anmation */
 

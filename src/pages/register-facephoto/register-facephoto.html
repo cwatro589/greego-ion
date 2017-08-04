@@ -15,20 +15,35 @@
 
 <ion-content padding>
     <ion-row class="headerTitle">
-      <h1>Face Photo</h1>
+      <h2>Face Photo</h2>
       Please take a picture of the face that will be used in your profile so the driver can find you quickly but you can skip this step.
     </ion-row>
     <ion-row>
-      <div class="facePhoto">
+      <!--<div class="facePhoto" *ngIf="!photoSelected" (click)='takephoto()'>
         <div class="fullWidth">
           <i class="fa fa-camera"></i>
           <div>Please click on here to upload a picture of your face</div>
-        </div>  
-      </div>
+        </div>
+      </div>-->
+      <img class="facephoto" [src]="facePhoto.facePhotoLocation" *ngIf="photoSelected">
     </ion-row>
     <ion-row>
       <div class="buttonContainer">
-        <button ion-button block id="btnLogin" class="btn" (click)="goto()">Next</button>
+        <button ion-button color="secondary" (click)="takephoto()">
+          <i class="fa fa-camera"></i>
+          Camera
+        </button>
+        <button ion-button color="secondary" (click)="takephoto()">
+          <i class="fa fa-file-image-o"></i>
+          Gallery
+        </button>
       </div>
     </ion-row>
 </ion-content>
+<ion-footer>
+  <ion-toolbar position="bottom" padding>
+     <div class="buttonContainer">
+        <button ion-button block id="btnLogin" class="btn" [disabled]="!valid" (click)="goto()">Next</button>
+      </div>
+	</ion-toolbar>
+</ion-footer>

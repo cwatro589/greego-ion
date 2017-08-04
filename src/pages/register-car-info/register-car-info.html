@@ -18,7 +18,7 @@
     <ion-grid>
       <ion-row class="headerTitle">
         <div>
-          <h1>Car Information</h1>
+          <h2>Car Information</h2>
         </div>
         Please select your car’s brand, model and types below.
       </ion-row>
@@ -56,13 +56,13 @@
       </ion-row>
       <ion-row>
         <ion-item>
-          <ion-label color="primary" stacked [hidden]="!carcolor.valid">Color</ion-label>
+          <ion-label color="labelLight" stacked [hidden]="!carcolor.valid">Color</ion-label>
           <ion-input type="text" #carcolor="ngModel" required id="carcolor" name="carcolor" [(ngModel)]="rider.carColor" placeholder="Enter a car color"></ion-input>
         </ion-item>
       </ion-row>
       <ion-row>
         <ion-list radio-group #cartransmittion="ngModel" id="cartransmittion" name="cartransmittion" [(ngModel)]="rider.carTransmittion">
-          <ion-label color="primary" stacked>Transmittion Type</ion-label>
+          <ion-label color="labelLight" stacked>Transmittion Type</ion-label>
           <ion-item>
             <ion-label>Automatic</ion-label>
             <ion-radio checked="true" value="automatic"></ion-radio>

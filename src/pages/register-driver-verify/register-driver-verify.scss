@@ -1,3 +1,8 @@
 page-register-driver-verify {
-
+    ion-label + button i {
+        margin-right: 10px;
+    }
+    button.completed {
+        background-color: $color-completedPhoto;
+    }
 }

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { LoginPage } from '../login/login';
 
-import { FacePhoto, RegisterType } from '../../form/formData.model';
+import { Personal, FacePhoto, RegisterType, Rider, DriverPref, Bank, DriverInfo } from '../../form/formData.model';
 import { FormDataService } from '../../form/formData.service';
 
 /**
@@ -17,8 +17,16 @@ import { FormDataService } from '../../form/formData.service';
   selector: 'page-register-user-completed',
   templateUrl: 'register-user-completed.html',
 })
+
 export class RegisterUserCompletedPage {
   registerType: RegisterType;
+  personal: Personal;
+  facePhoto: FacePhoto;
+  rider: Rider;
+  driverInfo: DriverInfo;
+  driverPref: DriverPref;
+  bank: Bank;
+
   regtype: string;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private formDataService: FormDataService) {
@@ -26,14 +34,22 @@ export class RegisterUserCompletedPage {
 
   ngOnInit() {
       this.registerType = this.formDataService.getType();
+      this.personal = this.formDataService.getPersonal();
+      this.facePhoto = this.formDataService.getFacePhoto();
+      this.rider = this.formDataService.getRider();
+      this.driverInfo = this.formDataService.getDriverInfo();
+      this.driverPref = this.formDataService.getDriver();
+      this.bank = this.formDataService.getBank();
       this.regtype = this.registerType.userType;
-      debugger;
+
+      console.log(this.formDataService);
   }
 
   ionViewDidLoad() {
   }
-  goto(a) {
+
+  goto() {
     this.formDataService.setType(this.registerType);
-    this.navCtrl.push(a);
+    this.navCtrl.push(LoginPage);
   }
 }

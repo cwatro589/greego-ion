@@ -13,6 +13,9 @@ export class HomePage {
   constructor(public navCtrl: NavController) {
     
   }
+  gotoLoginPage() {
+    this.navCtrl.push(LoginPage);
+  }
   gotoRegisterPage() {
     this.navCtrl.push(RegisterPage);
   }

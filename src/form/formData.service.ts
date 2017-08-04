@@ -92,13 +92,13 @@ export class FormDataService {
     setRider(data: Rider) {
         // Update the Address data only when the Address Form had been validated successfully
         this.isRiderFormValid = true;
-        this.formData.carYear = data.carYear,
-        this.formData.carBrand = data.carBrand,
-        this.formData.carModel = data.carModel,
-        this.formData.carTrim = data.carTrim,
-        this.formData.carColor = data.carColor,
-        this.formData.carPlateNumber = data.carPlateNumber,
-        this.formData.carTransmittion  = data.carTransmittion
+        this.formData.carYear = data.carYear;
+        this.formData.carBrand = data.carBrand;
+        this.formData.carModel = data.carModel;
+        this.formData.carTrim = data.carTrim;
+        this.formData.carColor = data.carColor;
+        this.formData.carPlateNumber = data.carPlateNumber;
+        this.formData.carTransmittion  = data.carTransmittion;
         // Validate Address Step in Workflow
         this.registerflowservice.validateStep(STEPS.Rider);
     }
@@ -106,8 +106,11 @@ export class FormDataService {
     getDriver() : DriverPref {
         // Return the Address data
         var driverPref: DriverPref = {
-            availCarType: this.formData.availCarType,
-            availCarTransmission: this.formData.availCarTransmission
+            availCarTypeSedan: this.formData.availCarTypeSedan,
+            availCarTypeSuv: this.formData.availCarTypeSuv,
+            availCarTypeVan: this.formData.availCarTypeVan,
+            availCarTransmissionAuto: this.formData.availCarTransmissionAuto,
+            availCarTransmissionManual: this.formData.availCarTransmissionManual
         };
         return driverPref;
     }
@@ -115,8 +118,11 @@ export class FormDataService {
     setDriver(data: DriverPref) {
         // Update the Address data only when the Address Form had been validated successfully
         this.isDriverPrefValid = true;
-        this.formData.availCarType = data.availCarType,
-        this.formData.availCarTransmission  = data.availCarTransmission
+        this.formData.availCarTypeSedan = data.availCarTypeSedan;
+        this.formData.availCarTypeSuv = data.availCarTypeSuv;
+        this.formData.availCarTypeVan = data.availCarTypeVan;
+        this.formData.availCarTransmissionAuto = data.availCarTransmissionAuto;
+        this.formData.availCarTransmissionManual = data.availCarTransmissionManual;
         // Validate Address Step in Workflow
         this.registerflowservice.validateStep(STEPS.DriverPref);
     }

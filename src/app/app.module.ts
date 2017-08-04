@@ -28,6 +28,10 @@ import { RegisterFlowService }    from '../registerFlow/registerFlow.service';
   declarations: [
     MyApp,
     HomePage,
+    LoginPage,
+    LoginVerifyPage,
+    PhoneupdatePage,
+    ForgotPasswordPage,
     RegisterPage,
     RegisterUserPage,
     RegisterCarInfoPage,
@@ -47,6 +51,10 @@ import { RegisterFlowService }    from '../registerFlow/registerFlow.service';
   entryComponents: [
     MyApp,
     HomePage,
+    LoginPage,
+    LoginVerifyPage,
+    PhoneupdatePage,
+    ForgotPasswordPage,
     RegisterPage,
     RegisterUserPage,
     RegisterCarInfoPage,

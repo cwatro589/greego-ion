@@ -17,34 +17,46 @@
   <ion-grid>
     <ion-row class="headerTitle">
       <div>
-        <h1>Driver Verification</h1>
+        <h2>Driver Verification</h2>
       </div>
       Please take a photo for Driver License and Vehicle Insurance Card.
     </ion-row>
     <ion-row>
       <ion-label>Driver's License</ion-label>
-      <button ion-button block>
+      <button ion-button block *ngIf="!driverLicense" (click)="selectPicture('driverLicense')">
         <i class="fa fa-camera"></i>
-        Take a Photo1
+        {{takePhoto}}
+      </button>
+      <button ion-button block class="completed" *ngIf="driverLicense" (click)="selectPicture('driverLicense')">
+        <i class="fa fa-check"></i>
+        {{completed}}
       </button>
     </ion-row>
     <ion-row>
       <ion-label>Passport or Birth Certificate.</ion-label>
-      <button ion-button block>
+      <button ion-button block *ngIf="!driverIdentification" (click)="selectPicture('driverIdentification')">
         <i class="fa fa-camera"></i>
-        Take a Photo2
+        {{takePhoto}}
+      </button>
+      <button ion-button block class="completed" *ngIf="driverIdentification" (click)="selectPicture('driverIdentification')">
+        <i class="fa fa-check"></i>
+        {{completed}}
       </button>
     </ion-row>
     <ion-row>
       <ion-label>Vehicle Insurance</ion-label>
-      <button ion-button block>
+      <button ion-button block *ngIf="!driverInsurance" (click)="selectPicture('driverInsurance')">
         <i class="fa fa-camera"></i>
-        Take a Photo3
+        {{takePhoto}}
+      </button>
+      <button ion-button block class="completed" *ngIf="driverInsurance" (click)="selectPicture('driverInsurance')">
+        <i class="fa fa-check"></i>
+        {{completed}}
       </button>
     </ion-row>
     <ion-row>
       <div class="buttonContainer">
-        <button ion-button block id="btnLogin" class="btn" (click)="goto('RegisterUserAgreementPage')">Next</button>
+        <button ion-button block id="btnLogin" class="btn" [disabled]="!valid" (click)="goto('RegisterUserAgreementPage')">Next</button>
       </div>
     </ion-row>
   </ion-grid>

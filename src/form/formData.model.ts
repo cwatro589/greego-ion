@@ -12,8 +12,11 @@ export class FormData {
     carColor: string = '';
     carPlateNumber: string = '';
     carTransmittion: string = '';
-    availCarType:Array<any>;
-    availCarTransmission:Array<any>;
+    availCarTypeSedan: boolean;
+    availCarTypeSuv: boolean;
+    availCarTypeVan: boolean;
+    availCarTransmissionAuto: boolean;
+    availCarTransmissionManual: boolean;
     facePhotoLocation:string = '';
     bankAccountNumber:number;
     bankRoutingNumber:number;
@@ -36,8 +39,11 @@ export class FormData {
         this.carColor = '';
         this.carPlateNumber = '';
         this.carTransmittion = '';
-        this.availCarType = [];
-        this.availCarTransmission = [];
+        this.availCarTypeSedan = false;
+        this.availCarTypeSuv = false;
+        this.availCarTypeVan = false;
+        this.availCarTransmissionAuto = false;
+        this.availCarTransmissionManual = false;
         this.facePhotoLocation = '';
         this.bankAccountNumber;
         this.bankRoutingNumber;
@@ -73,8 +79,11 @@ export class Rider {
 }
 
 export class DriverPref {
-    availCarType:Array<any>;
-    availCarTransmission:Array<any>;
+    availCarTypeSedan: boolean;
+    availCarTypeSuv: boolean;
+    availCarTypeVan: boolean;
+    availCarTransmissionAuto: boolean;
+    availCarTransmissionManual: boolean;
 }
 
 export class Bank {

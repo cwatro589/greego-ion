@@ -18,7 +18,7 @@
     <ion-grid>
       <ion-row class="headerTitle">
         <div>
-          <h1>Sign Up</h1>
+          <h2>Sign Up</h2>
         </div>
         <p>Please enter your informaton below or you can sign up and sign in using Facebook account.</p>
       </ion-row>
@@ -31,7 +31,7 @@
       <ion-row class="margin-top">
         <hr class="splitLine or">
       </ion-row>
-      <ion-row>
+      <ion-row class="noMargin">
         <ion-col col-6>
           <ion-item>
             <ion-label color="labelLight" stacked [hidden]="!firstname.valid">First Name</ion-label>
@@ -45,7 +45,7 @@
           </ion-item>
         </ion-col>
       </ion-row>
-      <ion-row>
+      <ion-row class="noMargin">
         <ion-col col-12>
           <ion-item>
             <ion-label color="labelLight" stacked [hidden]="!email.valid">Email Address</ion-label>
@@ -53,7 +53,7 @@
           </ion-item>
         </ion-col>
       </ion-row>
-      <ion-row>
+      <ion-row class="noMargin">
         <ion-col col-12>
           <ion-item>
             <ion-label color="labelLight" stacked [hidden]="!phone.valid">Phone Number</ion-label>
@@ -61,7 +61,7 @@
           </ion-item>
         </ion-col>
       </ion-row>
-      <ion-row>
+      <ion-row class="noMargin">
         <ion-col col-12>
           <ion-item>
             <ion-label color="labelLight" stacked [hidden]="!password.valid">Password</ion-label>
@@ -69,7 +69,7 @@
           </ion-item>
         </ion-col>
       </ion-row>
-      <ion-row>
+      <ion-row class="noMargin">
         <ion-col col-12>
           <ion-item>
             <ion-label color="labelLight" stacked [hidden]="!confirm.valid">Password Confirm</ion-label>

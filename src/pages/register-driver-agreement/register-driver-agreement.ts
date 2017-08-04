@@ -26,7 +26,7 @@ import { RegisterUserCompletedPage } from '../register-user-completed/register-u
   templateUrl: 'register-driver-agreement.html',
 })
 
-export class RegisterDriverAgreementPage {
+export class RegisterDriverAgreementPage implements OnInit {
 
   agreementList = [
     {
@@ -54,7 +54,7 @@ export class RegisterDriverAgreementPage {
   constructor(public navCtrl: NavController, public navParams: NavParams, public modalCtrl: ModalController, public loadingCtrl:LoadingController, private formDataService: FormDataService) {
   }
 
-  registerType: RegisterType;
+  private registerType: RegisterType;
 
   ngOnInit() {
       this.registerType = this.formDataService.getType();
@@ -84,15 +84,16 @@ export class RegisterDriverAgreementPage {
 })
 
 export class MathcesCategoryPipe implements PipeTransform {
-  constructor(public navCtrl: NavController, public navParams: NavParams, public modalCtrl: ModalController) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public modalCtrl: ModalController, private formDataService: FormDataService) {
   }
-  registerType = this.navParams.data;
-    transform(item: Array<any>, type: string): any {
-      if (this.registerType.userType == 'driver') {
+  
+    transform(item: Array<any>, type): any {
+      
+      if (type.userType == 'driver') {
         return item;
       }
       else {
         return item.filter(u => u.type == 'rider');
-    }
+      }
   }
 }

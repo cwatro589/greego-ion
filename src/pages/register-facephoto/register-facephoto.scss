@@ -14,8 +14,20 @@ page-register-facephoto {
         padding: 4vh;
         color: white;
     }
-    .fa-camera {
-        font-size: 8vh;
-        margin-bottom: 20px;
+    // .fa-camera {
+    //     font-size: 8vh;
+    //     margin-bottom: 20px;
+    // }
+    i {
+        margin-right: 10px !important;
+    }
+    img {
+        width: 100%;
+        height: 100%;
+        border: 1px solid $color-border;
+        object-fit: contain;
+    }
+    button {
+        @include button(2);
     }
 }

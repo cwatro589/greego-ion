@@ -19,9 +19,50 @@ import { FormDataService }     from '../../form/formData.service';
 export class RegisterDriverPrefPage implements OnInit {
 
   driverPref: DriverPref;
+  valid:boolean = false;
   form: any;
 
+  // typeofcar = [
+  //   {
+  //     name : 'Sedan',
+  //     model : this.driverPref.availCarTypeSedan,
+  //     value : false
+  //   },
+  //   {
+  //     name : 'SUV',
+  //     model : this.driverPref.availCarTypeSuv,
+  //     value : false
+  //   },
+  //   {
+  //     name : 'Van',
+  //     model : this.driverPref.availCarTypeVan,
+  //     value : false
+  //   }
+  // ];
+
+  // typeoftransmittion = [
+  //   {
+  //     name : 'Automatic',
+  //     model : this.driverPref.availCarTransmissionAuto,
+  //     value : false
+  //   },
+  //   {
+  //     name : 'Manual',
+  //     model : this.driverPref.availCarTransmissionManual',
+  //     value : false
+  //   }
+  // ];
+
   constructor(public navCtrl: NavController, public navParams: NavParams, private formDataService: FormDataService) {
+  }
+
+  validationCheck() {
+    if ((this.driverPref.availCarTypeSedan || this.driverPref.availCarTypeSuv || this.driverPref.availCarTypeVan) && (this.driverPref.availCarTransmissionAuto || this.driverPref.availCarTransmissionManual)) {
+      return this.valid = true;
+    }
+    else {
+      return this.valid = false;
+    }
   }
 
   ngOnInit() {
@@ -34,5 +75,9 @@ export class RegisterDriverPrefPage implements OnInit {
   goto() {
     this.formDataService.setDriver(this.driverPref);
     this.navCtrl.push(RegisterDriverVerifyPage);
+  }
+  
+  public trackByIndex(index: number, item) {
+    return index;
   }
 }

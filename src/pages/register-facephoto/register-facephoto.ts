@@ -21,7 +21,9 @@ import { FormDataService } from '../../form/formData.service';
 export class RegisterFacephotoPage {
   registerType: RegisterType;
   facePhoto: FacePhoto;
+  photoSelected:boolean = false;
   form: any;
+  valid:boolean = false;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private formDataService: FormDataService) {
   }
@@ -32,7 +34,12 @@ export class RegisterFacephotoPage {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad RegisterFacephotoPage');
+  }
+
+  takephoto() {
+    this.facePhoto.facePhotoLocation = '../../assets/1.jpg';
+    this.valid = true;
+    this.photoSelected = true;
   }
   
   goto() {

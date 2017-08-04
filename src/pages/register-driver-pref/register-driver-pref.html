@@ -17,48 +17,42 @@
   <ion-grid>
     <ion-row class="headerTitle">
       <div>
-        <h1>Driving Preference</h1>
+        <h2>Select types that you can drive</h2>
       </div>
-      Please input an additional your information for driver registration and please agree the Greego driver agreemets.
     </ion-row>
     <ion-row>
-      <h3>
-        Select types that you can drive
-      </h3>
+      <ion-label color="labelLight" stacked>Type of Car</ion-label>
+      <!--<ion-item *ngFor= 'let car of typeofcar; let nameIndex = index;'>
+        <ion-label>{{car.name}}</ion-label>
+        <ion-checkbox [(ngModel)]="car.model" (click)='validationCheck()'></ion-checkbox>
+      </ion-item>-->
+      <ion-item>
+        <ion-label>Sedan</ion-label>
+        <ion-checkbox [(ngModel)]="driverPref.availCarTypeSedan" (click)='validationCheck()'></ion-checkbox>
+      </ion-item>
+      <ion-item>
+        <ion-label>SUV</ion-label>
+        <ion-checkbox [(ngModel)]="driverPref.availCarTypeSuv" (click)='validationCheck()'></ion-checkbox>
+      </ion-item>
+      <ion-item>
+        <ion-label>Van</ion-label>
+        <ion-checkbox [(ngModel)]="driverPref.availCarTypeVan" (click)='validationCheck()'></ion-checkbox>
+      </ion-item>
     </ion-row>
     <ion-row>
-      <ion-list radio-group #availcartype="ngModel" required id="availcartype" name="availcartype" [(ngModel)]="rider.availCarType">
-        <ion-label color="primary" stacked>Type of Car</ion-label>
-        <ion-item>
-          <ion-label>Sedan</ion-label>
-          <ion-radio checked="true" value="Sedan"></ion-radio>
-        </ion-item>
-        <ion-item>
-          <ion-label>SUV</ion-label>
-          <ion-radio value="SUV"></ion-radio>
-        </ion-item>
-        <ion-item>
-          <ion-label>Van</ion-label>
-          <ion-radio value="SUV"></ion-radio>
-        </ion-item>
-      </ion-list>
-    </ion-row>
-    <ion-row>
-      <ion-list radio-group radio-group #availcartransmission="ngModel" required id="availcartransmission" name="availcartransmission" [(ngModel)]="rider.availCarTransmission">
-        <ion-label color="primary" stacked>Type of Transmission</ion-label>
-        <ion-item>
-          <ion-label>Automatic</ion-label>
-          <ion-radio checked="true" value="automatic"></ion-radio>
-        </ion-item>
-        <ion-item>
-          <ion-label>Manual</ion-label>
-          <ion-radio value="manual"></ion-radio>
-        </ion-item>
-      </ion-list>
+      <ion-label color="labelLight" stacked>Type of Transmission</ion-label>
+      <ion-item>
+        <ion-label>Automatic</ion-label>
+        <ion-checkbox [(ngModel)]="driverPref.availCarTransmissionAuto" (click)='validationCheck()'></ion-checkbox>
+      </ion-item>
+      <ion-item>
+        <ion-label>Manual</ion-label>
+        <ion-checkbox [(ngModel)]="driverPref.availCarTransmissionManual" (click)='validationCheck()'></ion-checkbox>
+      </ion-item>
     </ion-row>
     <ion-row>
       <div class="buttonContainer">
-        <button ion-button block id="btnLogin" class="btn" (click)="goto()">Next</button>
+        <button ion-button block id="btnLogin" class="btn" (click)="goto()" [disabled]="!valid">Next</button>
       </div>
     </ion-row>
   </ion-grid>
