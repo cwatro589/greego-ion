@@ -2,6 +2,9 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { RegisterDriverAgreementPage } from '../register-driver-agreement/register-driver-agreement';
 
+import { Bank } from '../../form/formData.model';
+import { FormDataService } from '../../form/formData.service';
+
 /**
  * Generated class for the RegisterDriverBankPage page.
  *
@@ -16,15 +19,20 @@ import { RegisterDriverAgreementPage } from '../register-driver-agreement/regist
 })
 export class RegisterDriverBankPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  bank: Bank;
+
+  constructor(public navCtrl: NavController, public navParams: NavParams, private formDataService: FormDataService) {
+  }
+
+  ngOnInit() {
+      this.bank = this.formDataService.getBank();
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad RegisterDriverBankPage');
   }
 
-  registerType = this.navParams.data;
   goto() {
-    this.navCtrl.push(RegisterDriverAgreementPage, this.registerType);
+    this.formDataService.setBank(this.bank);
+    this.navCtrl.push(RegisterDriverAgreementPage);
   }
 }

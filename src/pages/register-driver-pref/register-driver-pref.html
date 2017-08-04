@@ -27,7 +27,7 @@
       </h3>
     </ion-row>
     <ion-row>
-      <ion-list radio-group>
+      <ion-list radio-group #availcartype="ngModel" required id="availcartype" name="availcartype" [(ngModel)]="rider.availCarType">
         <ion-label color="primary" stacked>Type of Car</ion-label>
         <ion-item>
           <ion-label>Sedan</ion-label>
@@ -44,7 +44,7 @@
       </ion-list>
     </ion-row>
     <ion-row>
-      <ion-list radio-group>
+      <ion-list radio-group radio-group #availcartransmission="ngModel" required id="availcartransmission" name="availcartransmission" [(ngModel)]="rider.availCarTransmission">
         <ion-label color="primary" stacked>Type of Transmission</ion-label>
         <ion-item>
           <ion-label>Automatic</ion-label>
@@ -58,7 +58,7 @@
     </ion-row>
     <ion-row>
       <div class="buttonContainer">
-        <button ion-button block id="btnLogin" class="btn" (click)="goto('RegisterUserAgreementPage')">Next</button>
+        <button ion-button block id="btnLogin" class="btn" (click)="goto()">Next</button>
       </div>
     </ion-row>
   </ion-grid>
