@@ -7,48 +7,50 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>register-driver-bank</ion-title>
+    <ion-title>Additional Information</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding>
-  <ion-grid>
-    <ion-row class="headerTitle">
-      <div>
-        <h1>Additional Information</h1>
-      </div>
-      Please enter your bank account information for deposit an earned money and social security number.
-    </ion-row>
-    <ion-row>
-      <h4>Add Bank Account for Deposit</h4>
-    </ion-row>
-    <ion-row>
-      <ion-item>
-        <ion-label color="primary" stacked>Routing Number</ion-label>
-        <ion-input type="text" placeholder="Enter a Bank Routing Number"></ion-input>
-      </ion-item>
-    </ion-row>
-    <ion-row>
-      <ion-item>
-        <ion-label color="primary" stacked>Account Number</ion-label>
-        <ion-input type="text" placeholder="Enter a Bank Account Number"></ion-input>
-      </ion-item>
-    </ion-row>
-    <ion-row>
-      <h4>Social Security Number</h4>
-    </ion-row>
-    <ion-row>
-      <ion-item>
-        <ion-label color="primary" stacked>SSN</ion-label>
-        <ion-input type="text" placeholder="Enter a Social Security Number"></ion-input>
-      </ion-item>
-    </ion-row>
-    <ion-row>
-      <div class="buttonContainer">
-        <button ion-button block id="btnLogin" class="btn" (click)="goto()">Next</button>
-      </div>
-    </ion-row>
-  </ion-grid>
+  <form #riderForm="ngForm" class="editForm" novalidate>
+    <ion-grid>
+      <ion-row class="headerTitle">
+        <div>
+          <h1>Additional Information</h1>
+        </div>
+        Please enter your bank account information for deposit an earned money and social security number.
+      </ion-row>
+      <ion-row>
+        <h4>Add Bank Account for Deposit</h4>
+      </ion-row>
+      <ion-row>
+        <ion-item>
+          <ion-label color="labelLight" stacked [hidden]="!firstname.valid">Routing Number</ion-label>
+          <ion-input type="text" placeholder="Enter a Bank Routing Number" #bankroutingnumber="ngModel" required id="bankroutingnumber" name="bankroutingnumber" [(ngModel)]="rider.bankRoutingNumber"></ion-input>
+        </ion-item>
+      </ion-row>
+      <ion-row>
+        <ion-item>
+          <ion-label color="labelLight" stacked [hidden]="!firstname.valid">Account Number</ion-label>
+          <ion-input type="text" placeholder="Enter a Bank Account Number" #bankaccountnumber="ngModel" required id="bankaccountnumber" name="bankaccountnumber" [(ngModel)]="rider.bankAccountNumber"></ion-input>
+        </ion-item>
+      </ion-row>
+      <ion-row>
+        <h4>Social Security Number</h4>
+      </ion-row>
+      <ion-row>
+        <ion-item>
+          <ion-label color="labelLight" stacked [hidden]="!firstname.valid">SSN</ion-label>
+          <ion-input type="text" placeholder="Enter a Social Security Number" #ssn="ngModel" required id="ssn" name="ssn" [(ngModel)]="rider.ssn"></ion-input>
+        </ion-item>
+      </ion-row>
+      <ion-row>
+        <div class="buttonContainer">
+          <button ion-button block id="btnLogin" class="btn" (click)="goto()" [disabled]="!riderForm.valid">Next</button>
+        </div>
+      </ion-row>
+    </ion-grid>
+  </form>
 </ion-content>

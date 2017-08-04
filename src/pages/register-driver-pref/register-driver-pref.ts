@@ -1,7 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { RegisterDriverVerifyPage } from '../register-driver-verify/register-driver-verify';
 
+import { DriverPref }            from '../../form/formData.model';
+import { FormDataService }     from '../../form/formData.service';
 /**
  * Generated class for the RegisterDriverPrefPage page.
  *
@@ -14,16 +16,23 @@ import { RegisterDriverVerifyPage } from '../register-driver-verify/register-dri
   selector: 'page-register-driver-pref',
   templateUrl: 'register-driver-pref.html',
 })
-export class RegisterDriverPrefPage {
+export class RegisterDriverPrefPage implements OnInit {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  driverPref: DriverPref;
+  form: any;
+
+  constructor(public navCtrl: NavController, public navParams: NavParams, private formDataService: FormDataService) {
+  }
+
+  ngOnInit() {
+      this.driverPref = this.formDataService.getDriver();
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad RegisterDriverPrefPage');
   }
-  registerType = this.navParams.data;
+
   goto() {
-    this.navCtrl.push(RegisterDriverVerifyPage, this.registerType);
+    this.formDataService.setDriver(this.driverPref);
+    this.navCtrl.push(RegisterDriverVerifyPage);
   }
 }

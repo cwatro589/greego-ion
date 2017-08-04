@@ -4,6 +4,9 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { ModalController } from 'ionic-angular';
 import { LoadingController } from 'ionic-angular';
 
+import { RegisterType } from '../../form/formData.model';
+import { FormDataService } from '../../form/formData.service';
+
 import { RegisterAgreement1Page } from '../register-agreement1/register-agreement1';
 import { RegisterAgreement2Page } from '../register-agreement2/register-agreement2';
 import { RegisterAgreement3Page } from '../register-agreement3/register-agreement3';
@@ -48,7 +51,13 @@ export class RegisterDriverAgreementPage {
     }
   ];
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public modalCtrl: ModalController, public loadingCtrl:LoadingController) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public modalCtrl: ModalController, public loadingCtrl:LoadingController, private formDataService: FormDataService) {
+  }
+
+  registerType: RegisterType;
+
+  ngOnInit() {
+      this.registerType = this.formDataService.getType();
   }
 
   ionViewDidLoad() {
@@ -65,6 +74,7 @@ export class RegisterDriverAgreementPage {
       duration: 3000
     });
     loader.present();
+    this.formDataService.setType(this.registerType);
     this.navCtrl.push(RegisterUserCompletedPage);
   }
 }
@@ -78,7 +88,7 @@ export class MathcesCategoryPipe implements PipeTransform {
   }
   registerType = this.navParams.data;
     transform(item: Array<any>, type: string): any {
-      if (this.registerType == 'driver') {
+      if (this.registerType.userType == 'driver') {
         return item;
       }
       else {
