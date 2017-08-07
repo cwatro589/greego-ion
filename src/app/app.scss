@@ -188,9 +188,17 @@ ion-input {
   display: flex;
   align-items: flex-end;
 }
+
+/* Options */
+
 .noMargin {
   margin: 0 !important;
 }
+small.warning {
+  color: $color-google;
+  font-weight: bold;
+}
+
 /* Anmation */
 
 @keyframes fadein {

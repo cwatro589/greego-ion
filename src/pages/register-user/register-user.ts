@@ -21,9 +21,21 @@ import { FormDataService }     from '../../form/formData.service';
 export class RegisterUserPage implements OnInit {
   
   personal: Personal;
+  Confirm:string;
+  passwordMatch:boolean;
   form: any;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private formDataService: FormDataService) {
+    
+  }
+
+  passwordValidation() {
+    if (this.personal.password == this.Confirm) {
+      this.passwordMatch = true;
+    }
+    else {
+      this.passwordMatch = false;
+    }
   }
 
   ngOnInit() {

@@ -49,7 +49,7 @@
         <ion-col col-12>
           <ion-item>
             <ion-label color="labelLight" stacked [hidden]="!email.valid">Email Address</ion-label>
-            <ion-input type="email"  #email="ngModel" required id="email" name="email" [(ngModel)]="personal.email" placeholder="Email Address"></ion-input>
+            <ion-input type="email"  #email="ngModel" required id="email" name="email" [(ngModel)]="personal.email"  placeholder="Email Address"></ion-input>
           </ion-item>
         </ion-col>
       </ion-row>
@@ -65,7 +65,7 @@
         <ion-col col-12>
           <ion-item>
             <ion-label color="labelLight" stacked [hidden]="!password.valid">Password</ion-label>
-            <ion-input type="password" #password="ngModel" required id="password" name="password" [(ngModel)]="personal.password" placeholder="Password"></ion-input>
+            <ion-input type="password" #password="ngModel" required validateEqual="confirm" reverse="true" id="password" name="password" [(ngModel)]="personal.password" placeholder="Password"></ion-input>
           </ion-item>
         </ion-col>
       </ion-row>
@@ -73,13 +73,16 @@
         <ion-col col-12>
           <ion-item>
             <ion-label color="labelLight" stacked [hidden]="!confirm.valid">Password Confirm</ion-label>
-            <ion-input type="password" #confirm="ngModel" required id="confirm" name="confirm" [(ngModel)]="personal.confirm" placeholder="Password Confirm"></ion-input>
+            <ion-input type="password" #confirm="ngModel" required reverse="false" validateEqual="password" id="confirm" name="confirm" [(ngModel)]="Confirm" placeholder="Password Confirm"></ion-input>
           </ion-item>
+          <small class="warning" [hidden]="confirm.valid || (confirm.pristine)">
+            Password mismatch
+          </small>
         </ion-col>
       </ion-row>
       <ion-row>
         <div class="buttonContainer">
-          <button ion-button block id="btnLogin" class="btn" (click)="goto(personalForm)" [disabled]="!personalForm.valid">Next</button>
+          <button ion-button block type="submit" id="btnLogin" class="btn" (click)="goto()" [disabled]="!(personalForm.valid && (confirm.valid || (confirm.pristine)))">Next</button>
         </div>
       </ion-row>
     </ion-grid>

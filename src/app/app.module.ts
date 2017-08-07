@@ -2,6 +2,7 @@ import { NgModule, ErrorHandler } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { MyApp } from './app.component';
+import { FormsModule } from '@angular/forms';
 
 import { HomePage } from '../pages/home/home';
 import { LoginPage } from '../pages/login/login';
@@ -23,6 +24,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 
 import { FormDataService }    from '../form/formData.service';
 import { RegisterFlowService }    from '../registerFlow/registerFlow.service';
+import { EqualValidator } from './directives/equal-validator';
 
 @NgModule({
   declarations: [
@@ -41,11 +43,13 @@ import { RegisterFlowService }    from '../registerFlow/registerFlow.service';
     RegisterDriverBankPage,
     RegisterDriverAgreementPage,
     RegisterUserCompletedPage,
-    MathcesCategoryPipe
+    MathcesCategoryPipe,
+    EqualValidator
   ],
   imports: [
     BrowserModule,
-    IonicModule.forRoot(MyApp)
+    IonicModule.forRoot(MyApp),
+    FormsModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
