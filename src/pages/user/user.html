@@ -1,0 +1,59 @@
+<!--
+  Generated template for the UserPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>user</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+  <ion-card class="findDirectionCard">
+    <ion-card-content class="currentContainer">
+      <div class="iconSet">
+        <i class="fa fa-bullseye"></i>
+        <!-- <i class="fa fa-ellipsis-h fa-rotate-90"></i> -->
+      </div>
+      <div class="searchBox"> 
+        <ion-input type="text" name="currentLocation" [(ngModel)]="CurrentLocation" placeholder="Pickup Location" (mouseleave) ="checkPickupLocation()"></ion-input>
+      </div>
+    </ion-card-content>
+    <ion-card-content class="destinationContainer" *ngIf="destinationSearch">
+      <div class="iconSet">
+        <i class="fa fa-map-marker"></i>
+      </div>
+      <div class="searchBox">
+        <ion-input type="text" name="destination" [(ngModel)]="Destination" placeholder="Destination Address"></ion-input>
+      </div>
+    </ion-card-content>
+  </ion-card>
+  <ion-card class="estimateMenu">
+    <ion-card-content class="fareEstimateContainer">
+      <i class="fa fa-dollar"></i>
+      <span class="">Fare Estimates</span>
+      <span class="">$77</span>
+    </ion-card-content>
+    <ion-card-content class="creditCardInfo" *ngIf="destinationSearch">
+      <i class="fa fa-cc-visa"></i>
+      <span class="">Credit Card</span>
+      <span class="">**** 1234</span>
+      <button ion-button clear>Change</button>
+    </ion-card-content>
+    <ion-card-content class="destinationContainer" *ngIf="destinationSearch">
+      <button ion-button full>Request Driver</button>
+    </ion-card-content>
+  </ion-card>
+  <button ion-button icon-only class="currentLocationBtn" (click)='getCurrentPosition()'>
+    <ion-icon name="ios-locate-outline"></ion-icon>
+  </button>
+  <div class="map" [class.hidemap]="!((switch == 'map') || error)">
+    <ion-searchbar #searchbar placeholder="Suchen" [hidden]="!search"></ion-searchbar>
+    <div id="map" #map></div>
+  </div>
+</ion-content>

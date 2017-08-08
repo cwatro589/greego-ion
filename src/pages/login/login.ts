@@ -3,6 +3,8 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { LoginVerifyPage } from '../login-verify/login-verify';
 import { ForgotPasswordPage } from '../forgot-password/forgot-password';
 
+import { UserPage } from '../user/user';
+
 /**
  * Generated class for the LoginPage page.
  *
@@ -23,7 +25,13 @@ export class LoginPage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad LoginPage');
   }
-  goto(a) {
-    this.navCtrl.push(a);
+  gotoUser() {
+    this.navCtrl.setRoot(UserPage);
+  }
+  gotoLoginVerifyPage() {
+    this.navCtrl.push(LoginVerifyPage);
+  }
+  gotoForgotPasswordPage() {
+    this.navCtrl.push(ForgotPasswordPage);
   }
 }

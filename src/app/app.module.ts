@@ -3,6 +3,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { MyApp } from './app.component';
 import { FormsModule } from '@angular/forms';
+import { GoogleMaps } from '@ionic-native/google-maps';
+import { Geolocation } from '@ionic-native/geolocation';
 
 import { HomePage } from '../pages/home/home';
 import { LoginPage } from '../pages/login/login';
@@ -19,12 +21,17 @@ import { RegisterDriverBankPage } from '../pages/register-driver-bank/register-d
 import { RegisterDriverAgreementPage, MathcesCategoryPipe } from '../pages/register-driver-agreement/register-driver-agreement';
 import { RegisterUserCompletedPage } from '../pages/register-user-completed/register-user-completed';
 
+import { UserPage } from '../pages/user/user';
+import { DriverPage } from '../pages/driver/driver';
+
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
 import { FormDataService }    from '../form/formData.service';
 import { RegisterFlowService }    from '../registerFlow/registerFlow.service';
 import { EqualValidator } from './directives/equal-validator';
+import { IonicStorageModule } from '@ionic/storage';
+
 
 @NgModule({
   declarations: [
@@ -44,12 +51,15 @@ import { EqualValidator } from './directives/equal-validator';
     RegisterDriverAgreementPage,
     RegisterUserCompletedPage,
     MathcesCategoryPipe,
-    EqualValidator
+    EqualValidator,
+    UserPage,
+    DriverPage
   ],
   imports: [
     BrowserModule,
     IonicModule.forRoot(MyApp),
-    FormsModule
+    FormsModule,
+    IonicStorageModule.forRoot()
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -67,11 +77,15 @@ import { EqualValidator } from './directives/equal-validator';
     RegisterDriverPrefPage,
     RegisterDriverBankPage,
     RegisterDriverAgreementPage,
-    RegisterUserCompletedPage
+    RegisterUserCompletedPage,
+    UserPage,
+    DriverPage
   ],
   providers: [
     StatusBar,
+    GoogleMaps,
     SplashScreen,
+    Geolocation,
     { provide: FormDataService, useClass: FormDataService },
     { provide: RegisterFlowService, useClass: RegisterFlowService },
     {provide: ErrorHandler, useClass: IonicErrorHandler}

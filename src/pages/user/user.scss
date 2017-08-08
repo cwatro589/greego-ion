@@ -1,0 +1,55 @@
+page-user {
+    .scroll-content {
+        .currentLocationBtn {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            z-index: 100;
+        }
+    }
+    .findDirectionCard {
+        position: absolute;
+        z-index: 100;
+    }
+    #map {
+        position: absolute;
+        height: 100%;
+        width: 100%;
+    }
+    .iconSet {
+        float: left;
+        width: 30px;
+        text-align: center;
+        .fa {
+            color: $color-font-label;
+            font-size: 21px;
+            margin-left: -12px;
+        }
+        &.active .fa {
+            color: $color-main1;
+        }
+    }
+    .searchBox {
+        margin-left: 30px;
+        ion-input {
+            
+            input {
+                margin: 0px;
+            }
+        }
+    }
+    .currentContainer  {
+        position: relative;
+    }
+    .destinationContainer {
+        clear:both;
+        border-top: 1px solid #ddd;
+    }
+    .fa-ellipsis-h {
+        position: absolute;
+        bottom: 0;
+        left: 19px;
+        width: 30px;
+        top: 62px;
+    }
+}
