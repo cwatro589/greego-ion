@@ -37,15 +37,15 @@
     <ion-card-content class="fareEstimateContainer">
       <i class="fa fa-dollar"></i>
       <span class="">Fare Estimates</span>
-      <span class="">$77</span>
+      <span class="estimatePrice">$77</span>
     </ion-card-content>
-    <ion-card-content class="creditCardInfo" *ngIf="destinationSearch">
+    <ion-card-content class="creditCardInfo">
       <i class="fa fa-cc-visa"></i>
       <span class="">Credit Card</span>
-      <span class="">**** 1234</span>
-      <button ion-button clear>Change</button>
+      <span class="creditCardNumber">**** 1234</span>
+      <button ion-button clear class="creditCardChangeBtn">Change</button>
     </ion-card-content>
-    <ion-card-content class="destinationContainer" *ngIf="destinationSearch">
+    <ion-card-content class="destinationContainer">
       <button ion-button full>Request Driver</button>
     </ion-card-content>
   </ion-card>

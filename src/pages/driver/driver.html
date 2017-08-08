@@ -7,12 +7,112 @@
 <ion-header>
 
   <ion-navbar>
+     <button ion-button icon-only clear menuToggle #content class="menuBtn">
+      <ion-icon name='menu'></ion-icon>
+    </button> 
     <ion-title>driver</ion-title>
   </ion-navbar>
 
 </ion-header>
 
+<ion-menu [content]="content" type="overlay">
+  <ion-header>
+    <!-- <ion-toolbar>
+      <ion-title>Menu</ion-title>
+    </ion-toolbar> -->
+    <div class="userInfoWrapper">
+      <img src="#" class="userPhoto">
+      <div class="userInfo">
+        <h5 class="userName">John Doe</h5>
+        <div class="driverId">AB123C</div>
+      </div>
+    </div>
+  </ion-header>
+  <ion-content>
+    <ion-list>
+      <button *ngFor="let menu of userMenu" ion-item (click)="openPage(menu.target)">
+        <i class={{menu.icon}}></i>
+        {{menu.title}}
+      </button>
+      <!-- <button ion-item (click)="openPage(homePage)">
+        <i class="fa fa-user-circle-o"></i>
+        User Info
+      </button>
+      <button ion-item (click)="openPage(friendsPage)">
+        <i class="fa fa-credit-card"></i>
+        Payments
+      </button>
+      <button ion-item (click)="openPage(eventsPage)">
+        <i class="fa fa-history"></i>
+        History
+      </button>
+      <button ion-item (click)="closeMenu()">
+        <i class="fa fa-gift"></i>
+        Promotion
+      </button>
+      <button ion-item (click)="closeMenu()">
+        <i class="fa fa-envelope-open-o"></i>
+        Notification
+      </button>
+      <button ion-item (click)="closeMenu()">
+        <i class="fa fa-exchange"></i>
+        User Mode
+      </button>
+      <button ion-item (click)="closeMenu()">
+        <i class="fa fa-support"></i>
+        Customer Support
+      </button>
+      <button ion-item (click)="closeMenu()">
+        <i class="fa fa-sign-out"></i>
+        Sign out
+      </button> -->
+    </ion-list>
+  </ion-content>
+</ion-menu>
 
 <ion-content>
-  <div id="map"></div>
+  <ion-card class="findDirectionCard">
+    <ion-card-content class="currentContainer">
+      Driver Confirmed and Enroute
+    </ion-card-content>
+  </ion-card>
+  <ion-card class="findDirectionCard">
+    <ion-card-content class="currentContainer">
+      <div class="iconSet">
+        <i class="fa fa-bullseye"></i>
+        <!-- <i class="fa fa-ellipsis-h fa-rotate-90"></i> -->
+      </div>
+      <div class="searchBox"> 
+        <ion-input type="text" name="currentLocation" [(ngModel)]="CurrentLocation" placeholder="Pickup Location" (mouseleave) ="checkPickupLocation()"></ion-input>
+      </div>
+    </ion-card-content>
+    <ion-card-content class="destinationContainer" *ngIf="destinationSearch">
+      <div class="iconSet">
+        <i class="fa fa-map-marker"></i>
+      </div>
+      <div class="searchBox">
+        <ion-input type="text" name="destination" [(ngModel)]="Destination" placeholder="Destination Address"></ion-input>
+      </div>
+    </ion-card-content>
+  </ion-card>
+  <ion-card id="estimateMenu" class="estimateMenu">
+    <ion-card-content class="fareEstimateContainer">
+      <i class="fa fa-dollar"></i>
+      <span class="">Fare Estimates</span>
+      <span class="estimatePrice">$77</span>
+    </ion-card-content>
+    <ion-card-content class="creditCardInfo">
+      <i class="fa fa-cc-visa"></i>
+      <span class="">Credit Card</span>
+      <span class="creditCardNumber">**** 1234</span>
+      <button ion-button clear class="creditCardChangeBtn">Change</button>
+    </ion-card-content>
+    <ion-card-content class="destinationContainer">
+      <button ion-button full>Request Driver</button>
+    </ion-card-content>
+  </ion-card>
+  <button ion-button icon-only clear id="currentLocationBtn" class="currentLocationBtn" (click)='getCurrentPosition()'>
+    <ion-icon name="ios-locate-outline"></ion-icon>
+  </button>
+  <div id="map" #map></div>
 </ion-content>

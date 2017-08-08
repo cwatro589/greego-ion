@@ -5,9 +5,11 @@ page-user {
             bottom: 0;
             right: 0;
             z-index: 100;
+            margin-right: 0;
         }
     }
-    .findDirectionCard {
+    .findDirectionCard,
+    .estimateMenu {
         position: absolute;
         z-index: 100;
     }
@@ -38,12 +40,18 @@ page-user {
             }
         }
     }
+    ion-card-content {
+        border-top: 1px solid #ddd;
+    }
     .currentContainer  {
         position: relative;
     }
     .destinationContainer {
         clear:both;
-        border-top: 1px solid #ddd;
+        padding: 0;
+        > button {
+            margin: 0;
+        }
     }
     .fa-ellipsis-h {
         position: absolute;
@@ -51,5 +59,28 @@ page-user {
         left: 19px;
         width: 30px;
         top: 62px;
+    }
+    .estimateMenu {
+        bottom: 0;
+        .estimatePrice {
+            float: right;
+            font-weight: bold;
+        }
+        .creditCardChangeBtn {
+            margin: 0;
+            padding: 0.7em 0;
+            height: 1em;
+            float: right;
+            font-size: $font-size-default;
+        }
+        i {
+            width: 30px;
+            text-align: center;
+            color: $color-font-label;
+            margin-left: -12px;
+        }
+        .creditCardNumber {
+            margin-left: 20px;
+        }
     }
 }

@@ -1,7 +1,154 @@
 page-driver {
+    .scroll-content {
+        .currentLocationBtn {
+            position: absolute;
+            bottom: 0;
+            right: 10px;
+            z-index: 100;
+            border: 1px solid $color-border;
+        }
+    }
+    .findDirectionCard,
+    .estimateMenu {
+        position: absolute;
+        z-index: 100;
+    }
     #map {
         position: absolute;
-        width: 100%;
         height: 100%;
+        width: 100%;
+    }
+    .iconSet {
+        float: left;
+        width: 30px;
+        text-align: center;
+        .fa {
+            color: $color-font-label;
+            font-size: 21px;
+            margin-left: -12px;
+        }
+        &.active .fa {
+            color: $color-main1;
+        }
+    }
+    .searchBox {
+        margin-left: 30px;
+        ion-input {
+            
+            input {
+                margin: 0px;
+            }
+        }
+    }
+    ion-card-content {
+        border-top: 1px solid #ddd;
+    }
+    .currentContainer  {
+        position: relative;
+    }
+    .destinationContainer {
+        clear:both;
+        padding: 0;
+        > button {
+            margin: 0;
+        }
+    }
+    .fa-ellipsis-h {
+        position: absolute;
+        bottom: 0;
+        left: 19px;
+        width: 30px;
+        top: 62px;
+    }
+    .estimateMenu {
+        bottom: 0;
+        .estimatePrice {
+            float: right;
+            font-weight: bold;
+        }
+        .creditCardChangeBtn {
+            margin: 0;
+            padding: 0.7em 0;
+            height: 1em;
+            float: right;
+            font-size: $font-size-default;
+        }
+        i {
+            width: 30px;
+            text-align: center;
+            color: $color-font-label;
+            margin-left: -12px;
+        }
+        .creditCardNumber {
+            margin-left: 20px;
+        }
+    }
+    .ion-ios-locate-outline {
+        margin-right: 0;
+    }
+    ion-menu[type=reveal] {
+        z-index: 100;
+        .menu-inner {
+            border: 1px solid #aaa;
+            border-left: 0;
+            border-top: 0;
+            border-bottom: 0;
+            box-shadow: $box-shadow;
+        }
+        ion-list {
+            i {
+                width: 30px;
+                text-align: center; 
+            }
+        }
+    }
+    ion-menu {
+        ion-header {
+            background-color: $color-main2;
+        }
+        ion-list {
+            i {
+                width: 30px;
+                text-align: center; 
+            }
+            button .item-inner {
+                border: 0 !important;
+            }
+            button {
+                border-bottom: 0 !important;
+                &.activated {
+                    background-color: $color-main1 !important;
+                    color: $color-font-light;
+                }
+            }
+        }
+    }
+    
+    .userPhoto {
+        background-color: $color-border;
+        width: 80px;
+        height: 80px;
+        border-radius: 100px;
+        margin-right: 15px;
+    }
+    .userInfoWrapper {
+        display: flex;
+        align-items: center;
+        padding: 20px;
+        .userInfo {
+            h5 {
+                color: $color-font-light;
+                margin: 0 0 5px 0;
+            }
+            .driverId {
+                background-color: #555;
+                color: $color-font-light;
+                display: inline-block;
+                padding: 5px;
+            }
+        }
+    }
+    .menuBtn {
+        box-shadow:none !important;
     }
 }

@@ -4,6 +4,7 @@ import { GoogleMaps, GoogleMap, GoogleMapsEvent, LatLng, CameraPosition, MarkerO
 import { Observable } from 'rxjs/Observable';
 import { Storage } from '@ionic/storage';
 import { Geolocation } from '@ionic-native/geolocation';
+import * as $ from 'jquery';
 
 /**
  * Generated class for the UserPage page.
@@ -70,6 +71,16 @@ export class UserPage {
       "latitude": 49.1028606,
       "longitude": 9.8426116
     }];
+  }
+
+  ngAfterViewInit() {
+  //  let currentLocationBtn:HTMLElement = document;
+    let estimateMenuPosition:string = $('.estimateMenu').offset();
+    debugger;
+  }
+
+  ngOnInit() {
+      debugger;
   }
 
   viewPlace(id) {
