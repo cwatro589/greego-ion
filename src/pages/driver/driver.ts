@@ -25,7 +25,7 @@ import {
 })
 export class DriverPage {
 
-  public userMenu = [
+  userMenu = [
     {
       title: 'User Info',
       target: 'userInfo',
@@ -80,6 +80,27 @@ export class DriverPage {
       permission: 'all'
     }
   ];
+
+  cardStatus = [
+    {
+      title: 'Driver Confirmed and Enroute',
+      status: 'enroute'
+    },
+    {
+      title: 'Driver waiting at your pickup location',
+      status: 'waitingDriver'
+    },
+    {
+      title: 'Your on trip',
+      status: 'onTrip'
+    },
+    {
+      title: 'No new ride request',
+      status: 'noNewRequest'
+    }
+  ];
+
+  public currentCardStatus = this.cardStatus[1].status;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private menu: MenuController, private googleMaps: GoogleMaps, public modalCtrl: ModalController) {
   }
@@ -139,6 +160,7 @@ export class DriverPage {
       let estimateMenuHeight = document.getElementById('estimateMenu').clientHeight;
       document.getElementById('currentLocationBtn').style.bottom = (estimateMenuHeight + 20) + 'px';
     }
+    
   openPage(page) {
     let modal = this.modalCtrl.create(page);
     modal.present();
