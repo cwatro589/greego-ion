@@ -1,0 +1,31 @@
+{
+    "userType": "rider",
+    "driverId": "",
+    "creditCard": [
+        {
+            "id": "123123",
+            "type": "visa",
+            "number": "1234",
+            "default": true
+        },
+        {
+            "id": "456456",
+            "type": "american express",
+            "number": "5678",
+            "default": false
+        }
+    ],
+    "facePhoto": "facephoto.jpg",
+    "firstName": "John",
+    "lastName": "Doe",
+    "phone": "(703)677-5788",
+    "email": "cwatro589@gmail.com",
+    "carYear": "2017",
+    "carBrand": "Honda",
+    "carModel": "Civic",
+    "carTrim": "EX",
+    "carTransmittion": "auto",
+    "bank": "1234",
+    "availCarType": ["sedan", "suv"],
+    "availTransmittion": ["auto"]
+}

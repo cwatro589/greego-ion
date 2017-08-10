@@ -22,4 +22,8 @@ export class PromotionPage {
     console.log('ionViewDidLoad PromotionPage');
   }
 
+  closeModal() {
+    this.navCtrl.pop();
+  }
+
 }

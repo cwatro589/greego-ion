@@ -1,0 +1,52 @@
+<!--
+  Generated template for the AddcreditcardPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>addcreditcard</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+   <ion-row class="noMargin">
+     <ion-col col-12>
+      <ion-item>
+        <ion-label color="labelLight" stacked [hidden]="!creditcardnumber.valid">Credit Card Number</ion-label>
+        <ion-input type="text" #creditcardnumber="ngModel" required id="creditcardnumber" name="creditcardnumber" [(ngModel)]="personal.firstName" placeholder="Credit Card Number"></ion-input>
+      </ion-item>
+    </ion-col>
+    <ion-col col-6>
+      <ion-item>
+        <ion-label color="labelLight" stacked [hidden]="!month.valid">First Name</ion-label>
+        <ion-input type="text" #month="ngModel" required id="month" name="month" [(ngModel)]="personal.firstName" placeholder="Month"></ion-input>
+      </ion-item>
+    </ion-col>
+    <ion-col col-6>
+      <ion-item>
+        <ion-label color="labelLight" stacked [hidden]="!year.valid">Year</ion-label>
+        <ion-input type="text" #year="ngModel" required id="year" name="year" [(ngModel)]="personal.lastName" placeholder="Year"></ion-input>
+      </ion-item>
+    </ion-col>
+    <ion-col col-12>
+      <ion-item>
+        <ion-label color="labelLight" stacked [hidden]="!cvv.valid">CVV</ion-label>
+        <ion-input type="text" #cvv="ngModel" required id="cvv" name="cvv" [(ngModel)]="personal.firstName" placeholder="CVV"></ion-input>
+      </ion-item>
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-item>
+      <ion-label>Set Default</ion-label>
+      <ion-checkbox></ion-checkbox>
+    </ion-item>
+  </ion-row>
+  <ion-row>
+    <button ion-button block>Add</button>
+  </ion-row>
+</ion-content>

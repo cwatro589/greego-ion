@@ -22,4 +22,8 @@ export class HistoryPage {
     console.log('ionViewDidLoad HistoryPage');
   }
 
+  closeModal() {
+    this.navCtrl.pop();
+  }
+
 }

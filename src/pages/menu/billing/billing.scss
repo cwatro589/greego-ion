@@ -1,3 +1,13 @@
-page-billing {
+@import '../../../app/mixin';
 
+page-billing {
+    ion-list-header {
+        .category, .currency {
+            font-weight: bold;
+            color: $color-main1;
+        }
+    }
+    .currency {
+        float: right;
+    }
 }

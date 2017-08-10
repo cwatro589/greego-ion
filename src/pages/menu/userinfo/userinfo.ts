@@ -15,11 +15,18 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class UserinfoPage {
 
+  title = 'User Info';
+  a:string;
+
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad UserinfoPage');
+  }
+
+  closeModal() {
+    this.navCtrl.pop();
   }
 
 }

@@ -22,4 +22,8 @@ export class PaymentsPage {
     console.log('ionViewDidLoad PaymentsPage');
   }
 
+  closeModal() {
+    this.navCtrl.pop();
+  }
+
 }

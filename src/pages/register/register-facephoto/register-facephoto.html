@@ -5,11 +5,9 @@
   Ionic pages and navigation.
 -->
 <ion-header>
-
   <ion-navbar>
     <ion-title>Face Photo</ion-title>
   </ion-navbar>
-
 </ion-header>
 
 
@@ -29,11 +27,11 @@
     </ion-row>
     <ion-row>
       <div class="buttonContainer">
-        <button ion-button color="secondary" (click)="takephoto()">
+        <button ion-button color="secondary" (click)="takephoto('camera')">
           <i class="fa fa-camera"></i>
           Camera
         </button>
-        <button ion-button color="secondary" (click)="takephoto()">
+        <button ion-button color="secondary" (click)="takephoto('gallery')">
           <i class="fa fa-file-image-o"></i>
           Gallery
         </button>

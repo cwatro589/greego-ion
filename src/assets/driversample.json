@@ -1,0 +1,18 @@
+{
+    "userType": "driver",
+    "driverId": "AB123CD",
+    "creditCard": [],
+    "facePhoto": "facephoto-driver.jpg",
+    "firstName": "Hugh",
+    "lastName": "Jackman",
+    "phone": "(571)333-1234",
+    "email": "hugh@gmail.com",
+    "carYear": "2017",
+    "carBrand": "Honda",
+    "carModel": "Civic",
+    "carTrim": "EX",
+    "carTransmittion": "auto",
+    "bank": "1234",
+    "availCarType": ["sedan", "suv"],
+    "availTransmittion": ["auto"]
+}

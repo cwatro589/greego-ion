@@ -19,14 +19,14 @@ import { FormDataService }     from '../../../form/formData.service';
 })
 
 export class RegisterUserPage implements OnInit {
-  
+
   personal: Personal;
   Confirm:string;
   passwordMatch:boolean;
   form: any;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private formDataService: FormDataService) {
-    
+
   }
 
   passwordValidation() {
@@ -46,11 +46,8 @@ export class RegisterUserPage implements OnInit {
   ionViewDidLoad() {
     console.log('ionViewDidLoad RegisterUserPage');
   }
-  
-  goto(form: any) {
-    if (!form.valid) {
-      return;
-    }
+
+  goto() {
     this.formDataService.setPersonal(this.personal);
     this.navCtrl.push(RegisterFacephotoPage);
   }

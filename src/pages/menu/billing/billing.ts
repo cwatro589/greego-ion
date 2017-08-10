@@ -14,12 +14,18 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
   templateUrl: 'billing.html',
 })
 export class BillingPage {
+  
+  billingTab:string = 'earned';
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad BillingPage');
+  }
+
+  closeModal() {
+    this.navCtrl.pop();
   }
 
 }

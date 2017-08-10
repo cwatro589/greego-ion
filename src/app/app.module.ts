@@ -5,6 +5,7 @@ import { MyApp } from './app.component';
 import { FormsModule } from '@angular/forms';
 import { GoogleMaps } from '@ionic-native/google-maps';
 import { Geolocation } from '@ionic-native/geolocation';
+import { HttpModule } from '@angular/http';
 
 import { HomePage } from '../pages/home/home';
 import { LoginPage } from '../pages/login/login';
@@ -20,6 +21,9 @@ import { RegisterDriverPrefPage } from '../pages/register/register-driver-pref/r
 import { RegisterDriverBankPage } from '../pages/register/register-driver-bank/register-driver-bank';
 import { RegisterDriverAgreementPage, MathcesCategoryPipe } from '../pages/register/register-driver-agreement/register-driver-agreement';
 import { RegisterUserCompletedPage } from '../pages/register/register-user-completed/register-user-completed';
+import { TripcompletedPage } from '../pages/driver/tripcompleted/tripcompleted';
+import { TripcompletedDriverPage } from '../pages/driver/tripcompleted-driver/tripcompleted-driver';
+
 
 import { UserPage } from '../pages/user/user';
 import { DriverPage } from '../pages/driver/driver';
@@ -53,12 +57,15 @@ import { IonicStorageModule } from '@ionic/storage';
     MathcesCategoryPipe,
     EqualValidator,
     UserPage,
-    DriverPage
+    DriverPage,
+    TripcompletedPage,
+    TripcompletedDriverPage
   ],
   imports: [
     BrowserModule,
     IonicModule.forRoot(MyApp),
     FormsModule,
+    HttpModule,
     IonicStorageModule.forRoot()
   ],
   bootstrap: [IonicApp],
@@ -79,7 +86,9 @@ import { IonicStorageModule } from '@ionic/storage';
     RegisterDriverAgreementPage,
     RegisterUserCompletedPage,
     UserPage,
-    DriverPage
+    DriverPage,
+    TripcompletedPage,
+    TripcompletedDriverPage
   ],
   providers: [
     StatusBar,

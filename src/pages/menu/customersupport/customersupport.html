@@ -7,12 +7,25 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>customersupport</ion-title>
+    <ion-title>Customer Support</ion-title>
+    <button ion-button clear (click)="closeModal()">
+        Close
+    </button>
   </ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding>
-
+  <div>If you have any problems or questions about using the Greego service, please contact us at the phone number below or leave a message on the form.</div>
+  <div>
+    <label>Phone</label>
+    <div>1-800-677-5788</div>
+    <div>Available: 9:30AM ~ 12:30AM</div>
+  </div>
+  <div class="splitLine">
+    <label>Message</label>
+    <ion-textarea placeholder="Enter a message"></ion-textarea>
+    <button ion-button block (click)="send()">Send Message</button>
+  </div>
 </ion-content>

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { RegisterUserPage } from '../register-user/register-user';
-import { RegisterDriverVerifyPage } from '../register-driver-verify/register-driver-verify';
+import { RegisterUserPage } from './register-user/register-user';
+import { RegisterDriverVerifyPage } from './register-driver-verify/register-driver-verify';
 
 import { RegisterType } from '../../form/formData.model';
 import { FormDataService } from '../../form/formData.service';

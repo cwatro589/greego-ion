@@ -7,12 +7,126 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>userinfo</ion-title>
+    <ion-title>{{title}}</ion-title>
+    <button ion-button clear (click)="closeModal()">
+        Close
+    </button>
   </ion-navbar>
 
 </ion-header>
 
 
-<ion-content padding>
+<ion-content>
+  <ion-row class="userInfoWrapper">
+    <img src="#" class="userPhoto">
+    <div class="userInfo">
+      <h5 class="userName">John Doe</h5>
+      <div class="driverId">AB123C</div>
+    </div>
+  </ion-row>
+
+  <ion-row padding>
+    <ion-item>
+      <ion-label color="labelLight" stacked [hidden]="!phone.valid">Phone Number</ion-label>
+      <ion-input type="tel" #phone="ngModel" required id="phone" name="phone" [(ngModel)]="a" placeholder="Phone Number"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label color="labelLight" stacked [hidden]="!email.valid">Email Address</ion-label>
+      <ion-input type="email"  #email="ngModel" required id="email" name="email" [(ngModel)]="a"  placeholder="Email Address"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label color="labelLight" stacked [hidden]="!password.valid">Change Password</ion-label>
+      <ion-input type="password" #password="ngModel" required validateEqual="confirm" reverse="true" id="password" name="password" [(ngModel)]="a" placeholder="Change Password"></ion-input>
+    </ion-item>
+  </ion-row>
+
+  <ion-row padding>
+    <ion-item>
+      <ion-label>Choose Year</ion-label>
+      <ion-select #caryear="ngModel" required id="caryear" name="caryear" [(ngModel)]="a">
+        <ion-option value="2000">2000</ion-option>
+      </ion-select>
+    </ion-item>
+    <ion-item>
+      <ion-label>Choose Brand</ion-label>
+      <ion-select #carbrand="ngModel" required id="carbrand" name="carbrand" [(ngModel)]="a">
+        <ion-option value="honda">Honda</ion-option>
+      </ion-select>
+    </ion-item>
+    <ion-item>
+      <ion-label>Choose Model</ion-label>
+      <ion-select #carmodel="ngModel" required id="carmodel" name="carmodel" [(ngModel)]="a">
+        <ion-option value="Civic">Civic</ion-option>
+      </ion-select>
+    </ion-item>
+    <ion-item>
+      <ion-label>Choose Trim</ion-label>
+      <ion-select #cartrim="ngModel" required id="cartrim" name="cartrim" [(ngModel)]="a">
+        <ion-option value="EX">EX</ion-option>
+      </ion-select>
+    </ion-item>
+    <ion-item>
+      <ion-label color="labelLight" stacked [hidden]="!carcolor.valid">Color</ion-label>
+      <ion-input type="text" #carcolor="ngModel" required id="carcolor" name="carcolor" [(ngModel)]="a" placeholder="Enter a car color"></ion-input>
+    </ion-item>
+  </ion-row>
+
+  <ion-row padding>
+    <ion-list radio-group #cartransmittion="ngModel" id="cartransmittion" name="cartransmittion" [(ngModel)]="a">
+      <ion-label color="labelLight" stacked>Transmittion Type</ion-label>
+      <ion-item>
+        <ion-label>Automatic</ion-label>
+        <ion-radio checked="true" value="automatic"></ion-radio>
+      </ion-item>
+      <ion-item>
+        <ion-label>Manual</ion-label>
+        <ion-radio value="manual"></ion-radio>
+      </ion-item>
+    </ion-list>
+  </ion-row>
+
+  <ion-row padding>
+    <ion-label color="labelLight" stacked>Type of Car</ion-label>
+    <ion-item>
+      <ion-label>Sedan</ion-label>
+      <ion-checkbox [(ngModel)]="a" (click)='validationCheck()'></ion-checkbox>
+    </ion-item>
+    <ion-item>
+      <ion-label>SUV</ion-label>
+      <ion-checkbox [(ngModel)]="a" (click)='validationCheck()'></ion-checkbox>
+    </ion-item>
+    <ion-item>
+      <ion-label>Van</ion-label>
+      <ion-checkbox [(ngModel)]="a" (click)='validationCheck()'></ion-checkbox>
+    </ion-item>
+  </ion-row>
+
+  <ion-row padding>
+    <ion-label color="labelLight" stacked>Type of Transmission</ion-label>
+    <ion-item>
+      <ion-label>Automatic</ion-label>
+      <ion-checkbox [(ngModel)]="a" (click)='validationCheck()'></ion-checkbox>
+    </ion-item>
+    <ion-item>
+      <ion-label>Manual</ion-label>
+      <ion-checkbox [(ngModel)]="a" (click)='validationCheck()'></ion-checkbox>
+    </ion-item>
+  </ion-row>
+
+  <ion-row padding>
+    <h5>Bank Account</h5>
+    <ion-item>
+      <ion-label color="labelLight" stacked [hidden]="!bankroutingnumber.valid">Routing Number</ion-label>
+      <ion-input type="text" placeholder="Enter a Bank Routing Number" #bankroutingnumber="ngModel" required id="bankroutingnumber" name="bankroutingnumber" [(ngModel)]="a"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label color="labelLight" stacked [hidden]="!bankaccountnumber.valid">Account Number</ion-label>
+      <ion-input type="text" placeholder="Enter a Bank Account Number" #bankaccountnumber="ngModel" required id="bankaccountnumber" name="bankaccountnumber" [(ngModel)]="a"></ion-input>
+    </ion-item>
+  </ion-row>
+  
+  <ion-row padding>
+    <button ion-button block>Update</button>
+  </ion-row>
 
 </ion-content>

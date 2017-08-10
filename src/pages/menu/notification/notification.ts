@@ -22,4 +22,8 @@ export class NotificationPage {
     console.log('ionViewDidLoad NotificationPage');
   }
 
+  closeModal() {
+    this.navCtrl.pop();
+  }
+
 }

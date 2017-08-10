@@ -188,9 +188,22 @@ ion-input {
   display: flex;
   align-items: flex-end;
 }
+.chargeAmount {
+  :before {
+    content: "$";
+  }
+}
 
 /* Options */
-
+.currency {
+  &:before {
+    content: '$';
+  }
+}
+.textFocus {
+  font-weight: bold;
+  color: $color-main1;
+}
 .noMargin {
   margin: 0 !important;
 }

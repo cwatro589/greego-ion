@@ -7,12 +7,27 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>payments</ion-title>
+    <ion-title>Select a Credit Card to Pay</ion-title>
+    <button ion-button clear (click)="closeModal()">
+        Close
+    </button>
   </ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding>
-
+  <ion-list radio-group>
+    <ion-item>
+      <ion-label>
+        Visa Card
+        <div class="cardNumber">1234</div>
+      </ion-label>
+      <ion-radio checked="true" value="go"></ion-radio>
+      <i class="fa fa-trash-o" (click)="removeCreditCard()"></i>
+    </ion-item>
+  </ion-list>
+  <ion-row>
+    <button ion-button block>Add Credit Card</button>
+  </ion-row>
 </ion-content>

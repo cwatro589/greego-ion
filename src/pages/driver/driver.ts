@@ -9,7 +9,16 @@ import {
  MarkerOptions,
  Marker
 } from '@ionic-native/google-maps';
+import { Http } from '@angular/http';
+import 'rxjs/add/operator/map';
 
+import { UserinfoPage } from '../menu/userinfo/userinfo';
+
+import { RequestcallPage } from './requestcall/requestcall';
+import { TripcompletedPage } from './tripcompleted/tripcompleted';
+import { TripcompletedDriverPage } from './tripcompleted-driver/tripcompleted-driver';
+
+import * as $ from 'jquery'
 
 /**
  * Generated class for the DriverPage page.
@@ -25,39 +34,127 @@ import {
 })
 export class DriverPage {
 
+  step:string = 'home';
+
+  pickuplocation:string;
+  destination:string;
+
+  buttonDisabled:boolean = false;
+  cancelationLimitTime:number = 2;
+
+  userStepFlow = [
+    'home', 'destination', 'estimates', 'enroute', 'ontrip'
+  ]
+
+  driverStepFlow = [
+    'waiting', 'request'
+  ]
+
+  stepFlow:any;
+  
+  stepSet = {
+    home: {
+      headerTitle: 'Greego',
+      headerIcon: '',
+      cardTitle: '',
+      pickupLocation: true,
+      destination: false,
+      estimateMenu: false,
+      driverInfo: false,
+      riderInfo: false,
+      arrivedatrider: false,
+      destinationArrived: false,
+      customerRate: false
+    },
+    destination: {
+      headerTitle: 'Greego',
+      headerIcon: '',
+      cardTitle: '',
+      pickupLocation: true,
+      destination: true,
+      estimateMenu: false,
+      driverInfo: false,
+      riderInfo: false,
+      arrivedatrider: false,
+      destinationArrived: false,
+      customerRate: false
+    },
+    estimates : {
+      headerTitle: 'Request Greego Driver',
+      headerIcon: '',
+      cardTitle: '',
+      pickupLocation: true,
+      destination: true,
+      estimateMenu: true,
+      driverInfo: false,
+      riderInfo: false,
+      arrivedatrider: false,
+      destinationArrived: false,
+      customerRate: false
+    },
+    enroute : {
+      headerTitle: 'En Route',
+      headerIcon: 'fa fa-map-marker',
+      cardTitle: 'Driver Confirmed and En Route',
+      pickupLocation: false,
+      destination: false,
+      estimateMenu: false,
+      driverInfo: true,
+      riderInfo: false,
+      arrivedatrider: false,
+      destinationArrived: false,
+      customerRate: false
+    },
+    ontrip : {
+      headerTitle: 'On Trip',
+      headerIcon: 'fa fa-map-marker',
+      cardTitle: 'Your on Trip',
+      pickupLocation: false,
+      destination: false,
+      estimateMenu: false,
+      driverInfo: false,
+      riderInfo: false,
+      arrivedatrider: false,
+      destinationArrived: false,
+      customerRate: false
+    }
+  }
+
+  activeStep:any = this.stepSet.home;
+
   userMenu = [
     {
       title: 'User Info',
-      target: 'userInfo',
+      target: 'UserinfoPage',
       icon: 'fa fa-user-circle-o',
       permission: 'all'
     },
     {
       title: 'Payments',
-      target: 'payments',
+      target: 'PaymentsPage',
       icon: 'fa fa-credit-card',
       permission: 'rider'
     },
     {
       title: 'History',
-      target: 'history',
+      target: 'HistoryPage',
       icon: 'fa fa-history',
       permission: 'rider'
     },
     {
       title: 'Billing History',
-      target: 'billing',
+      target: 'BillingPage',
       icon: 'fa fa-money'
     },
     {
       title: 'Promotion',
-      target: 'promotion',
+      target: 'PromotionPage',
       icon: 'fa fa-gift',
       permission: 'rider'
     },
     {
       title: 'Notification',
-      target: 'notification',
+      target: 'NotificationPage',
       icon: 'fa fa-envelope-open-o',
       permission: 'rider'
     },
@@ -69,7 +166,7 @@ export class DriverPage {
     },
     {
       title: 'Customer Support',
-      target: 'customersupport',
+      target: 'CustomersupportPage',
       icon: 'fa fa-support',
       permission: 'all'
     },
@@ -81,32 +178,68 @@ export class DriverPage {
     }
   ];
 
-  cardStatus = [
-    {
-      title: 'Driver Confirmed and Enroute',
-      status: 'enroute'
+  userInfo:any;
+  defaultCreditCard:any;
+
+  constructor(public navCtrl: NavController, public navParams: NavParams, private menu: MenuController, private googleMaps: GoogleMaps, public modalCtrl: ModalController, public http: Http) {
+    this.getUserInfo();
+  }
+
+  getUserInfo() {
+    this.http.get('http://localhost:8100/assets/usersample.json').map(res => res.json()).subscribe(data => {
+      this.userInfo = data;
+      this.defineCreditCard();
+
+      if (this.userInfo.userType == 'rider') {
+        this.stepFlow = this.userStepFlow;
+      }
+      else {
+        this.stepFlow = this.driverStepFlow;
+      }
     },
-    {
-      title: 'Driver waiting at your pickup location',
-      status: 'waitingDriver'
-    },
-    {
-      title: 'Your on trip',
-      status: 'onTrip'
-    },
-    {
-      title: 'No new ride request',
-      status: 'noNewRequest'
+    err => {
+        console.log("Oops!");
+    }); 
+  }
+
+ 
+
+  defineCreditCard() {
+    for (let i = 0; i < Object.keys(this.userInfo.creditCard).length; i++) {
+      if (this.userInfo.creditCard[i].default) {
+        this.defaultCreditCard = this.userInfo.creditCard[i];
+      }
     }
-  ];
+  }
 
-  public currentCardStatus = this.cardStatus[1].status;
+  callFunction(name) {
+    switch(name) {
+      case "enroute": 
+        this.disableCancelBtn();
+        var time = 5000;
+        setTimeout(function(){
+          this.nextStep();
+        }.bind(this), time);
+        break;
+      case "ontrip":
+        var time = 5000;
+        setTimeout(function(){
+          this.navCtrl.setRoot(TripcompletedPage);
+        }.bind(this), time);
+        break;
+    }
+  }
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private menu: MenuController, private googleMaps: GoogleMaps, public modalCtrl: ModalController) {
+  disableCancelBtn() {
+    var minutes = this.cancelationLimitTime;
+    var seconds = minutes * ( 60 * 1000 );
+    setTimeout(function(){
+      this.buttonDisabled= true;
+    }.bind(this), seconds);
   }
 
   ngAfterViewInit() {
-   this.loadMap();
+    this.loadMap();
   }
   
   ionViewDidLoad() {
@@ -157,12 +290,90 @@ export class DriverPage {
     //    .then((marker: Marker) => {
     //       marker.showInfoWindow();
     //     });
-      let estimateMenuHeight = document.getElementById('estimateMenu').clientHeight;
-      document.getElementById('currentLocationBtn').style.bottom = (estimateMenuHeight + 20) + 'px';
+
+    let estimateMenuHeight = $('#estimateMenu').outerHeight();
+    $('#currentLocationBtn').css({'bottom': estimateMenuHeight + 20});
+
+    // let estimateMenuHeight = document.getElementById('estimateMenu').clientHeight;
+    // document.getElementById('currentLocationBtn').style.bottom = (estimateMenuHeight + 20) + 'px';
+
+
+    //Driver Rating - 5 Star
+    $('.driverRating i').click(function() {
+      $('.driverRating i').removeClass('active');
+      $(this).prevAll('i').addBack().addClass('active');
+    });
+  }
+
+  checkPickupLocation() {
+    if (this.pickuplocation == undefined || this.pickuplocation == '') {
+      if (this.destination == undefined || this.destination == '') {
+        return false;
+      }
+      return false;
     }
-    
+    else {
+      this.step = 'destinationSearch';
+    }
+  }
+   
+  // Open Pages in Menu
   openPage(page) {
     let modal = this.modalCtrl.create(page);
     modal.present();
+  }
+
+  // Open Driver Request Call
+  requestCall() {
+    let modal = this.modalCtrl.create(RequestcallPage);
+    modal.present();
+  }
+  
+  // Open Completed Page after trip
+  tripCompleted() {
+    let userType = TripcompletedDriverPage;
+    let modal = this.modalCtrl.create(userType);
+    modal.present();
+  }
+
+  currentStep:string = 'home'; 
+
+  nextStep() {
+    for (let i=0; i < this.stepFlow.length; i++) {
+      if (this.currentStep == this.stepFlow[i]) {
+        let nextstep = ++i;
+        for (let stepIndex = 0; stepIndex < Object.keys(this.stepSet).length; stepIndex++) {
+          if (this.stepFlow[nextstep] == Object.keys(this.stepSet)[stepIndex]) {
+            this.activeStep = this.stepSet[Object.keys(this.stepSet)[stepIndex]];
+            this.currentStep = this.stepFlow[nextstep];
+            this.callFunction(this.currentStep);
+          }
+        }
+      }
+    }
+    // debugger;
+    // $(this.stepFlow).each(function(flowIndex,flowName) { 
+    //   debugger;
+    //   if (flowName == this.currentStep) {
+    //     let nextstep = flowIndex++;
+    //     $.each(this.stepSet, function(stepName, stepData) {
+    //       if (this.stepFlow[nextstep] == stepName) {
+    //         this.currentStep = stepName;
+    //         this.activeStep = stepData;
+    //       }
+    //       else {
+    //         console.log('No more next step');
+    //       }
+    //     })
+    //   }
+    //   else {
+    //     console.log('Error');
+    //   }
+    // }, this.currentStep)
+  }
+
+  resetStep() {
+    this.currentStep = this.stepFlow[0];
+    this.activeStep = this.stepSet[Object.keys(this.stepSet)[0]];
   }
 }

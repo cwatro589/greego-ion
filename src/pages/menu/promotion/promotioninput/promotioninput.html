@@ -1,0 +1,26 @@
+<!--
+  Generated template for the PromotioninputPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Add Promotion Code</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <ion-row>
+    <ion-item>
+      <ion-label color="labelLight" stacked [hidden]="!promotioncode.valid">Promotion Code</ion-label>
+      <ion-input type="text" placeholder="Promotion Code" #promotioncode="ngModel" required id="promotioncode" name="promotioncode" [(ngModel)]="bank.bankRoutingNumber"></ion-input>
+    </ion-item>
+  </ion-row>
+  <ion-row>
+    <button ion-button block>Apply</button>
+  </ion-row>
+</ion-content>
