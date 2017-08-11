@@ -179,7 +179,9 @@ export class DriverPage {
   ];
 
   userInfo:any;
-  defaultCreditCard:any;
+  selectedCreditCard:any;
+  selectedCreditCardIcon:string;
+  creditcardtype:string;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private menu: MenuController, private googleMaps: GoogleMaps, public modalCtrl: ModalController, public http: Http) {
     this.getUserInfo();
@@ -202,13 +204,52 @@ export class DriverPage {
     }); 
   }
 
- 
+  changeCC() {
+    let modal = this.modalCtrl.create('PaymentsPage', {changeCC: true});
+    modal.present();
+  }
+
+  changeCreditCard(id) {
+    for (let i = 0; i < Object.keys(this.userInfo.creditCard).length; i++) {
+      if (this.userInfo.creditCard[i].id == id) {
+        this.selectedCreditCard = this.userInfo.creditCard[i];
+        this.selectedCreditCardIcon = this.creditCardIcon(this.userInfo.creditCard[i].type);
+      }
+    }
+  }
 
   defineCreditCard() {
     for (let i = 0; i < Object.keys(this.userInfo.creditCard).length; i++) {
       if (this.userInfo.creditCard[i].default) {
-        this.defaultCreditCard = this.userInfo.creditCard[i];
+        this.selectedCreditCard = this.userInfo.creditCard[i];
+        this.selectedCreditCardIcon = this.creditCardIcon(this.userInfo.creditCard[i].type);
       }
+    }
+  }
+
+  creditCardIcon(type) {
+    switch(type) {
+      case "visa":
+        return 'fa fa-cc-visa';
+      case "mastercard":
+        return 'fa fa-cc-mastercard';
+      case "discover":
+        return 'fa fa-cc-discover';
+      case "amex":
+        return 'fa fa-cc-amex';
+    }
+  }
+
+  creditCardName(type) {
+    switch(type) {
+      case "visa":
+        return 'visa';
+      case "mastercard":
+        return 'master';
+      case "discover":
+        return 'discover';
+      case "amex":
+        return 'american express';
     }
   }
 

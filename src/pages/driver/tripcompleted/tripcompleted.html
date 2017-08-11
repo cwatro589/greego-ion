@@ -17,9 +17,7 @@
     </div>
     <div class="chargeInfo">
       Total Charged
-      <div class="chargeAmount">
-        77
-      </div>
+      <div class="chargeAmount currency">77</div>
     </div>
   </ion-row>
   <ion-row padding class="driverRating">
@@ -30,7 +28,7 @@
         <div class="driverId">AB123C</div>
       </div>
     </div>
-    <div class="driverRating">
+    <div class="driverRates review">
       <i class="fa fa-star"></i>
       <i class="fa fa-star"></i>
       <i class="fa fa-star"></i>
@@ -38,8 +36,8 @@
       <i class="fa fa-star"></i>
     </div>
   </ion-row>
-  <ion-row>
-    <button ion-button block (click)="submit()">Submit</button>
+  <ion-row padding>
+    <button ion-button block (click)="submit()" [disabled]="!ratingAvail">Submit</button>
   </ion-row>
-  <button ion-button full class="buttomBtn">Need Help?</button>
+  <button ion-button clear class="subBtn" (click)="customersupport()">Need Help?</button>
 </ion-content>

@@ -10,7 +10,7 @@
         },
         {
             "id": "456456",
-            "type": "american express",
+            "type": "amex",
             "number": "5678",
             "default": false
         }

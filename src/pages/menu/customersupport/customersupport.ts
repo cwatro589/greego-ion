@@ -22,4 +22,8 @@ export class CustomersupportPage {
     console.log('ionViewDidLoad CustomersupportPage');
   }
 
+  closeModal() {
+    this.navCtrl.pop();
+  }
+
 }

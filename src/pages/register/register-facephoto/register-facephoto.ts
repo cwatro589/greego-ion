@@ -3,14 +3,9 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { RegisterCarInfoPage } from '../register-car-info/register-car-info';
 import { RegisterDriverPrefPage } from '../register-driver-pref/register-driver-pref';
 
-<<<<<<< HEAD:src/pages/register/register-facephoto/register-facephoto.ts
 import { FacePhoto, RegisterType } from '../../../form/formData.model';
 import { FormDataService } from '../../../form/formData.service';
-=======
-import { FacePhoto, RegisterType } from '../../form/formData.model';
-import { FormDataService } from '../../form/formData.service';
 import { Camera, CameraOptions } from '@ionic-native/camera';
->>>>>>> 925c6b4a9b68c155f081199b648c942b1d0d9fd1:src/pages/register-facephoto/register-facephoto.ts
 
 /**
  * Generated class for the RegisterFacephotoPage page.

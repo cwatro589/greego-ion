@@ -69,10 +69,10 @@
       <span class="estimatePrice">$77</span>
     </ion-card-content>
     <ion-card-content class="creditCardInfo">
-      <i class="fa fa-cc-visa"></i>
-      <span class="">Credit Card</span>
-      <span class="creditCardNumber">**** 1234</span>
-      <button ion-button clear class="creditCardChangeBtn">Change</button>
+      <i class="{{creditCardIcon(selectedCreditCard.type)}}"></i>
+      <span class="creditCardType">{{creditCardName(selectedCreditCard.type)}} Card</span>
+      <span class="creditCardNumber">**** {{selectedCreditCard.number}}</span>
+      <button ion-button clear class="creditCardChangeBtn" (click)="changeCC()">Change</button>
     </ion-card-content>
     <ion-card-content class="requestDriverContainer">
       <button ion-button full (click)="nextStep()">Request Driver</button>

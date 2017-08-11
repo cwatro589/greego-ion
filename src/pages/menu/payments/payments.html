@@ -7,7 +7,7 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>Select a Credit Card to Pay</ion-title>
+    <ion-title>Select a Credit Card</ion-title>
     <button ion-button clear (click)="closeModal()">
         Close
     </button>
@@ -18,16 +18,21 @@
 
 <ion-content padding>
   <ion-list radio-group>
-    <ion-item>
+    <ion-item *ngFor="let creditcard of creditCardList">
       <ion-label>
-        Visa Card
-        <div class="cardNumber">1234</div>
+        <i class="{{creditCardIcon(creditcard.type)}} cardIcon"></i>
+        <div class="cardInfoContainer">
+          <div class="cardType">
+            {{creditCardName(creditcard.type)}} Card
+          </div>
+          <div class="cardNumber">**** **** **** {{creditcard.number}}</div>
+        </div>
+        <i class="fa fa-trash-o deleteBtn" *ngIf="!changeCreditCard" (click)="removeCreditCard()"></i>
       </ion-label>
-      <ion-radio checked="true" value="go"></ion-radio>
-      <i class="fa fa-trash-o" (click)="removeCreditCard()"></i>
+      <ion-radio [checked]="creditcard.default" value="{{creditcard.id}}" (click)="!changeCreditCard ? setDefault() : selectCreditCard()"></ion-radio>
     </ion-item>
   </ion-list>
-  <ion-row>
+  <ion-row *ngIf="!changeCreditCard">
     <button ion-button block>Add Credit Card</button>
   </ion-row>
 </ion-content>
