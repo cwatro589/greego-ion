@@ -1,3 +1,49 @@
 page-requestcall {
-
+    ion-content .scroll-content {
+        background: $color-main2;
+        color: $color-font-light;
+        text-align: center;
+    }
+    h2 {
+        text-transform: uppercase;
+        font-size: 2em;
+        margin-top: 10px;
+        letter-spacing: 3px;
+    }
+    ion-row.row {
+        width: 100%;
+        display: block;
+    }
+    .address {
+            margin-bottom: 20px;
+        }
+    #map {
+        width: 40vh;
+        height: 40vh;
+        margin: 0 auto;
+        background-color: #eee;
+        border-radius: 40vh;
+        border: 4px solid lighten($color-main2, 10%);
+    }
+    .customerInfo {
+        margin: 25px 0;
+        font-size: 1.5em;
+        font-weight: bold;
+    }
+    .rating {
+        color: $color-main1;
+        margin-left: 12px;
+    }
+    .buttonSet {
+        margin-top: 30px;
+    }
+    ion-label {
+        margin-bottom: 5px;
+    }
+    i {
+        margin-right: 5px;
+    }
+    .rejectBtn {
+        margin-top: 15px;
+    }
 }

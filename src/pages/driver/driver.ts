@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, MenuController, ModalController } from 'ionic-angular';
+import { Component, OnInit } from '@angular/core';
+import { IonicPage, NavController, NavParams, MenuController, ModalController, ViewController } from 'ionic-angular';
 import {
  GoogleMaps,
  GoogleMap,
@@ -32,7 +32,7 @@ import * as $ from 'jquery'
   selector: 'page-driver',
   templateUrl: 'driver.html',
 })
-export class DriverPage {
+export class DriverPage implements OnInit {
 
   step:string = 'home';
 
@@ -47,7 +47,7 @@ export class DriverPage {
   ]
 
   driverStepFlow = [
-    'waiting', 'request'
+    'waiting', 'driverEnroute', 'arrivedAtRider', 'onGoing', 'destinationArrived'
   ]
 
   stepFlow:any;
@@ -88,6 +88,8 @@ export class DriverPage {
       estimateMenu: true,
       driverInfo: false,
       riderInfo: false,
+      pickupInfo: false,
+      destinationAddress: false,
       arrivedatrider: false,
       destinationArrived: false,
       customerRate: false
@@ -101,6 +103,8 @@ export class DriverPage {
       estimateMenu: false,
       driverInfo: true,
       riderInfo: false,
+      pickupInfo: false,
+      destinationAddress: false,
       arrivedatrider: false,
       destinationArrived: false,
       customerRate: false
@@ -114,13 +118,113 @@ export class DriverPage {
       estimateMenu: false,
       driverInfo: false,
       riderInfo: false,
+      pickupInfo: false,
+      destinationAddress: true,
       arrivedatrider: false,
       destinationArrived: false,
       customerRate: false
+    },
+    waiting : {
+      headerTitle: 'Greego Driver',
+      headerIcon: '',
+      cardTitle: 'No New Ride Request',
+      pickupLocation: false,
+      destination: false,
+      estimateMenu: false,
+      driverInfo: false,
+      driverWaiting: true,
+      driverEnroute: false,
+      riderInfo: false,
+      pickupInfo: false,
+      destinationAddress: false,
+      arrivedatrider: false,
+      destinationArrived: false,
+      customerRate: false
+    },
+    driverEnroute : {
+      headerTitle: 'En Route',
+      headerIcon: 'fa fa-map-marker',
+      cardTitle: '',
+      pickupLocation: false,
+      destination: false,
+      estimateMenu: false,
+      driverInfo: false,
+      estimateTime: true,
+      riderInfo: true,
+      pickupInfo: true,
+      destinationAddress: false,
+      arrivedatrider: false,
+      destinationArrived: false,
+      customerRate: false
+    },
+    arrivedAtRider : {
+      headerTitle: 'Rider Location Arrived',
+      headerIcon: 'fa fa-map-marker',
+      cardTitle: '',
+      pickupLocation: false,
+      destination: false,
+      estimateMenu: false,
+      driverInfo: false,
+      estimateTime: false,
+      riderInfo: true,
+      pickupInfo: true,
+      destinationAddress: false,
+      arrivedatrider: true,
+      destinationArrived: false,
+      customerRate: false
+    },
+    onGoing : {
+      headerTitle: 'Ongoing',
+      headerIcon: 'fa fa-map-marker',
+      cardTitle: '',
+      pickupLocation: false,
+      destination: false,
+      estimateMenu: false,
+      driverInfo: false,
+      estimateTime: false,
+      riderInfo: true,
+      pickupInfo: false,
+      destinationAddress: true,
+      arrivedatrider: false,
+      ongoing: true,
+      destinationArrived: false,
+      customerRate: false
+    },
+    destinationArrived : {
+      headerTitle: 'Destination Arrived',
+      headerIcon: 'fa fa-map-marker',
+      cardTitle: 'Arrived near the destination.',
+      pickupLocation: false,
+      destination: false,
+      estimateMenu: false,
+      driverInfo: false,
+      estimateTime: false,
+      riderInfo: true,
+      pickupInfo: false,
+      destinationAddress: true,
+      arrivedatrider: false,
+      ongoing: true,
+      destinationArrived: true,
+      customerRate: false
+    },
+    tripCompleted : {
+      headerTitle: 'Trip Completed',
+      headerIcon: 'fa fa-map-marker',
+      cardTitle: '',
+      pickupLocation: false,
+      destination: false,
+      estimateMenu: false,
+      driverInfo: false,
+      estimateTime: false,
+      riderInfo: true,
+      pickupInfo: false,
+      destinationAddress: true,
+      arrivedatrider: false,
+      ongoing: false,
+      destinationArrived: true,
+      customerRate: true
     }
   }
-
-  activeStep:any = this.stepSet.home;
 
   userMenu = [
     {
@@ -178,17 +282,51 @@ export class DriverPage {
     }
   ];
 
+  activeStep:any = this.stepSet.waiting;
+  currentStep:string = 'waiting'; 
+
   userInfo:any;
   selectedCreditCard:any;
   selectedCreditCardIcon:string;
   creditcardtype:string;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private menu: MenuController, private googleMaps: GoogleMaps, public modalCtrl: ModalController, public http: Http) {
+  request;
+
+  constructor(public navCtrl: NavController, public navParams: NavParams, private menu: MenuController, private googleMaps: GoogleMaps, public modalCtrl: ModalController, public http: Http, public viewCtrl: ViewController) {
     this.getUserInfo();
+
+      let time = 1000;
+      setTimeout(function(){
+        this.driverRequestCall();
+      }.bind(this), time);
+      
+  }
+
+  driverRequestCall() {
+    let modal = this.modalCtrl.create('RequestcallPage');
+    modal.onDidDismiss(data => {
+      if (data == true) {
+        this.nextStep();
+      }
+      else {
+        this.driverRequestCall();
+      }
+    });
+    modal.present();
+
+    let time2 = 3000;
+    setTimeout(function(){
+        this.nextStep();
+        console.log('1');
+    }.bind(this), time2);
+  }
+
+  ngOnInit() {
+    // debugger;
   }
 
   getUserInfo() {
-    this.http.get('http://localhost:8100/assets/usersample.json').map(res => res.json()).subscribe(data => {
+    this.http.get('http://localhost:8100/assets/driversample.json').map(res => res.json()).subscribe((data) => {
       this.userInfo = data;
       this.defineCreditCard();
 
@@ -198,6 +336,13 @@ export class DriverPage {
       else {
         this.stepFlow = this.driverStepFlow;
       }
+
+      $.each(this.stepSet, function(i, v) {
+        if (this.stepFlow[0] == i) {
+          return this.activeStep = v;
+        }
+      }.bind(this));
+
     },
     err => {
         console.log("Oops!");
@@ -377,8 +522,6 @@ export class DriverPage {
     modal.present();
   }
 
-  currentStep:string = 'home'; 
-
   nextStep() {
     for (let i=0; i < this.stepFlow.length; i++) {
       if (this.currentStep == this.stepFlow[i]) {
@@ -417,4 +560,30 @@ export class DriverPage {
     this.currentStep = this.stepFlow[0];
     this.activeStep = this.stepSet[Object.keys(this.stepSet)[0]];
   }
+
+  callToRider() {
+    alert('Call to Rider Function!');
+  }
+
+  openNavigation() {
+    alert('Nav App!');
+  }
+
+  startTrip() {
+    this.nextStep();
+    this.dummyStep();
+  }
+
+  completedTrip() {
+    this.navCtrl.setRoot(TripcompletedDriverPage);
+  }
+
+  //1초 후 다음 스탭으로 넘기는 테스트용 기능.
+  dummyStep() {
+    let time = 2000;
+    setTimeout(function(){
+      this.nextStep();
+    }.bind(this), time);
+  }
+
 }

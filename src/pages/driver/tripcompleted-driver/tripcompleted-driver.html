@@ -8,13 +8,24 @@
   <ion-row class="completedMsg">
     <i class="fa fa-smile-o"></i>
     <h1>Thank you for ride customer safely.</h1>
-    <div class="desc">Please wait for the next customer's request.</div>
+    Please enter your customer rating and please wait for the next customer's request.
   </ion-row>
-  <ion-row class="earned">
-    You Earned
-    <span class="earnedAmount">65</span>
+  <ion-row padding class="driverRating">
+    <div class="driverInfo">
+      <img src="#" class="userPhoto">
+      <div class="userInfo">
+        <h5 class="userName">John Doe</h5>
+      </div>
+    </div>
+    <div class="driverRates review">
+      <i class="fa fa-star"></i>
+      <i class="fa fa-star"></i>
+      <i class="fa fa-star"></i>
+      <i class="fa fa-star"></i>
+      <i class="fa fa-star"></i>
+    </div>
   </ion-row>
   <ion-row>
-    <button ion-buton block (click)="submit()">Go Back to Map</button>
+    <button ion-button block class="submitBtn" [disabled]="!ratingAvail" (click)="submit()">Go Back to Map</button>
   </ion-row>
 </ion-content>

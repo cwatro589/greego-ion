@@ -190,4 +190,68 @@ page-driver {
             }
         }
     }
+    ion-card-content.navigation  {
+        display: flex;
+        align-items: center;
+        padding: 0 3px;
+        > button {
+            margin-right: 20px;
+        }
+    }
+    .pickupContainer {
+        .riderInfo {
+            display: flex;
+            position: relative;
+        };
+        .leftPanel {
+            width: calc(100% - 75px);
+            > ion-row {
+                display: block;
+                &:first-child {
+                    ion-label {
+                        margin-top: 0;
+                    }
+                }
+            }
+        };
+        .RightPanel {
+            width: 65px;
+            position: absolute;
+            right: 0;
+            margin-right: 20px;
+            .userPhoto {
+                width: 65px;
+                height: 65px;
+            };
+            button {
+                width: 100%;
+                height: 65px;
+                margin: 10px 0 0 0;
+            };
+            i.fa {
+                font-size: 2em;
+            };
+        };
+    }
+    .waitingRider  {
+        ion-card-content {
+            display: flex;
+            align-items: center;
+            h2 {
+                font-weight: bold;
+                text-transform: uppercase;
+            }
+            .waitingContainer {
+                display: flex;
+                margin: auto;
+            }
+            .waitingIconWrapper {
+                i {
+                    font-size: 3em;
+                    margin-right: 15px;
+                    color: $color-font-label;
+                }
+            }
+        }
+    }
 }

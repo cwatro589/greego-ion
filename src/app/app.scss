@@ -241,6 +241,12 @@ ion-input {
 .noMargin {
   margin: 0 !important;
 }
+.noPadding {
+  padding: 0 !important;
+  > button {
+    margin: 0;
+  }
+}
 small.warning {
   color: $color-google;
   font-weight: bold;

@@ -9,20 +9,26 @@
     <h2>Driver Request</h2>
   </ion-row>
   <ion-row>
-    <img src="#" id="#map">
+    <div id="map"></div>
   </ion-row>
-  <ion-row class="address">
-    4464 Limelight Ct.<br>
-    Annandale, VA 22003
-  </ion-row>
-  <ion-row>
-    <h5>Chris Jang</h5> 
+  <ion-row class="customerInfo">
+    <span>Chris Jang</span> 
     <span class="rating">
       <i class="fa fa-star"></i>4.5
     </span>
   </ion-row>
-  <ion-row>
+  <ion-row class="address">
+      <ion-label color="labelLight"><i class="fa fa-bullseye"></i>Pickup Location</ion-label>
+      4464 Limelight Ct.,
+      Annandale, VA 22003
+  </ion-row>
+  <ion-row class="address">
+    <ion-label color="labelLight"><i class="fa fa-map-marker"></i>Destination</ion-label>
+      4464 Limelight Ct.,
+      Annandale, VA 22003
+  </ion-row>
+  <ion-row class="buttonSet">
     <button ion-button block (click)="accept()">Accept</button>
-    <button ion-button block color="warning" (click)="reject()">Reject</button>
+    <button ion-button block color="danger" class="rejectBtn" (click)="reject()">Reject</button>
   </ion-row>
 </ion-content>

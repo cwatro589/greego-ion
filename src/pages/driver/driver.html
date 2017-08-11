@@ -36,7 +36,7 @@
 </ion-menu>
 
 <ion-content>
-  <ion-card class="findDirectionCard">
+  <ion-card class="findDirectionCard" *ngIf="!activeStep.cardTitle == '' || !activeStep.cardTitle == undefined">
     <ion-card-content class="cardStatus">
       {{activeStep.cardTitle}}
     </ion-card-content>
@@ -49,7 +49,7 @@
       </div>
       <div class="searchBox"> 
         <!-- <ion-input type="text" name="currentLocation" [(ngModel)]="CurrentLocation" placeholder="Pickup Location" [(ngModel)]="pickuplocation" (mouseleave) ="checkPickupLocation()"></ion-input> -->
-        <ion-input type="text" name="currentLocation" placeholder="Pickup Location" [(ngModel)]="pickuplocation" (mouseleave) ="nextStep()"></ion-input>
+        <ion-input type="text" name="currentLocation" placeholder="Pickup Location"  (mouseleave) ="nextStep()"></ion-input>
       </div>
     </ion-card-content>
     <ion-card-content class="destinationContainer" *ngIf="activeStep.destination">
@@ -79,9 +79,9 @@
     </ion-card-content>
   </ion-card>
 
-  <ion-card class="navigation" *ngIf="userInfo?.userType == 'driver'">
+  <!-- <ion-card class="navigation" *ngIf="activeStep.driverNav">
     <ion-card-content class="navigation">
-      <button ion-button>
+      <button ion-button (click)="openNavigation()">
         <i class="fa fa-location-arrow"></i>
       </button>
       <div class="address">
@@ -89,11 +89,25 @@
         Annandale, VA 22003
       </div>
     </ion-card-content>
+  </ion-card> -->
+
+  <ion-card class="waitingRider" *ngIf="activeStep.arrivedatrider">
+    <ion-card-content>
+      <div class="waitingContainer">
+        <div class="waitingIconWrapper">
+          <i class="fa fa-clock-o"></i>
+        </div>
+        <div class="waitingTextWrapper">
+          <h2>Wait for Customer</h2>
+          Customer has been notified.
+        </div>
+      </div>
+    </ion-card-content>
   </ion-card>
 
   <ion-card id="driverRequest" class="driverRequest" *ngIf="activeStep.driverInfo">
     <ion-card-content class="driverInfo">
-      <img src="#" class="userPhoto">
+      <img src="{{userInfo?.facePhoto}}" class="userPhoto">
       <div class="userInfo">
         <div class="driverRates">
           <i class="fa fa-star"></i>
@@ -112,42 +126,60 @@
     </ion-card-content>
   </ion-card>
 
-  <ion-card id="pickupContainer" class="pickupContainer" *ngIf="userInfo?.userType == 'driver'">
-    <ion-card-content class="driverInfo">
-      <div class="leftPanel">
-        <ion-row>
-          <ion-label color="labelLight" stacked>Pick Up</ion-label>
-          John Doe
-        </ion-row>
-        <ion-row>
-          <ion-label color="labelLight" stacked>Car</ion-label>
-          2007 Honda Civic EX
-        </ion-row>
-        <ion-row>
-          <ion-label color="labelLight" stacked>Plate No.</ion-label>
-          WHD-7712
-        </ion-row>
-        <ion-row>
-          <ion-label color="labelLight" stacked>Estimated Time</ion-label>
-          <span class="textFocus">2</span> Min
-        </ion-row>
-      </div>
-      <div class="RightPanel">
-        <ion-row>
-          <img src="#" class="userPhoto">
-        </ion-row>
-        <ion-row>
-          <button ion-button full><i class="fa fa-phone"></i></button>
-        </ion-row>
-      </div>
-    </ion-card-content>
-    <ion-card-content>
-      <button ion-button full>Start Trip</button>
-    </ion-card-content>
-  </ion-card>
-
   <button ion-button icon-only clear id="currentLocationBtn" class="currentLocationBtn" (click)='getCurrentPosition()'>
     <ion-icon name="ios-locate-outline"></ion-icon>
   </button>
   <div id="map" #map></div>
 </ion-content>
+
+<ion-footer *ngIf="activeStep.riderInfo">
+  <ion-card id="pickupContainer" class="pickupContainer" *ngIf="activeStep.riderInfo">
+    <ion-card-content class="riderInfo">
+      <div class="leftPanel">
+        <ion-row>
+          <ion-label color="labelLight" stacked>Pick Up</ion-label>
+          John Doe
+        </ion-row>
+        <ion-row *ngIf="activeStep.pickupInfo">
+          <ion-label color="labelLight" stacked>Pickup Location</ion-label>
+          13212 Cove Landing Rd. #203<br>
+          Falls Church, VA 22012
+        </ion-row>
+        <ion-row *ngIf="activeStep.destinationAddress">
+          <ion-label color="labelLight" stacked>Destination Location</ion-label>
+          230481 Abraham Landing Rd. #1123<br>
+          Arkham City, CH 22012
+        </ion-row>
+        <ion-row *ngIf="activeStep.pickupInfo">
+          <ion-label color="labelLight" stacked>Car</ion-label>
+          2007 Honda Civic EX - Automatic
+        </ion-row>
+        <ion-row *ngIf="activeStep.pickupInfo">
+          <ion-label color="labelLight" stacked>Plate No.</ion-label>
+          WHD-7712
+        </ion-row>
+        <ion-row *ngIf="activeStep.pickupInfo">
+          <ion-label color="labelLight" stacked>Estimated Time</ion-label>
+          2 Minuites
+        </ion-row>
+      </div>
+      <div class="RightPanel" *ngIf="activeStep.pickupInfo">
+        <ion-row>
+          <img src="assets/{{userInfo?.facePhoto}}" class="userPhoto">
+        </ion-row>
+        <ion-row>
+          <button ion-button round (click)="callToRider()"><i class="fa fa-phone"></i></button>
+        </ion-row>
+      </div>
+    </ion-card-content>
+    <ion-card-content class="noPadding" *ngIf="activeStep.arrivedatrider">
+      <button ion-button full (click)="startTrip()">Start Trip</button>
+    </ion-card-content>
+    <ion-card-content class="noPadding" *ngIf="activeStep.ongoing">
+      <button ion-button full clear (click)="openNavigation()">Navigation</button>
+    </ion-card-content>
+    <ion-card-content class="noPadding" *ngIf="activeStep.destinationArrived">
+      <button ion-button full (click)="completedTrip()">Completed Trip</button>
+    </ion-card-content>
+  </ion-card>
+</ion-footer>

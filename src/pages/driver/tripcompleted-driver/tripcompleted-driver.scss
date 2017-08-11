@@ -1,3 +1,45 @@
-page-tripcompleted-driver {
+@import '../../../app/mixin';
 
+page-tripcompleted-driver {
+    ion-content.content {
+        background-color: $color-main2;
+        color: $color-font-light;
+        text-align: center;
+    }
+    .completedMsg {
+        i {
+            font-size: 7em;
+            color: $color-main1;
+            width: 100%;
+        }
+        h1 {
+            text-transform: uppercase;
+        }
+    }
+    ion-row {
+        display: block;
+    }
+    .driverInfo {
+        margin-top: 20px !important;
+        img {
+            margin: 0;
+        }
+        .userInfo {
+            margin-top: 5px;
+        }
+    }
+    .driverRates, .driverInfo {
+        margin: auto;
+    }
+    .driverRates.review i {
+        margin-top: 0;
+    }
+    .driverRating {
+        background: darken($color-main2, 5%);
+        border-radius: 10px;
+        margin-top: 30px;
+    }
+    .submitBtn {
+        margin-top: 20px;
+    }
 }
