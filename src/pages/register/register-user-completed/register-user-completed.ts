@@ -1,9 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { LoginPage } from '../../login/login';
+import { LoadingController } from 'ionic-angular';
 
 import { Personal, FacePhoto, RegisterType, Rider, DriverPref, Bank, DriverInfo } from '../../../form/formData.model';
 import { FormDataService } from '../../../form/formData.service';
+
+import 'rxjs/add/operator/toPromise';
 
 /**
  * Generated class for the RegisterUserCompletedPage page.
@@ -15,7 +18,7 @@ import { FormDataService } from '../../../form/formData.service';
 @IonicPage()
 @Component({
   selector: 'page-register-user-completed',
-  templateUrl: 'register-user-completed.html',
+  templateUrl: 'register-user-completed.html'
 })
 
 export class RegisterUserCompletedPage {
@@ -41,8 +44,6 @@ export class RegisterUserCompletedPage {
       this.driverPref = this.formDataService.getDriver();
       this.bank = this.formDataService.getBank();
       this.regtype = this.registerType.userType;
-
-      console.log(this.formDataService);
   }
 
   ionViewDidLoad() {

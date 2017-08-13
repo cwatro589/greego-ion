@@ -16,7 +16,7 @@ export class FormDataService {
     private isBankValid: boolean = false;
     private isDriverInfoValid: boolean = false;
 
-    constructor(private registerflowservice: RegisterFlowService) { 
+    constructor(private registerflowservice: RegisterFlowService) {
     }
 
     getType(): RegisterType {
@@ -26,7 +26,7 @@ export class FormDataService {
         // Return the user type
         return type;
     }
-    
+
     setType(data: RegisterType) {
         // Update the work type only when the Work Form had been validated successfully
         this.isWorkFormValid = true;
@@ -66,11 +66,11 @@ export class FormDataService {
         // Return the user type
         return facePhoto;
     }
-    
+
     setFacePhoto(data: FacePhoto) {
         // Update the work type only when the Work Form had been validated successfully
         this.isWorkFormValid = true;
-        this.formData.userType = data.facePhotoLocation;
+        this.formData.facePhotoLocation = data.facePhotoLocation;
         // Validate Work Step in Workflow
         this.registerflowservice.validateStep(STEPS.FacePhoto);
     }
@@ -126,7 +126,7 @@ export class FormDataService {
         // Validate Address Step in Workflow
         this.registerflowservice.validateStep(STEPS.DriverPref);
     }
-    
+
     getBank() : Bank {
         // Return the Address data
         var driverPref: Bank = {
@@ -160,9 +160,9 @@ export class FormDataService {
     setDriverInfo(data: DriverInfo) {
         // Update the Address data only when the Address Form had been validated successfully
         this.isDriverInfoValid = true;
-        this.formData.driverLicense = data.driverLicense,
-        this.formData.driverIdentification  = data.driverIdentification,
-        this.formData.driverInsurance  = data.driverInsurance
+        this.formData.driverLicense = data.driverLicense;
+        this.formData.driverIdentification  = data.driverIdentification;
+        this.formData.driverInsurance  = data.driverInsurance;
         // Validate Address Step in Workflow
         this.registerflowservice.validateStep(STEPS.DriverInfo);
     }
@@ -184,7 +184,7 @@ export class FormDataService {
     isFormValid() {
         // Return true if all forms had been validated successfully; otherwise, return false
         return this.isPersonalFormValid &&
-                this.isWorkFormValid && 
+                this.isWorkFormValid &&
                 this.isAddressFormValid;
     }
 }

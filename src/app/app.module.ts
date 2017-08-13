@@ -35,7 +35,7 @@ import { FormDataService }    from '../form/formData.service';
 import { RegisterFlowService }    from '../registerFlow/registerFlow.service';
 import { EqualValidator } from './directives/equal-validator';
 import { IonicStorageModule } from '@ionic/storage';
-
+import { Transfer } from '@ionic-native/transfer';
 
 @NgModule({
   declarations: [
@@ -95,6 +95,7 @@ import { IonicStorageModule } from '@ionic/storage';
     GoogleMaps,
     SplashScreen,
     Geolocation,
+    Transfer,
     { provide: FormDataService, useClass: FormDataService },
     { provide: RegisterFlowService, useClass: RegisterFlowService },
     {provide: ErrorHandler, useClass: IonicErrorHandler}
