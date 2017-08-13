@@ -44,7 +44,7 @@ export class UserPage {
   destinationSearch:boolean = false;
 
   constructor(
-    public navCtrl: NavController, 
+    public navCtrl: NavController,
     public navParams: NavParams,
     public loadingCtrl: LoadingController,
     public toastCtrl: ToastController,
@@ -319,6 +319,8 @@ export class UserPage {
 
   // go show currrent location
   getCurrentPosition() {
+    console.log('getCurrentPosition');
+
     this.loading = this.loadingCtrl.create({
       content: 'Searching Location ...'
     });

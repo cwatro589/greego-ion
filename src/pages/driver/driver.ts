@@ -51,7 +51,7 @@ export class DriverPage implements OnInit {
   ]
 
   stepFlow:any;
-  
+
   stepSet = {
     home: {
       headerTitle: 'Greego',
@@ -283,7 +283,7 @@ export class DriverPage implements OnInit {
   ];
 
   activeStep:any = this.stepSet.waiting;
-  currentStep:string = 'waiting'; 
+  currentStep:string = 'waiting';
 
   userInfo:any;
   selectedCreditCard:any;
@@ -296,10 +296,10 @@ export class DriverPage implements OnInit {
     this.getUserInfo();
 
       let time = 1000;
-      setTimeout(function(){
-        this.driverRequestCall();
-      }.bind(this), time);
-      
+      // setTimeout(function(){
+      //   this.driverRequestCall();
+      // }.bind(this), time);
+
   }
 
   driverRequestCall() {
@@ -346,7 +346,7 @@ export class DriverPage implements OnInit {
     },
     err => {
         console.log("Oops!");
-    }); 
+    });
   }
 
   changeCC() {
@@ -400,7 +400,7 @@ export class DriverPage implements OnInit {
 
   callFunction(name) {
     switch(name) {
-      case "enroute": 
+      case "enroute":
         this.disableCancelBtn();
         var time = 5000;
         setTimeout(function(){
@@ -427,7 +427,7 @@ export class DriverPage implements OnInit {
   ngAfterViewInit() {
     this.loadMap();
   }
-  
+
   ionViewDidLoad() {
     console.log('ionViewDidLoad DriverPage');
   }
@@ -502,7 +502,7 @@ export class DriverPage implements OnInit {
       this.step = 'destinationSearch';
     }
   }
-   
+
   // Open Pages in Menu
   openPage(page) {
     let modal = this.modalCtrl.create(page);
@@ -514,7 +514,7 @@ export class DriverPage implements OnInit {
     let modal = this.modalCtrl.create(RequestcallPage);
     modal.present();
   }
-  
+
   // Open Completed Page after trip
   tripCompleted() {
     let userType = TripcompletedDriverPage;
@@ -536,7 +536,7 @@ export class DriverPage implements OnInit {
       }
     }
     // debugger;
-    // $(this.stepFlow).each(function(flowIndex,flowName) { 
+    // $(this.stepFlow).each(function(flowIndex,flowName) {
     //   debugger;
     //   if (flowName == this.currentStep) {
     //     let nextstep = flowIndex++;

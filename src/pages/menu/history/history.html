@@ -16,14 +16,14 @@
 </ion-header>
 
 <ion-content padding>
-  <ion-card>
+  <ion-card  *ngFor="let history of historys">
     <ion-item>
       <div id="map"></div>
       <div class="historyInfo">
-        <span>06/20/2017 - 03:00AM</span>
-        <span>John Doe</span>
-        <span>77</span>
-        <span>AB123CD</span>
+        <span>{{history.date.request}}</span>
+        <span>{{history.driver.fName}} {{history.driver.lName}}</span>
+        <span>{{history.money.amount}}</span>
+        <span>{{history.driver.id}}</span>
       </div>
     </ion-item>
   </ion-card>

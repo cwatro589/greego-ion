@@ -20,26 +20,26 @@
   <ion-row>
     <button ion-button block>Add Promotion Code</button>
   </ion-row>
-  <ion-card>
+  <ion-card *ngFor="let promoList of promoLists">
     <ion-item>
-      <div>$15 Off</div>
-      <div>Free trip up to $15 or discount $15</div>
-      <div>Expires April 15 2017</div>
+      <div>${{promoList.discount}} Off</div>
+      <div>Free trip up to $15 or discount ${{promoList.discount}}</div>
+      <div>Expires {{promoList.endDate}}</div>
     </ion-item>
   </ion-card>
-  <ion-card>
-    <ion-item>
-      <div>$15 Off</div>
-      <div>Free trip up to $15 or discount $15</div>
-      <div>Expires April 15 2017</div>
-    </ion-item>
-  </ion-card>
-  <ion-card>
-    <ion-item>
-      <div>$15 Off</div>
-      <div>Free trip up to $15 or discount $15</div>
-      <div>Expires April 15 2017</div>
-    </ion-item>
-  </ion-card>
+  <!--<ion-card>-->
+    <!--<ion-item>-->
+      <!--<div>$15 Off</div>-->
+      <!--<div>Free trip up to $15 or discount $15</div>-->
+      <!--<div>Expires April 15 2017</div>-->
+    <!--</ion-item>-->
+  <!--</ion-card>-->
+  <!--<ion-card>-->
+    <!--<ion-item>-->
+      <!--<div>$15 Off</div>-->
+      <!--<div>Free trip up to $15 or discount $15</div>-->
+      <!--<div>Expires April 15 2017</div>-->
+    <!--</ion-item>-->
+  <!--</ion-card>-->
 
 </ion-content>
