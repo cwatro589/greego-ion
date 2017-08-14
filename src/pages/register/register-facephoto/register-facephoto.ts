@@ -29,7 +29,7 @@ import {Http} from "@angular/http";
 export class RegisterFacephotoPage {
   registerType: RegisterType;
   facePhoto: FacePhoto;
-  photoSelected:boolean = false;
+  photoSelected:boolean = true;
   form: any;
   valid:boolean = false;
 

@@ -18,13 +18,13 @@
 
 <ion-content padding>
   <ion-row>
-    <button ion-button block>Add Promotion Code</button>
+    <button ion-button (click)="addPromo()">Add Promotion Code</button>
   </ion-row>
   <ion-card *ngFor="let promoList of promoLists">
     <ion-item>
       <div>${{promoList.discount}} Off</div>
       <div>Free trip up to $15 or discount ${{promoList.discount}}</div>
-      <div>Expires {{promoList.endDate}}</div>
+      <div>Expires {{promoList.endDate.substring(0,10)}} {{promoList.endDate.substring(11, 19)}}</div>
     </ion-item>
   </ion-card>
   <!--<ion-card>-->

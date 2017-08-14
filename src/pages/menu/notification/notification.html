@@ -18,11 +18,13 @@
 
 <ion-content padding>
   <ion-row>
-    <ion-item>
+    <ion-item *ngFor="let notice of noticeList">
       <div class="date">
-        07/23/2017 - 03:12AM
+        <!--07/23/2017 - 03:12AM-->
+        {{notice.registerDate.substring(0,10)}} - {{notice.registerDate.substring(11, 19)}}
       </div>
-      The driver has arriaved at the requested location - 4464 Limelight Ct., Annandale, VA 22003
+      {{notice.description}}
+      <!--The driver has arriaved at the requested location - 4464 Limelight Ct., Annandale, VA 22003-->
     </ion-item>
   </ion-row>
 </ion-content>

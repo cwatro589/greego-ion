@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { IonicPage, NavController, NavParams, MenuController, ModalController, ViewController } from 'ionic-angular';
+import {
+  IonicPage, NavController, NavParams, MenuController, ModalController, ViewController,
+  LoadingController
+} from 'ionic-angular';
 import {
  GoogleMaps,
  GoogleMap,
@@ -11,6 +14,7 @@ import {
 } from '@ionic-native/google-maps';
 import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
+import { Geolocation } from '@ionic-native/geolocation';
 
 import { UserinfoPage } from '../menu/userinfo/userinfo';
 
@@ -19,6 +23,8 @@ import { TripcompletedPage } from './tripcompleted/tripcompleted';
 import { TripcompletedDriverPage } from './tripcompleted-driver/tripcompleted-driver';
 
 import * as $ from 'jquery'
+import {FormDataService} from "../../form/formData.service";
+import {Domain} from "../../form/formData.model";
 
 /**
  * Generated class for the DriverPage page.
@@ -31,6 +37,9 @@ import * as $ from 'jquery'
 @Component({
   selector: 'page-driver',
   templateUrl: 'driver.html',
+  providers: [
+    Domain
+  ]
 })
 export class DriverPage implements OnInit {
 
@@ -282,8 +291,8 @@ export class DriverPage implements OnInit {
     }
   ];
 
-  activeStep:any = this.stepSet.waiting;
-  currentStep:string = 'waiting';
+  activeStep:any = this.stepSet.home;
+  currentStep:string = 'home';
 
   userInfo:any;
   selectedCreditCard:any;
@@ -291,8 +300,9 @@ export class DriverPage implements OnInit {
   creditcardtype:string;
 
   request;
+  map: GoogleMap;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private menu: MenuController, private googleMaps: GoogleMaps, public modalCtrl: ModalController, public http: Http, public viewCtrl: ViewController) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private menu: MenuController, private googleMaps: GoogleMaps, public modalCtrl: ModalController, public http: Http, public viewCtrl: ViewController, private geolocation: Geolocation, public loadingCtrl:LoadingController, private formDataService: FormDataService, private domain: Domain) {
     this.getUserInfo();
 
       let time = 1000;
@@ -326,7 +336,61 @@ export class DriverPage implements OnInit {
   }
 
   getUserInfo() {
-    this.http.get('http://localhost:8100/assets/driversample.json').map(res => res.json()).subscribe((data) => {
+    const json = {
+      email : this.formDataService.getPersonal().email
+    };
+    this.http.post(this.domain.ip + "/api/users/test", {email : 'hbc8141@naver.com'}, {})
+    .map(res => res.json())
+    .subscribe(loginRes => {
+      if(loginRes.success) {
+        this.userInfo = loginRes;
+        if(loginRes.lastLoginClass == 1) {
+          delete loginRes['driver'];
+        }else if(loginRes.lastLoginClass == 2){
+          delete loginRes['user'];
+        }
+        console.log(loginRes);
+        // this.navCtrl.setRoot(DriverPage);
+      }
+    });
+
+    this.http.get('http://localhost:8100/assets/usersample.json').map(res => res.json()).subscribe((data) => {
+      // if(data.lastLoginClass == 1){
+      //   const json = {
+      //     userType : 'rider',
+      //     driverid : data.id,
+      //     creditCard : '',
+      //     facePhoto : data.image,
+      //     firstName : data.fName,
+      //     lastName : data.lName,
+      //     phone: data.phoneNum,
+      //     email : data.email,
+      //     carYear : data.user.carInfo.year,
+      //     carBrand : data.user.carInfo.brand,
+      //     carModel : data.user.carInfo.model,
+      //     carTrim : data.user.carInfo.trim,
+      //     carTransmission : data.user.carInfo.transmission
+      //   };
+      //   this.userInfo = json;
+      // }else if(data.lastLoginClass == 2){
+      //   const json = {
+      //     userType : 'driver',
+      //     driverid : data.id,
+      //     creditCard : '',
+      //     facePhoto : data.image,
+      //     firstName : data.fName,
+      //     lastName : data.lName,
+      //     phone: data.phoneNum,
+      //     email : data.email,
+      //     carYear : data.user.carInfo.year,
+      //     carBrand : data.user.carInfo.brand,
+      //     carModel : data.user.carInfo.model,
+      //     carTrim : data.user.carInfo.trim,
+      //     carTransmission : data.user.carInfo.transmission,
+      //     availCarType : data.driver.available.sizeOfCar,
+      //     availTransmission : data.driver.available.transmission
+      //   };
+      // }
       this.userInfo = data;
       this.defineCreditCard();
 
@@ -439,32 +503,49 @@ export class DriverPage implements OnInit {
     //  <div #map id="map" style="height:100%;"></div>
     // </ion-content>
 
+    let loader = this.loadingCtrl.create({
+      content: "Please wait..."
+    });
+    loader.present();
+
     // create a new map by passing HTMLElement
     let element: HTMLElement = document.getElementById('map');
 
-    let map: GoogleMap = this.googleMaps.create(element);
+    this.map = this.googleMaps.create(element);
 
     // listen to MAP_READY event
     // You must wait for this event to fire before adding something to the map or modifying it in anyway
-    map.one(GoogleMapsEvent.MAP_READY).then(
+    this.map.one(GoogleMapsEvent.MAP_READY).then(
       () => {
         console.log('Map is ready!');
         // Now you can add elements to the map like the marker
       }
     );
 
-    // create CameraPosition
-    let position: CameraPosition = {
-      target: {
-        lat: 43.0741904,
-        lng: -89.3809802
-      },
-      zoom: 18,
-      tilt: 30
-    };
+    let lat: number;
+    let lng: number;
+    this.geolocation.getCurrentPosition().then((resp) => {
+        loader.dismiss();
+        lat = resp.coords.latitude;
+        lng = resp.coords.longitude;
+        console.log(resp);
+        let position: CameraPosition = {
+          target: {
+            lat: lat,
+            lng: lng
+          },
+          zoom: 18,
+          tilt: 30
+        };
 
-    // move the map's camera to position
-    map.moveCamera(position);
+        // move the map's camera to position
+        this.map.moveCamera(position);
+      }).catch((err) => {
+      console.log(err);
+    });
+
+    // create CameraPosition
+
 
     // create new marker
     //  let markerOptions: MarkerOptions = {
@@ -488,6 +569,34 @@ export class DriverPage implements OnInit {
     $('.driverRating i').click(function() {
       $('.driverRating i').removeClass('active');
       $(this).prevAll('i').addBack().addClass('active');
+    });
+  }
+
+  getCurrentPosition() {
+    let lat: number;
+    let lng: number;
+    let loader = this.loadingCtrl.create({
+      content: "Please wait..."
+    });
+    loader.present();
+    this.geolocation.getCurrentPosition().then((resp) => {
+      loader.dismiss();
+      lat = resp.coords.latitude;
+      lng = resp.coords.longitude;
+      console.log(resp);
+      let position: CameraPosition = {
+        target: {
+          lat: lat,
+          lng: lng
+        },
+        zoom: 18,
+        tilt: 30
+      };
+
+      // move the map's camera to position
+      this.map.moveCamera(position);
+    }).catch((err) => {
+      console.log(err);
     });
   }
 

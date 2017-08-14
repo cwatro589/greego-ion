@@ -19,11 +19,11 @@ import { RegisterFacephotoPage } from '../pages/register/register-facephoto/regi
 import { RegisterDriverVerifyPage } from '../pages/register/register-driver-verify/register-driver-verify';
 import { RegisterDriverPrefPage } from '../pages/register/register-driver-pref/register-driver-pref';
 import { RegisterDriverBankPage } from '../pages/register/register-driver-bank/register-driver-bank';
+import { RegisterDriverInfoPage } from '../pages/register/register-driver-info/register-driver-info';
 import { RegisterDriverAgreementPage, MathcesCategoryPipe } from '../pages/register/register-driver-agreement/register-driver-agreement';
 import { RegisterUserCompletedPage } from '../pages/register/register-user-completed/register-user-completed';
 import { TripcompletedPage } from '../pages/driver/tripcompleted/tripcompleted';
 import { TripcompletedDriverPage } from '../pages/driver/tripcompleted-driver/tripcompleted-driver';
-
 
 import { UserPage } from '../pages/user/user';
 import { DriverPage } from '../pages/driver/driver';
@@ -36,6 +36,7 @@ import { RegisterFlowService }    from '../registerFlow/registerFlow.service';
 import { EqualValidator } from './directives/equal-validator';
 import { IonicStorageModule } from '@ionic/storage';
 import { Transfer } from '@ionic-native/transfer';
+import {PromotioninputPage} from "../pages/menu/promotion/promotioninput/promotioninput";
 
 @NgModule({
   declarations: [
@@ -52,6 +53,7 @@ import { Transfer } from '@ionic-native/transfer';
     RegisterDriverVerifyPage,
     RegisterDriverPrefPage,
     RegisterDriverBankPage,
+    RegisterDriverInfoPage,
     RegisterDriverAgreementPage,
     RegisterUserCompletedPage,
     MathcesCategoryPipe,
@@ -59,7 +61,8 @@ import { Transfer } from '@ionic-native/transfer';
     UserPage,
     DriverPage,
     TripcompletedPage,
-    TripcompletedDriverPage
+    TripcompletedDriverPage,
+    PromotioninputPage
   ],
   imports: [
     BrowserModule,
@@ -83,12 +86,14 @@ import { Transfer } from '@ionic-native/transfer';
     RegisterDriverVerifyPage,
     RegisterDriverPrefPage,
     RegisterDriverBankPage,
+    RegisterDriverInfoPage,
     RegisterDriverAgreementPage,
     RegisterUserCompletedPage,
     UserPage,
     DriverPage,
     TripcompletedPage,
-    TripcompletedDriverPage
+    TripcompletedDriverPage,
+    PromotioninputPage
   ],
   providers: [
     StatusBar,

@@ -118,11 +118,12 @@ export class RegisterDriverAgreementPage implements OnInit {
                 image : '/photo/' + publishRes.data.id + '/photo.jpg',
                 user : {
                   carInfo : {
-                    transmission : this.formDataService.getRider().carTransmittion,
-                    sizeOfCar : this.formDataService.getRider().carTrim,
+                    year : this.formDataService.getRider().carYear,
                     brand : this.formDataService.getRider().carBrand,
                     model : this.formDataService.getRider().carModel,
-                    color : this.formDataService.getRider().carColor
+                    trim : this.formDataService.getRider().carTrim,
+                    color : this.formDataService.getRider().carColor,
+                    transmission : this.formDataService.getRider().carTransmittion
                   }
                 }
               };

@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { LoginVerifyPage } from '../login-verify/login-verify';
+import {Http} from "@angular/http";
+import {Domain} from "../../../form/formData.model";
+import {FormDataService} from "../../../form/formData.service";
 
 /**
  * Generated class for the PhoneupdatePage page.
@@ -13,17 +16,34 @@ import { LoginVerifyPage } from '../login-verify/login-verify';
 @Component({
   selector: 'page-phoneupdate',
   templateUrl: 'phoneupdate.html',
+  providers: [
+    Domain
+  ]
 })
 export class PhoneupdatePage {
+  phone:string;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private http: Http, private domain: Domain, private formDataService: FormDataService) {
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad PhoneupdatePage');
   }
-  
+
   gotoLoginVerifyPage() {
-    this.navCtrl.push(LoginVerifyPage);
+    const json = {
+      email : this.formDataService.getPersonal().email,
+      phoneNum : this.phone
+    };
+
+    this.http.post(this.domain.ip + "/api/auth/send", json, {})
+      .map(res => res.json())
+      .subscribe(sendRes => {
+        console.log(sendRes, 'sendRes');
+
+        if(sendRes.success){
+          this.navCtrl.push(LoginVerifyPage);
+        }
+      });
   }
 }

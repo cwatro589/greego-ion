@@ -1,8 +1,12 @@
+/**
+ * Created by user on 2017-08-14.
+ */
+
 import { Component, OnInit } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { RegisterDriverInfoPage } from '../register-driver-info/register-driver-info';
+import { RegisterDriverAgreementPage } from '../register-driver-agreement/register-driver-agreement';
 
-import {Address, Bank, Birth} from '../../../form/formData.model';
+import {Address, Birth} from '../../../form/formData.model';
 import { FormDataService } from '../../../form/formData.service';
 
 /**
@@ -15,24 +19,28 @@ import { FormDataService } from '../../../form/formData.service';
 @IonicPage()
 @Component({
   selector: 'page-register-driver-bank',
-  templateUrl: 'register-driver-bank.html',
+  templateUrl: 'register-driver-info.html',
 })
-export class RegisterDriverBankPage {
+export class RegisterDriverInfoPage {
 
-  bank: Bank;
+  address: Address;
+  birth: Birth;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private formDataService: FormDataService) {
   }
 
   ngOnInit() {
-      this.bank = this.formDataService.getBank();
+    this.address = this.formDataService.getAddress();
+    this.birth = this.formDataService.getBirth();
   }
 
   ionViewDidLoad() {
   }
 
   goto() {
-    this.formDataService.setBank(this.bank);
-    this.navCtrl.push(RegisterDriverInfoPage);
+    this.formDataService.setAddress(this.address);
+    this.formDataService.setBirth(this.birth);
+    this.navCtrl.push(RegisterDriverAgreementPage);
   }
 }
+

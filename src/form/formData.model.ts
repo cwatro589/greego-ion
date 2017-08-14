@@ -21,6 +21,15 @@ export class FormData {
     bankAccountNumber:number;
     bankRoutingNumber:number;
     ssn:number;
+
+    year:number;
+    month:number;
+    day:number;
+    city:string = '';
+    line1:string = '';
+    zipCode:string = '';
+    state:string = '';
+
     driverLicense:string = '';
     driverIdentification:string = '';
     driverInsurance:string = '';
@@ -48,6 +57,13 @@ export class FormData {
         this.bankAccountNumber;
         this.bankRoutingNumber;
         this.ssn;
+        this.city = '';
+        this.line1 = '';
+        this.zipCode = '';
+        this.state = '';
+        this.year;
+        this.month;
+        this.day;
         this.driverLicense = '';
         this.driverIdentification = '';
         this.driverInsurance = '';
@@ -90,6 +106,19 @@ export class Bank {
     bankAccountNumber:number;
     bankRoutingNumber:number;
     ssn:number;
+}
+
+export class Birth {
+  year:number;
+  month:number;
+  day:number;
+}
+
+export class Address {
+  city:string;
+  line1:string;
+  zipCode:string;
+  state:string;
 }
 
 export class DriverInfo {

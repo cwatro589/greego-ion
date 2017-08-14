@@ -1,5 +1,8 @@
 import { Injectable } from '@angular/core';
-import { FormData, RegisterType, Personal, Rider, DriverPref, FacePhoto, Bank, DriverInfo } from './formData.model';
+import {
+  FormData, RegisterType, Personal, Rider, DriverPref, FacePhoto, Bank, DriverInfo,
+  Address, Birth
+} from './formData.model';
 import { RegisterFlowService } from '../registerFlow/registerFlow.service';
 import { STEPS } from '../registerFlow/registerFlow.model';
 
@@ -15,6 +18,8 @@ export class FormDataService {
     private isFacePhotoValid: boolean = false;
     private isBankValid: boolean = false;
     private isDriverInfoValid: boolean = false;
+    private isBirthValue:boolean = true;
+    private isAddressValue:boolean = true;
 
     constructor(private registerflowservice: RegisterFlowService) {
     }
@@ -145,6 +150,45 @@ export class FormDataService {
         this.formData.ssn  = data.ssn
         // Validate Address Step in Workflow
         this.registerflowservice.validateStep(STEPS.Bank);
+    }
+
+    getAddress() : Address {
+      // Return the Address data
+      var driverInfo: Address = {
+        city: this.formData.city,
+        line1: this.formData.line1,
+        zipCode: this.formData.zipCode,
+        state: this.formData.state
+      }
+
+      return driverInfo;
+    }
+
+    setAddress(data: Address) {
+      this.isAddressValue = true;
+      this.formData.city = data.city;
+      this.formData.line1 = data.line1;
+      this.formData.zipCode = data.zipCode;
+      this.formData.state = data.state;
+      this.registerflowservice.validateStep(STEPS.Bank);
+    }
+
+    getBirth() : Birth{
+      var driverInfo: Birth = {
+        year : this.formData.year,
+        month : this.formData.month,
+        day : this.formData.day
+      }
+
+      return driverInfo;
+    }
+
+    setBirth(data : Birth) {
+      this.isBirthValue = true;
+      this.formData.year = data.year;
+      this.formData.month = data.month;
+      this.formData.day = data.day;
+      this.registerflowservice.validateStep(STEPS.Bank);
     }
 
     getDriverInfo() : DriverInfo {

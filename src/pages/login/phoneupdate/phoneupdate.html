@@ -12,7 +12,6 @@
 
 </ion-header>
 
-
 <ion-content padding>
   <ion-grid>
     <ion-row class="headerTitle">
@@ -21,7 +20,7 @@
     <ion-row class="section">
       <ion-item>
         <ion-label color="primary" stacked>Phone Number</ion-label>
-        <ion-input type="tel" placeholder="Please enter your new phone number"></ion-input>
+        <ion-input type="tel" placeholder="Please enter your new phone number" [(ngModel)]="phone"></ion-input>
       </ion-item>
     </ion-row>
   </ion-grid>

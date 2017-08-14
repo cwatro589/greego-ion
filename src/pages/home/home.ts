@@ -4,6 +4,7 @@ import { LoginPage } from '../login/login';
 import { RegisterPage } from '../register/register';
 import { DriverPage } from '../driver/driver';
 import {UserPage} from "../user/user";
+import {FormDataService} from "../../form/formData.service";
 
 
 @Component({
@@ -13,10 +14,11 @@ import {UserPage} from "../user/user";
 
 export class HomePage {
 
-  constructor(public navCtrl: NavController) {
+  constructor(public navCtrl: NavController, public formDataService: FormDataService) {
 
   }
   gotoLoginPage() {
+    console.log(this.formDataService);
     this.navCtrl.push(LoginPage);
   }
   gotoRegisterPage() {
@@ -25,7 +27,7 @@ export class HomePage {
   gotoDriver() {
     this.navCtrl.setRoot(DriverPage);
   }
-  gotoUser() {
-    this.navCtrl.setRoot(UserPage);
-  }
+  // gotoUser() {
+  //   this.navCtrl.setRoot(UserPage);
+  // }
 }

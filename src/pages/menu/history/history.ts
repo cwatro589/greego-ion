@@ -14,12 +14,15 @@ import {Domain} from "../../../form/formData.model";
 @Component({
   selector: 'page-history',
   templateUrl: 'history.html',
+  providers: [
+    Domain
+  ]
 })
 export class HistoryPage {
   historys: any;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private http: Http, private domain:Domain) {
-    this.http.get(domain.ip + "/api/notice", {})
+    this.http.get(domain.ip + "/api/trips", {})
       .map(res => res.json())
       .subscribe(data => {
         this.historys = data.data;

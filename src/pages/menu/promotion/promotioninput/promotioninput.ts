@@ -15,18 +15,26 @@ import {FormDataService} from "../../../../form/formData.service";
 @Component({
   selector: 'page-promotioninput',
   templateUrl: 'promotioninput.html',
+  providers: [
+    Domain
+  ]
 })
 export class PromotioninputPage {
   promoCode: string = '';
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private http: Http, private domain:Domain, private formDataService: FormDataService) {
-    this.http.post(domain.ip + "/api/promo", {code : this.promoCode, email : this.formDataService.getPersonal().email}, {})
-      .map(res => res.json())
-      .subscribe(data => {
-      })
   }
   ionViewDidLoad() {
     console.log('ionViewDidLoad PromotioninputPage');
   }
 
+  applyPromoCode() {
+    this.http.post(this.domain.ip + "/api/promo/register", {code : this.promoCode, email : ''}, {})
+      .map(res => res.json())
+      .subscribe(data => {
+        if(data.success) {
+          this.navCtrl.pop();
+        }
+      })
+  }
 }
