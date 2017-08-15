@@ -41,23 +41,14 @@ export class LoginVerifyPage {
       phoneNum : this.formDataService.getPersonal().phone,
       code : this.code
     };
-
-    console.log(json, 'json');
-
+    console.log(json);
     this.http.post(this.domain.ip + "/api/users/test", {email : 'hbc8141@naver.com'}, {})
       .map(res => res.json())
       .subscribe(loginRes => {
         console.log(loginRes);
-        this.navCtrl.setRoot(DriverPage);
-        if(loginRes.success) {
-          if(loginRes.lastLoginClass == 1) {
-            delete loginRes['driver'];
-          }else if(loginRes.lastLoginClass == 2){
-            delete loginRes['user'];
-          }
-          // console.log(loginRes);
-          this.navCtrl.setRoot(DriverPage);
-        }
+        this.navCtrl.setRoot(DriverPage, {
+          data : loginRes
+        });
       })
     // this.http.post(this.domain.ip + "/api/auth/verify", json, {})
     //   .map(res => res.json())
@@ -73,12 +64,9 @@ export class LoginVerifyPage {
     //         .map(res => res.json())
     //         .subscribe(loginRes => {
     //           if(loginRes.success) {
-    //             if(loginRes.lastLoginClass == 1) {
-    //               delete loginRes['driver'];
-    //             }else if(loginRes.lastLoginClass == 2){
-    //               delete loginRes['user'];
-    //             }
-    //             this.navCtrl.setRoot(DriverPage);
+    //             this.navCtrl.setRoot(DriverPage, {
+    //               data : loginRes
+    //             });
     //           }
     //         })
     //     }

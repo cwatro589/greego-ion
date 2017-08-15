@@ -20,19 +20,19 @@
   <ion-list radio-group>
     <ion-item *ngFor="let creditcard of creditCardList">
       <ion-label>
-        <i class="{{creditCardIcon(creditcard.type)}} cardIcon"></i>
+        <i class="{{creditCardIcon(creditcard.brand)}} cardIcon"></i>
         <div class="cardInfoContainer">
           <div class="cardType">
-            {{creditCardName(creditcard.type)}} Card
+            {{creditCardName(creditcard.brand)}} Card
           </div>
-          <div class="cardNumber">**** **** **** {{creditcard.number}}</div>
+          <div class="cardNumber">**** **** **** {{creditcard.last4}}</div>
         </div>
-        <i class="fa fa-trash-o deleteBtn" *ngIf="!changeCreditCard" (click)="removeCreditCard()"></i>
+        <i class="fa fa-trash-o deleteBtn" *ngIf="!changeCreditCard" (click)="removeCreditCard(creditcard.card)"></i>
       </ion-label>
-      <ion-radio [checked]="creditcard.default" value="{{creditcard.id}}" (click)="!changeCreditCard ? setDefault() : selectCreditCard()"></ion-radio>
+      <!--<ion-radio [checked]="creditcard.default" value="{{creditcard.id}}" (click)="!changeCreditCard ? setDefault() : selectCreditCard()"></ion-radio>-->
     </ion-item>
   </ion-list>
   <ion-row *ngIf="!changeCreditCard">
-    <button ion-button block>Add Credit Card</button>
+    <button ion-button (click)="addCardPage()">Add Credit Card</button>
   </ion-row>
 </ion-content>

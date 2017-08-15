@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import {
   FormData, RegisterType, Personal, Rider, DriverPref, FacePhoto, Bank, DriverInfo,
-  Address, Birth
+  Address, Birth, Card
 } from './formData.model';
 import { RegisterFlowService } from '../registerFlow/registerFlow.service';
 import { STEPS } from '../registerFlow/registerFlow.model';
@@ -47,7 +47,8 @@ export class FormDataService {
             lastName: this.formData.lastName,
             email: this.formData.email,
             phone: this.formData.phone,
-            password: this.formData.password
+            password: this.formData.password,
+            id: this.formData.id
         };
         return personal;
     }
@@ -60,6 +61,7 @@ export class FormDataService {
         this.formData.email = data.email;
         this.formData.phone = data.phone;
         this.formData.password = data.password;
+        this.formData.id = data.id;
         // Validate Personal Step in Workflow
         this.registerflowservice.validateStep(STEPS.Personal);
     }
@@ -147,7 +149,6 @@ export class FormDataService {
         this.isBankValid = true;
         this.formData.bankAccountNumber = data.bankAccountNumber,
         this.formData.bankRoutingNumber  = data.bankRoutingNumber,
-        this.formData.ssn  = data.ssn
         // Validate Address Step in Workflow
         this.registerflowservice.validateStep(STEPS.Bank);
     }
@@ -189,6 +190,24 @@ export class FormDataService {
       this.formData.month = data.month;
       this.formData.day = data.day;
       this.registerflowservice.validateStep(STEPS.Bank);
+    }
+
+    getCard() {
+      var cardInfo: Card = {
+        cardNum: this.formData.cardNum,
+        cardYear: this.formData.cardYear,
+        cardMonth: this.formData.cardMonth,
+        cardCvc: this.formData.cardCvc
+      }
+
+      return cardInfo;
+    }
+
+    setCard(data: Card) {
+      this.formData.cardNum = data.cardNum;
+      this.formData.cardYear = data.cardYear;
+      this.formData.cardMonth = data.cardMonth;
+      this.formData.cardCvc  = data.cardCvc;
     }
 
     getDriverInfo() : DriverInfo {

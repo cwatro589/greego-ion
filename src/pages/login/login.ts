@@ -39,7 +39,6 @@ export class LoginPage {
     this.navCtrl.setRoot(UserPage);
   }
   gotoLoginVerifyPage() {
-    console.log(this.email + "/" + this.pw);
     const json = {
       email : this.email,
       pw : this.pw
@@ -49,7 +48,6 @@ export class LoginPage {
       email : this.email,
       phoneNum : '7033801716'
     });
-
 
     // this.http.post(this.domain.ip + "/api/auth/compare", json, {})
     //   .map(res => res.json())

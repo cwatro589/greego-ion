@@ -24,6 +24,7 @@ export class PromotioninputPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private http: Http, private domain:Domain, private formDataService: FormDataService) {
   }
+
   ionViewDidLoad() {
     console.log('ionViewDidLoad PromotioninputPage');
   }

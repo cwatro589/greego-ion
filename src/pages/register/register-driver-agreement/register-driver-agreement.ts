@@ -145,6 +145,7 @@ export class RegisterDriverAgreementPage implements OnInit {
 
               console.log(uploadRes, 'uploadRes');
             }, (err) => {
+              loader.dismiss();
               console.log(err, 'uploadRes');
             })
         })
@@ -189,25 +190,6 @@ export class RegisterDriverAgreementPage implements OnInit {
 
                   fileTransfer.upload(this.formDataService.getFacePhoto().facePhotoLocation, this.domain.ip + '/api/users/photo', options)
                     .then((uploadIns) => {
-                      const availableTrans = [];
-                      const availableSizeOfCar = [];
-
-                      if(this.formDataService.getDriver().availCarTransmissionAuto){
-                        availableTrans.push('Automatic');
-                      }
-                      if(this.formDataService.getDriver().availCarTransmissionManual){
-                        availableTrans.push('Manual');
-                      }
-                      if(this.formDataService.getDriver().availCarTypeSedan) {
-                        availableSizeOfCar.push('Sedan');
-                      }
-                      if(this.formDataService.getDriver().availCarTypeSuv) {
-                        availableSizeOfCar.push('SUV');
-                      }
-                      if(this.formDataService.getDriver().availCarTypeVan) {
-                        availableSizeOfCar.push('Van');
-                      }
-
                       let json = {
                         id : publishRes.data.id,
                         phoneNum : this.formDataService.getPersonal().phone,
@@ -218,8 +200,15 @@ export class RegisterDriverAgreementPage implements OnInit {
                         image : '/photo/' + publishRes.data.id + '/photo.jpg',
                         driver: {
                           available : {
-                            transmission : availableTrans,
-                            sizeOfCar : availableSizeOfCar
+                            transmission : {
+                              automatic : this.formDataService.getDriver().availCarTransmissionAuto,
+                              manual : this.formDataService.getDriver().availCarTransmissionManual
+                            },
+                            sizeOfCar : {
+                              sedan : this.formDataService.getDriver().availCarTypeSedan,
+                              suv : this.formDataService.getDriver().availCarTypeSuv,
+                              van : this.formDataService.getDriver().availCarTypeVan
+                            }
                           },
                           ssn : this.formDataService.getBank().ssn,
                           documentsUrl : {

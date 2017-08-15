@@ -37,6 +37,7 @@ import { EqualValidator } from './directives/equal-validator';
 import { IonicStorageModule } from '@ionic/storage';
 import { Transfer } from '@ionic-native/transfer';
 import {PromotioninputPage} from "../pages/menu/promotion/promotioninput/promotioninput";
+import {AddcreditcardPage} from '../pages/menu/payments/addcreditcard/addcreditcard';
 
 @NgModule({
   declarations: [
@@ -62,7 +63,8 @@ import {PromotioninputPage} from "../pages/menu/promotion/promotioninput/promoti
     DriverPage,
     TripcompletedPage,
     TripcompletedDriverPage,
-    PromotioninputPage
+    PromotioninputPage,
+    AddcreditcardPage
   ],
   imports: [
     BrowserModule,
@@ -93,7 +95,8 @@ import {PromotioninputPage} from "../pages/menu/promotion/promotioninput/promoti
     DriverPage,
     TripcompletedPage,
     TripcompletedDriverPage,
-    PromotioninputPage
+    PromotioninputPage,
+    AddcreditcardPage
   ],
   providers: [
     StatusBar,

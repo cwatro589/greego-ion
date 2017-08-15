@@ -25,24 +25,24 @@
       <ion-row>
         <ion-item>
           <ion-label>Choose Year</ion-label>
-          <ion-select #caryear="ngModel" required id="caryear" name="caryear" [(ngModel)]="rider.carYear">
-            <ion-option value="2000">2000</ion-option>
+          <ion-select #caryear="ngModel" required id="caryear" name="caryear" [(ngModel)]="rider.carYear" (ionChange)="getBrand()">
+            <ion-option *ngFor="let year of years" [value]="year">{{year}}</ion-option>
           </ion-select>
         </ion-item>
       </ion-row>
       <ion-row>
         <ion-item>
           <ion-label>Choose Brand</ion-label>
-          <ion-select #carbrand="ngModel" required id="carbrand" name="carbrand" [(ngModel)]="rider.carBrand">
-            <ion-option value="honda">Honda</ion-option>
+          <ion-select #carbrand="ngModel" required id="carbrand" name="carbrand" [(ngModel)]="rider.carBrand" (ionChange)="getModel()">
+            <ion-option *ngFor="let brand of brands" [value]="brand">{{brand}}</ion-option>
           </ion-select>
         </ion-item>
       </ion-row>
       <ion-row>
         <ion-item>
           <ion-label>Choose Model</ion-label>
-          <ion-select #carmodel="ngModel" required id="carmodel" name="carmodel" [(ngModel)]="rider.carModel">
-            <ion-option value="Civic">Civic</ion-option>
+          <ion-select #carmodel="ngModel" required id="carmodel" name="carmodel" [(ngModel)]="rider.carModel" (ionChange)="getTrim()">
+            <ion-option *ngFor="let model of models" [value]="model">{{model}}</ion-option>
           </ion-select>
         </ion-item>
       </ion-row>
@@ -50,7 +50,7 @@
         <ion-item>
           <ion-label>Choose Trim</ion-label>
           <ion-select #cartrim="ngModel" required id="cartrim" name="cartrim" [(ngModel)]="rider.carTrim">
-            <ion-option value="EX">EX</ion-option>
+            <ion-option *ngFor="let trim of trims" [value]="trim">{{trim}}</ion-option>
           </ion-select>
         </ion-item>
       </ion-row>

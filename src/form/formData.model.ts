@@ -29,10 +29,16 @@ export class FormData {
     line1:string = '';
     zipCode:string = '';
     state:string = '';
+    id:string='';
 
     driverLicense:string = '';
     driverIdentification:string = '';
     driverInsurance:string = '';
+
+    cardNum:string = '';
+    cardYear:string ='';
+    cardMonth :string ='';
+    cardCvc : string = '';
 
     clear() {
         this.userType = '';
@@ -67,8 +73,21 @@ export class FormData {
         this.driverLicense = '';
         this.driverIdentification = '';
         this.driverInsurance = '';
+
+        this.cardNum = '';
+        this.cardYear = '';
+        this.cardMonth = '';
+        this.cardCvc  = '';
     }
 }
+
+export class Card {
+  cardNum:string = '';
+  cardYear:string ='';
+  cardMonth :string ='';
+  cardCvc : string = '';
+}
+
 export class RegisterType {
     userType: string = '';
 }
@@ -78,6 +97,7 @@ export class Personal {
     email: string = '';
     phone: string = '';
     password: string = '';
+    id: string = '';
 }
 
 export class FacePhoto {

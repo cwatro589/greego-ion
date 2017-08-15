@@ -25,6 +25,7 @@ import { TripcompletedDriverPage } from './tripcompleted-driver/tripcompleted-dr
 import * as $ from 'jquery'
 import {FormDataService} from "../../form/formData.service";
 import {Domain} from "../../form/formData.model";
+import {HomePage} from "../home/home";
 
 /**
  * Generated class for the DriverPage page.
@@ -257,7 +258,8 @@ export class DriverPage implements OnInit {
     {
       title: 'Billing History',
       target: 'BillingPage',
-      icon: 'fa fa-money'
+      icon: 'fa fa-money',
+      permission: 'all'
     },
     {
       title: 'Promotion',
@@ -303,13 +305,36 @@ export class DriverPage implements OnInit {
   map: GoogleMap;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private menu: MenuController, private googleMaps: GoogleMaps, public modalCtrl: ModalController, public http: Http, public viewCtrl: ViewController, private geolocation: Geolocation, public loadingCtrl:LoadingController, private formDataService: FormDataService, private domain: Domain) {
+    console.log('constructor');
     this.getUserInfo();
 
-      let time = 1000;
+      // let time = 1000;
       // setTimeout(function(){
       //   this.driverRequestCall();
       // }.bind(this), time);
 
+    // 1 4 6
+    if(this.userInfo.lastLoginClass == 1) {
+      const userFilters = this.userMenu.filter((item) => {
+        return item.permission === 'all' || item.permission === 'rider';
+      });
+
+      this.userMenu = userFilters;
+    }else if(this.userInfo.lastLoginClass == 2){
+      let filters = this.userMenu.filter((item) => {
+        return item.permission === 'all' || item.permission === 'driver';
+      });
+
+      this.userMenu = filters;
+
+      if(this.userInfo.user.createDate == null){
+        filters = this.userMenu.filter((item) => {
+          return item.title !== 'User Mode';
+        });
+
+        this.userMenu = filters;
+      }
+    }
   }
 
   driverRequestCall() {
@@ -336,81 +361,69 @@ export class DriverPage implements OnInit {
   }
 
   getUserInfo() {
-    const json = {
-      email : this.formDataService.getPersonal().email
-    };
-    this.http.post(this.domain.ip + "/api/users/test", {email : 'hbc8141@naver.com'}, {})
-    .map(res => res.json())
-    .subscribe(loginRes => {
-      if(loginRes.success) {
-        this.userInfo = loginRes;
-        if(loginRes.lastLoginClass == 1) {
-          delete loginRes['driver'];
-        }else if(loginRes.lastLoginClass == 2){
-          delete loginRes['user'];
-        }
-        console.log(loginRes);
-        // this.navCtrl.setRoot(DriverPage);
+    // console.log(this.navParams);
+    // this.userInfo = this.navParams.data.data.data;
+    // 상용화 용
+
+    this.userInfo = this.navParams.data.data;
+    // 테스트 용
+
+    console.log(this.userInfo, 'userInfo');
+    const personal = this.formDataService.getPersonal();
+    personal.email = this.userInfo.email;
+    personal.phone = this.userInfo.phoneNum;
+    personal.firstName = this.userInfo.fName;
+    personal.lastName = this.userInfo.lName;
+    personal.password = '';
+    personal.id = this.userInfo.id;
+
+    this.formDataService.setPersonal(personal);
+
+    const photo = this.formDataService.getFacePhoto();
+    photo.facePhotoLocation = this.userInfo.image;
+    this.formDataService.setFacePhoto(photo);
+
+    this.defineCreditCard();
+
+    if (this.userInfo.lastLoginClass == 1) {
+      this.stepFlow = this.userStepFlow;
+      const carInfo = this.formDataService.getRider();
+      carInfo.carBrand = this.userInfo.user.carInfo.brand;
+      carInfo.carColor = this.userInfo.user.carInfo.color;
+      carInfo.carModel = this.userInfo.user.carInfo.model;
+      carInfo.carYear = this.userInfo.user.carInfo.year;
+      carInfo.carTrim = this.userInfo.user.carInfo.trim;
+      carInfo.carTransmittion = this.userInfo.user.carInfo.transmission;
+      console.log(carInfo, 'lastLogin');
+      this.formDataService.setRider(carInfo);
+    } // user
+    else {
+      this.stepFlow = this.driverStepFlow;
+      const bank = this.formDataService.getBank();
+
+      const driver = this.formDataService.getDriver();
+      driver.availCarTypeSedan = this.userInfo.driver.available.sizeOfCar.sedan;
+      driver.availCarTypeSuv = this.userInfo.driver.available.sizeOfCar.suv;
+      driver.availCarTypeVan = this.userInfo.driver.available.sizeOfCar.van;
+      driver.availCarTransmissionAuto = this.userInfo.driver.available.transmission.automatic;
+      driver.availCarTransmissionManual = this.userInfo.driver.available.transmission.manual;
+      this.formDataService.setDriver(driver);
+
+      this.http.post(this.domain.ip + '/api/payout/list', { id : this.userInfo.id}, {})
+        .map(res => res.json())
+        .subscribe(foundBalance => {
+          bank.bankAccountNumber = foundBalance.data.accountNum;
+          bank.bankRoutingNumber = foundBalance.data.routeNum;
+          this.formDataService.setBank(bank);
+          this.userInfo.driver['bank'] = this.formDataService.getBank();
+        })
+    } // driver
+
+    $.each(this.stepSet, function(i, v) {
+      if (this.stepFlow[0] == i) {
+        return this.activeStep = v;
       }
-    });
-
-    this.http.get('http://localhost:8100/assets/usersample.json').map(res => res.json()).subscribe((data) => {
-      // if(data.lastLoginClass == 1){
-      //   const json = {
-      //     userType : 'rider',
-      //     driverid : data.id,
-      //     creditCard : '',
-      //     facePhoto : data.image,
-      //     firstName : data.fName,
-      //     lastName : data.lName,
-      //     phone: data.phoneNum,
-      //     email : data.email,
-      //     carYear : data.user.carInfo.year,
-      //     carBrand : data.user.carInfo.brand,
-      //     carModel : data.user.carInfo.model,
-      //     carTrim : data.user.carInfo.trim,
-      //     carTransmission : data.user.carInfo.transmission
-      //   };
-      //   this.userInfo = json;
-      // }else if(data.lastLoginClass == 2){
-      //   const json = {
-      //     userType : 'driver',
-      //     driverid : data.id,
-      //     creditCard : '',
-      //     facePhoto : data.image,
-      //     firstName : data.fName,
-      //     lastName : data.lName,
-      //     phone: data.phoneNum,
-      //     email : data.email,
-      //     carYear : data.user.carInfo.year,
-      //     carBrand : data.user.carInfo.brand,
-      //     carModel : data.user.carInfo.model,
-      //     carTrim : data.user.carInfo.trim,
-      //     carTransmission : data.user.carInfo.transmission,
-      //     availCarType : data.driver.available.sizeOfCar,
-      //     availTransmission : data.driver.available.transmission
-      //   };
-      // }
-      this.userInfo = data;
-      this.defineCreditCard();
-
-      if (this.userInfo.userType == 'rider') {
-        this.stepFlow = this.userStepFlow;
-      }
-      else {
-        this.stepFlow = this.driverStepFlow;
-      }
-
-      $.each(this.stepSet, function(i, v) {
-        if (this.stepFlow[0] == i) {
-          return this.activeStep = v;
-        }
-      }.bind(this));
-
-    },
-    err => {
-        console.log("Oops!");
-    });
+    }.bind(this));
   }
 
   changeCC() {
@@ -428,12 +441,12 @@ export class DriverPage implements OnInit {
   }
 
   defineCreditCard() {
-    for (let i = 0; i < Object.keys(this.userInfo.creditCard).length; i++) {
-      if (this.userInfo.creditCard[i].default) {
-        this.selectedCreditCard = this.userInfo.creditCard[i];
-        this.selectedCreditCardIcon = this.creditCardIcon(this.userInfo.creditCard[i].type);
-      }
-    }
+    // for (let i = 0; i < Object.keys(this.userInfo.creditCard).length; i++) {
+    //   if (this.userInfo.creditCard[i].default) {
+    //     this.selectedCreditCard = this.userInfo.creditCard[i];
+    //     this.selectedCreditCardIcon = this.creditCardIcon(this.userInfo.creditCard[i].type);
+    //   }
+    // }
   }
 
   creditCardIcon(type) {
@@ -614,8 +627,23 @@ export class DriverPage implements OnInit {
 
   // Open Pages in Menu
   openPage(page) {
-    let modal = this.modalCtrl.create(page);
-    modal.present();
+    console.log(page);
+
+    if(page != 'signout'){
+      let modal = this.modalCtrl.create(page, {
+        lastLoginClass : this.userInfo.lastLoginClass
+      });
+      modal.present();
+    }else{
+      this.http.post(this.domain.ip + '/api/auth/logout', {
+        id : this.formDataService.getPersonal().id
+      }).map(res => res.json())
+        .subscribe(logoutRes => {
+          if(logoutRes.success){
+            this.navCtrl.setRoot(HomePage);
+          }
+        });
+    }
   }
 
   // Open Driver Request Call

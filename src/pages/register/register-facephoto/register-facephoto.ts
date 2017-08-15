@@ -45,9 +45,6 @@ export class RegisterFacephotoPage {
   }
 
   takephoto(type:string) {
-    const fileTransfer: TransferObject = this.transfer.create();
-
-
     let cameraOptions: CameraOptions = {
       quality: 100,
       destinationType: this.camera.DestinationType.FILE_URI,
@@ -69,27 +66,6 @@ export class RegisterFacephotoPage {
       this.valid = true;
       this.photoSelected = true;
       console.log(imageData);
-      // const lastIndex = this.facePhoto.facePhotoLocation.lastIndexOf('/');
-      // const fileName = this.facePhoto.facePhotoLocation.substring(lastIndex + 1, this.facePhoto.facePhotoLocation.length);
-      // const options = {
-      //   filekey : "file",
-      //   fileName : fileName,
-      //   chunkedMode: false,
-      //   // mimeType : 'multipart/form-data',
-      //   mimeType : 'image/jpg',
-      //   params : {
-      //     'id' : '008fcf78-121a-45a0-bb76-925e517c5f39',
-      //     'class' : 'user',
-      //     'behavior' : 'save',
-      //     'filename' : 'photo'
-      //   }
-      // };
-      // fileTransfer.upload(imageData, this.domain.ip + '/api/users/photo', options)
-      //   .then(uploadRes => {
-      //     console.log(uploadRes);
-      //   }, (err) => {
-      //     console.log(err);
-      //   })
     }, (err) => {
       console.log("photo error");
     })

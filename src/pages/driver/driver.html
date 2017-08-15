@@ -18,10 +18,11 @@
 <ion-menu [content]="content" type="overlay">
   <ion-header>
     <div class="userInfoWrapper">
-      <img src="#" class="userPhoto">
+      <img [src]=userInfo.image class="userPhoto">
       <div class="userInfo">
-        <h5 class="userName">{{userInfo?.firstName}} {{userInfo?.lastName}}</h5>
-        <div class="driverId" *ngIf="userInfo?.userType == 'driver'">{{userInfo?.driverId}}</div>
+        <h5 class="userName">{{userInfo.fName}} {{userInfo.lName}}</h5>
+        <!--<div class="driverId" *ngIf="userInfo?.userType == 'driver'">{{userInfo?.driverId}}</div>-->
+        <div class="driverId">{{userInfo.id}}</div>
       </div>
     </div>
   </ion-header>
