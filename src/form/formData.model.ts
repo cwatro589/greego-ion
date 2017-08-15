@@ -148,5 +148,5 @@ export class DriverInfo {
 }
 
 export class Domain {
-  ip:string = 'http://192.168.1.219:8081';
+  ip:string = 'http://192.168.1.194:8081';
 }
