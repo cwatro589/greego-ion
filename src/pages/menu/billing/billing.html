@@ -28,51 +28,23 @@
 
   <div [ngSwitch]="billingTab">
     <ion-list *ngSwitchCase="'earned'" class="earnedContent">
-      <ion-list-header>
-        <span class="category">June 2007</span>
-        <span class="currency">287</span>
-      </ion-list-header>
-      <ion-item>
-        <span class="time">07/20/2017 - 03:00AM</span>
-        <span class="amountType currency"><span class="amount">77</span></span>
-      </ion-item>
-      <ion-item>
-        <span class="time">07/20/2017 - 03:00AM</span>
-        <span class="amountType currency"><span class="amount">77</span></span>
-      </ion-item>
-      <ion-item>
-        <span class="time">07/20/2017 - 03:00AM</span>
-        <span class="amountType currency"><span class="amount">77</span></span>
-      </ion-item>
-      <ion-item>
-        <span class="time">07/20/2017 - 03:00AM</span>
-        <span class="amountType currency"><span class="amount">77</span></span>
+      <!--<ion-list-header>-->
+        <!--<span class="category">June 2007</span>-->
+        <!--<span class="currency">287</span>-->
+      <!--</ion-list-header>-->
+      <ion-item *ngFor="let billing of payments">
+        <span class="time">{{billing.update}}</span>
+        <span class="amountType currency"><span class="amount">{{billing.amount}}</span></span>
       </ion-item>
     </ion-list>
 
     <ion-list *ngSwitchCase="'received'" class="receivedContent">
-      <ion-list-header>
-        <span class="category">2007</span>
-      </ion-list-header>
-      <ion-item>
-        <span class="time">07/31/2017</span>
-        <span class="bankNumber">1234</span>
-        <span class="amountType currency"><span class="amount">77</span></span>
-      </ion-item>
-      <ion-item>
-        <span class="time">07/20/2017</span>
-        <span class="bankNumber">1234</span>
-        <span class="amountType currency"><span class="amount">77</span></span>
-      </ion-item>
-      <ion-item>
-        <span class="time">07/20/2017</span>
-        <span class="bankNumber">1234</span>
-        <span class="amountType currency"><span class="amount">77</span></span>
-      </ion-item>
-      <ion-item>
-        <span class="time">07/20/2017</span>
-        <span class="bankNumber">1234</span>
-        <span class="amountType currency"><span class="amount">77</span></span>
+      <!--<ion-list-header>-->
+        <!--<span class="category">2007</span>-->
+      <!--</ion-list-header>-->
+      <ion-item *ngFor="let received of payouts">
+        <span class="time">{{received.update}}</span>
+        <span class="amountType currency"><span class="amount">{{received.amount}}</span></span>
       </ion-item>
     </ion-list>
   </div>

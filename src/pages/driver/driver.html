@@ -7,7 +7,7 @@
 <ion-header>
 
   <ion-navbar>
-     <button ion-button icon-only clear menuToggle #content class="menuBtn">
+     <button ion-button icon-only clear menuToggle #content class="menuBtn" (click)="mapClickable(false)">
       <ion-icon name='menu'></ion-icon>
     </button>
     <ion-title><i class="{{activeStep.headerIcon}}"></i>{{activeStep.headerTitle}}</ion-title>
@@ -21,7 +21,8 @@
       <img [src]=userInfo.image class="userPhoto">
       <div class="userInfo">
         <h5 class="userName">{{userInfo.fName}} {{userInfo.lName}}</h5>
-        <!--<div class="driverId" *ngIf="userInfo?.userType == 'driver'">{{userInfo?.driverId}}</div>-->
+        <!--<h5 class="userName">{{userInfo?.firstName}} {{userInfo?.lastName}}</h5>-->
+        <!--<div class="driverId" *ngIf="userInfo?.lastLoginClass == 2">{{userInfo?.driverId}}</div>-->
         <div class="driverId">{{userInfo.id}}</div>
       </div>
     </div>
@@ -43,14 +44,14 @@
     </ion-card-content>
   </ion-card>
 
-  <ion-card class="findDirectionCard" *ngIf="activeStep.pickupLocation && userInfo?.userType == 'rider'">
+  <ion-card class="findDirectionCard" *ngIf="activeStep.pickupLocation && userInfo?.lastLoginClass == 1">
     <ion-card-content class="currentContainer">
       <div class="iconSet">
         <i class="fa fa-bullseye"></i>
       </div>
       <div class="searchBox">
         <!-- <ion-input type="text" name="currentLocation" [(ngModel)]="CurrentLocation" placeholder="Pickup Location" [(ngModel)]="pickuplocation" (mouseleave) ="checkPickupLocation()"></ion-input> -->
-        <ion-input type="text" name="currentLocation" placeholder="Pickup Location"  (mouseleave) ="nextStep()"></ion-input>
+        <ion-input type="text" class="cu" name="currentLocation" placeholder="Pickup Location" [(ngModel)]="srcAddress" readonly></ion-input>
       </div>
     </ion-card-content>
     <ion-card-content class="destinationContainer" *ngIf="activeStep.destination">
@@ -58,25 +59,25 @@
         <i class="fa fa-map-marker"></i>
       </div>
       <div class="searchBox">
-        <ion-input type="text" name="destination" placeholder="Destination Address" (mouseleave) ="nextStep()"></ion-input>
+        <ion-input type="text" name="destination" placeholder="Destination Address" [(ngModel)]="desAddress" readonly></ion-input>
       </div>
     </ion-card-content>
   </ion-card>
 
-  <ion-card id="estimateMenu" class="estimateMenu" *ngIf="activeStep.estimateMenu && userInfo?.userType == 'rider'">
+  <ion-card id="estimateMenu" class="estimateMenu" *ngIf="activeStep.estimateMenu && userInfo?.lastLoginClass == 1">
     <ion-card-content class="fareEstimateContainer">
       <i class="fa fa-dollar"></i>
       <span class="">Fare Estimates</span>
-      <span class="estimatePrice">$77</span>
+      <span class="estimatePrice">${{estimatePrice}}</span>
     </ion-card-content>
     <ion-card-content class="creditCardInfo">
-      <i class="{{creditCardIcon(selectedCreditCard.type)}}"></i>
-      <span class="creditCardType">{{creditCardName(selectedCreditCard.type)}} Card</span>
-      <span class="creditCardNumber">**** {{selectedCreditCard.number}}</span>
+      <i class="{{creditCardIcon(selectedCreditCard.brand)}}"></i>
+      <span class="creditCardType">{{creditCardName(selectedCreditCard.brand)}} Card</span>
+      <span class="creditCardNumber">**** {{selectedCreditCard.last4}}</span>
       <button ion-button clear class="creditCardChangeBtn" (click)="changeCC()">Change</button>
     </ion-card-content>
     <ion-card-content class="requestDriverContainer">
-      <button ion-button full (click)="nextStep()">Request Driver</button>
+      <button ion-button full (click)="tripRequest()">Request Driver</button>
     </ion-card-content>
   </ion-card>
 
@@ -108,7 +109,7 @@
 
   <ion-card id="driverRequest" class="driverRequest" *ngIf="activeStep.driverInfo">
     <ion-card-content class="driverInfo">
-      <img src="{{userInfo.facePhoto}}" class="userPhoto">
+      <img [src]=list.driver.image  class="userPhoto">
       <div class="userInfo">
         <div class="driverRates">
           <i class="fa fa-star"></i>
@@ -117,20 +118,22 @@
           <i class="fa fa-star"></i>
           <i class="fa fa-star"></i>
         </div>
-        <h5 class="userName">John Doe</h5>
+        <h5 class="userName">{{list.driver.fName}} {{list.driver.lName}}</h5>
       </div>
-      Pick up time is approximately <span class="textFocus">2</span> minutes
+      Pick up time is approximately <span class="textFocus">{{list.estimate.substring(0, list.estimate.lastIndexOf(' '))}}</span> minutes
     </ion-card-content>
     <ion-card-content class="buttonset">
-      <button ion-button full color="dark" outline id="requestDriverCallBtn">Call</button>
-      <button ion-button full color="dark" outline id="requestDriverCancelBtn" [disabled]="buttonDisabled" (click)="resetStep()">Cancel</button>
+      <button ion-button full color="dark" outline id="requestDriverCallBtn" (click)="callToRider(list.driver.phoneNum)">Call</button>
+      <button ion-button full color="dark" outline id="requestDriverCancelBtn" (click)="resetStep()">Cancel</button>
+      <!--<button ion-button full color="dark" outline id="requestDriverCancelBtn" [disabled]="buttonDisabled" (click)="resetStep()">Cancel</button>-->
     </ion-card-content>
   </ion-card>
 
-  <button ion-button icon-only clear id="currentLocationBtn" class="currentLocationBtn" (click)='getCurrentPosition()'>
-    <ion-icon name="ios-locate-outline"></ion-icon>
-  </button>
-  <div id="map" #map></div>
+  <div id="map" #map (click)="mapClickable(true)">
+    <button ion-button icon-only clear id="currentLocationBtn" class="currentLocationBtn" (click)='getCurrentPosition()'>
+      <ion-icon name="ios-locate-outline"></ion-icon>
+    </button>
+  </div>
 </ion-content>
 
 <ion-footer *ngIf="activeStep.riderInfo">
@@ -139,37 +142,42 @@
       <div class="leftPanel">
         <ion-row>
           <ion-label color="labelLight" stacked>Pick Up</ion-label>
-          John Doe
+          {{list.user.fName}} {{list.user.lName}}
         </ion-row>
         <ion-row *ngIf="activeStep.pickupInfo">
           <ion-label color="labelLight" stacked>Pickup Location</ion-label>
-          13212 Cove Landing Rd. #203<br>
-          Falls Church, VA 22012
+          <!--13212 Cove Landing Rd. #203<br>-->
+          <!--Falls Church, VA 22012-->
+          {{list.user.srcAddr}}
         </ion-row>
         <ion-row *ngIf="activeStep.destinationAddress">
           <ion-label color="labelLight" stacked>Destination Location</ion-label>
-          230481 Abraham Landing Rd. #1123<br>
-          Arkham City, CH 22012
+          <!--230481 Abraham Landing Rd. #1123<br>-->
+          <!--Arkham City, CH 22012-->
+          {{list.user.desAddr}}
         </ion-row>
         <ion-row *ngIf="activeStep.pickupInfo">
           <ion-label color="labelLight" stacked>Car</ion-label>
-          2007 Honda Civic EX - Automatic
+          {{list.user.car.year}} {{list.user.car.brand}} {{list.user.car.model}} - {{list.user.car.transmission}}
+          <!--2007 Honda Civic EX - Automatic-->
         </ion-row>
-        <ion-row *ngIf="activeStep.pickupInfo">
-          <ion-label color="labelLight" stacked>Plate No.</ion-label>
-          WHD-7712
-        </ion-row>
+        <!--<ion-row *ngIf="activeStep.pickupInfo">-->
+          <!--<ion-label color="labelLight" stacked>Plate No.</ion-label>-->
+          <!--WHD-7712-->
+        <!--</ion-row>-->
         <ion-row *ngIf="activeStep.pickupInfo">
           <ion-label color="labelLight" stacked>Estimated Time</ion-label>
-          2 Minuites
+          {{list.estimate}}
+          <!--Minuites-->
         </ion-row>
       </div>
       <div class="RightPanel" *ngIf="activeStep.pickupInfo">
         <ion-row>
-          <img src="assets/{{userInfo?.facePhoto}}" class="userPhoto">
+          <!--<img src="assets/{{userInfo?.facePhoto}}" class="userPhoto">-->
+          <img [src]=list.user.image class="userPhoto">
         </ion-row>
         <ion-row>
-          <button ion-button round (click)="callToRider()"><i class="fa fa-phone"></i></button>
+          <button ion-button round (click)="callToRider(list.user.phoneNum)"><i class="fa fa-phone"></i></button>
         </ion-row>
       </div>
     </ion-card-content>

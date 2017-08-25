@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { RegisterDriverInfoPage } from '../register-driver-info/register-driver-info';
+import { RegisterDriverAgreementPage } from '../register-driver-agreement/register-driver-agreement';
 
-import {Address, Bank, Birth} from '../../../form/formData.model';
+import { Bank } from '../../../form/formData.model';
 import { FormDataService } from '../../../form/formData.service';
 
 /**
@@ -33,6 +33,6 @@ export class RegisterDriverBankPage {
 
   goto() {
     this.formDataService.setBank(this.bank);
-    this.navCtrl.push(RegisterDriverInfoPage);
+    this.navCtrl.push(RegisterDriverAgreementPage);
   }
 }

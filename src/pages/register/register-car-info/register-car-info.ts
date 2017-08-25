@@ -43,7 +43,6 @@ export class RegisterCarInfoPage {
             }
           }
         }
-        console.log(data.data, 'default');
         this.years = data.data;
       })
   }
@@ -70,7 +69,6 @@ export class RegisterCarInfoPage {
             }
           }
         }
-        console.log(data.data, 'year');
         this.brands = data.data;
         this.models = [];
         this.trims = [];
@@ -95,7 +93,6 @@ export class RegisterCarInfoPage {
             }
           }
         }
-        console.log(data.data, 'brand');
         this.models = data.data;
         this.trims = [];
         this.rider.carModel = '';
@@ -118,7 +115,6 @@ export class RegisterCarInfoPage {
             }
           }
         }
-        console.log(data.data, 'model');
         this.trims = data.data;
       })
   }

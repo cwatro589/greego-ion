@@ -13,19 +13,19 @@
 <ion-content>
   <ion-row padding class="chargeContainer">
     <div class="completedTime">
-      08/31/2017 - 03:24AM
+      {{list.date.complete}}
     </div>
     <div class="chargeInfo">
       Total Charged
-      <div class="chargeAmount currency">77</div>
+      <div class="chargeAmount currency">{{list.amount}}</div>
     </div>
   </ion-row>
   <ion-row padding class="driverRating">
     <div class="driverInfo">
-      <img src="#" class="userPhoto">
+      <img [src]=list.driver.image class="userPhoto">
       <div class="userInfo">
-        <h5 class="userName">John Doe</h5>
-        <div class="driverId">AB123C</div>
+        <h5 class="userName">{{list.driver.fName}} {{list.driver.lName}}</h5>
+        <div class="driverId">{{list.driver.id}}</div>
       </div>
     </div>
     <div class="driverRates review">
@@ -37,7 +37,7 @@
     </div>
   </ion-row>
   <ion-row padding>
-    <button ion-button block (click)="submit()" [disabled]="!ratingAvail">Submit</button>
+    <button ion-button block (click)="submit()" [disabled]="ratingAvail">Submit</button>
   </ion-row>
   <button ion-button clear class="subBtn" (click)="customersupport()">Need Help?</button>
 </ion-content>

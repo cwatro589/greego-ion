@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import {MessagesentPage} from "./messagesent/messagesent";
 
 /**
  * Generated class for the CustomersupportPage page.
@@ -26,4 +27,7 @@ export class CustomersupportPage {
     this.navCtrl.pop();
   }
 
+  send() {
+    this.navCtrl.push(MessagesentPage);
+  }
 }

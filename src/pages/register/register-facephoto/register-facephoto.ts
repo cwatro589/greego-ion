@@ -3,11 +3,9 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { RegisterCarInfoPage } from '../register-car-info/register-car-info';
 import { RegisterDriverPrefPage } from '../register-driver-pref/register-driver-pref';
 
-import {Domain, FacePhoto, RegisterType} from '../../../form/formData.model';
+import { FacePhoto, RegisterType } from '../../../form/formData.model';
 import { FormDataService } from '../../../form/formData.service';
 import { Camera, CameraOptions } from '@ionic-native/camera';
-import {Transfer, TransferObject} from "@ionic-native/transfer";
-import {Http} from "@angular/http";
 
 /**
  * Generated class for the RegisterFacephotoPage page.
@@ -21,19 +19,17 @@ import {Http} from "@angular/http";
   selector: 'page-register-facephoto',
   templateUrl: 'register-facephoto.html',
   providers: [
-    Camera,
-    Transfer,
-    Domain
+    Camera
   ]
 })
 export class RegisterFacephotoPage {
   registerType: RegisterType;
   facePhoto: FacePhoto;
-  photoSelected:boolean = true;
+  photoSelected:boolean = false;
   form: any;
   valid:boolean = false;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private formDataService: FormDataService, private domain: Domain, private http: Http, private transfer: Transfer, private camera:Camera) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private formDataService: FormDataService, private camera:Camera) {
   }
 
   ngOnInit() {
@@ -45,23 +41,20 @@ export class RegisterFacephotoPage {
   }
 
   takephoto(type:string) {
-    let cameraOptions: CameraOptions = {
+    let options: CameraOptions = {
       quality: 100,
       destinationType: this.camera.DestinationType.FILE_URI,
-      sourceType: this.camera.PictureSourceType.CAMERA,
       encodingType: this.camera.EncodingType.JPEG,
       mediaType: this.camera.MediaType.PICTURE,
-      targetWidth : 500,
-      targetHeight : 500,
-      saveToPhotoAlbum : false,
+      targetWidth : 1024,
+      targetHeight : 1024,
       correctOrientation: true
-    };
-
+    }
     if(type === 'gallery') {
-      cameraOptions.sourceType = this.camera.PictureSourceType.PHOTOLIBRARY;
+      options.sourceType = this.camera.PictureSourceType.PHOTOLIBRARY;
     }
 
-    this.camera.getPicture(cameraOptions).then((imageData) => {
+    this.camera.getPicture(options).then((imageData) => {
       this.facePhoto.facePhotoLocation = imageData;
       this.valid = true;
       this.photoSelected = true;
@@ -69,14 +62,13 @@ export class RegisterFacephotoPage {
     }, (err) => {
       console.log("photo error");
     })
+
   }
 
   goto() {
-    console.log(this.facePhoto);
     this.formDataService.setFacePhoto(this.facePhoto);
     this.formDataService.setType(this.registerType);
 
-    console.log(this.formDataService.getFacePhoto());
     if (this.registerType.userType == 'rider') {
       this.navCtrl.push(RegisterCarInfoPage);
     }

@@ -25,7 +25,7 @@ export class PromotionPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private http: Http, private domain:Domain, private formDataService: FormDataService) {
     console.log(this.formDataService.getPersonal().email);
-    this.http.get(domain.ip + "/api/promo/list?email=" + '', {})
+    this.http.get(domain.ip + "/api/promo/list?email=" + this.formDataService.getPersonal().email, {})
       .map(res => res.json())
       .subscribe(data => {
         console.log(data, "promo");

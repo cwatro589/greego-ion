@@ -12,20 +12,18 @@
     <div id="map"></div>
   </ion-row>
   <ion-row class="customerInfo">
-    <span>Chris Jang</span> 
+    <span>{{userInfo.user.fName}} {{userInfo.user.lName}}</span>
     <span class="rating">
-      <i class="fa fa-star"></i>4.5
+      <i class="fa fa-star"></i>{{userInfo.user.grade}}
     </span>
   </ion-row>
   <ion-row class="address">
       <ion-label color="labelLight"><i class="fa fa-bullseye"></i>Pickup Location</ion-label>
-      4464 Limelight Ct.,
-      Annandale, VA 22003
+    {{userInfo.source.addr}}
   </ion-row>
   <ion-row class="address">
     <ion-label color="labelLight"><i class="fa fa-map-marker"></i>Destination</ion-label>
-      4464 Limelight Ct.,
-      Annandale, VA 22003
+    {{userInfo.destination.addr}}
   </ion-row>
   <ion-row class="buttonSet">
     <button ion-button block (click)="accept()">Accept</button>

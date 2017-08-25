@@ -12,8 +12,8 @@ import { RegisterAgreement2Page } from './register-agreement2/register-agreement
 import { RegisterAgreement3Page } from './register-agreement3/register-agreement3';
 import { RegisterAgreement4Page } from './register-agreement4/register-agreement4';
 import { RegisterUserCompletedPage } from '../register-user-completed/register-user-completed';
-import {Http} from "@angular/http";
 import {Transfer, TransferObject} from "@ionic-native/transfer";
+import {Http} from "@angular/http";
 
 /**
  * Generated class for the RegisterDriverAgreementPage page.
@@ -75,11 +75,6 @@ export class RegisterDriverAgreementPage implements OnInit {
   }
 
   goto() {
-    // let loader = this.loadingCtrl.create({
-    //   content: "Please wait...",
-    //   duration: 3000
-    // });
-    // loader.present();
     let loader = this.loadingCtrl.create({
       content: "Please wait..."
     });
@@ -89,6 +84,7 @@ export class RegisterDriverAgreementPage implements OnInit {
       this.http.post(this.domain.ip + '/api/users/publish', {'email' : this.formDataService.getPersonal().email}, {})
         .map(res => res.json())
         .subscribe(publishRes => {
+          console.log(publishRes," res");
           const fileTransfer: TransferObject = this.transfer.create();
 
           const lastIndex = this.formDataService.getFacePhoto().facePhotoLocation.lastIndexOf('/');
@@ -106,6 +102,7 @@ export class RegisterDriverAgreementPage implements OnInit {
               'filename' : 'photo'
             }
           };
+
           fileTransfer.upload(this.formDataService.getFacePhoto().facePhotoLocation, this.domain.ip + '/api/users/photo', options)
             .then((uploadRes) => {
               let json = {
@@ -174,6 +171,7 @@ export class RegisterDriverAgreementPage implements OnInit {
               'filename' : 'license'
             }
           };
+
           fileTransfer.upload(this.formDataService.getFacePhoto().facePhotoLocation, this.domain.ip + '/api/users/photo', options)
             .then((uploadLicense) => {
               lastIndex = cert.lastIndexOf('/');
@@ -273,7 +271,7 @@ export class RegisterDriverAgreementPage implements OnInit {
                     })
                 }, err => {
                   loader.dismiss();
-              })
+                })
             }, err => {
               loader.dismiss();
             });

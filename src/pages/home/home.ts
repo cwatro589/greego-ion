@@ -1,24 +1,34 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController, Platform } from 'ionic-angular';
 import { LoginPage } from '../login/login';
 import { RegisterPage } from '../register/register';
 import { DriverPage } from '../driver/driver';
-import {UserPage} from "../user/user";
-import {FormDataService} from "../../form/formData.service";
-
+import { AndroidPermissions } from '@ionic-native/android-permissions'
 
 @Component({
   selector: 'page-home',
-  templateUrl: 'home.html'
+  templateUrl: 'home.html',
+  providers:[
+    AndroidPermissions
+  ]
 })
 
 export class HomePage {
 
-  constructor(public navCtrl: NavController, public formDataService: FormDataService) {
+  constructor(public navCtrl: NavController, private platform: Platform, private androidPermissions: AndroidPermissions) {
+    if(this.platform.is('android')){
+      this.androidPermissions.checkPermission(this.androidPermissions.PERMISSION.ACCESS_FINE_LOCATION)
+        .then(
+          success => {
+            console.log('Permission granted');
+        }, err => {
+          this.androidPermissions.requestPermissions(this.androidPermissions.PERMISSION.ACCESS_FINE_LOCATION)
+          })
 
+      this.androidPermissions.requestPermissions([this.androidPermissions.PERMISSION.ACCESS_FINE_LOCATION]);
+    }
   }
   gotoLoginPage() {
-    console.log(this.formDataService);
     this.navCtrl.push(LoginPage);
   }
   gotoRegisterPage() {
@@ -27,7 +37,4 @@ export class HomePage {
   gotoDriver() {
     this.navCtrl.setRoot(DriverPage);
   }
-  // gotoUser() {
-  //   this.navCtrl.setRoot(UserPage);
-  // }
 }

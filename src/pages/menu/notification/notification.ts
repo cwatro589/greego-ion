@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import {Http} from "@angular/http";
 import {Domain} from "../../../form/formData.model";
+import {Http} from "@angular/http";
 
 /**
  * Generated class for the NotificationPage page.

@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { LoginVerifyPage } from '../login-verify/login-verify';
-import {Http} from "@angular/http";
 import {Domain} from "../../../form/formData.model";
 import {FormDataService} from "../../../form/formData.service";
+import {Http} from "@angular/http";
 
 /**
  * Generated class for the PhoneupdatePage page.

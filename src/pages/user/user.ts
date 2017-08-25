@@ -75,7 +75,7 @@ export class UserPage {
 
   ngAfterViewInit() {
   //  let currentLocationBtn:HTMLElement = document;
-    let estimateMenuPosition:string = $('.estimateMenu').offset();
+  //   let estimateMenuPosition:string = $('.estimateMenu').offset();
     debugger;
   }
 
@@ -319,8 +319,6 @@ export class UserPage {
 
   // go show currrent location
   getCurrentPosition() {
-    console.log('getCurrentPosition');
-
     this.loading = this.loadingCtrl.create({
       content: 'Searching Location ...'
     });

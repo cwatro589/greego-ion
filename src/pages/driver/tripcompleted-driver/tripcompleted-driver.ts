@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { DriverPage } from '../driver';
 
 import * as $ from 'jquery'
+import {Http} from "@angular/http";
 
 /**
  * Generated class for the TripcompletedDriverPage page.
@@ -20,8 +21,10 @@ export class TripcompletedDriverPage {
 
   ratings:number = 0;
   ratingAvail:boolean = false;
+  list:any;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private http: Http) {
+    this.list = navParams.get('list');
   }
 
   ionViewDidLoad() {

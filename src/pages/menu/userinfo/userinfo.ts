@@ -43,8 +43,8 @@ export class UserinfoPage {
     this.personal = this.formDataService.getPersonal();
     this.photo = this.formDataService.getFacePhoto();
     this.carInfo = this.formDataService.getRider();
-
     this.userType = navParams.get('lastLoginClass');
+    console.log(this.userType);
 
     if(this.userType === 1) {
       this.carInfo = this.formDataService.getRider();

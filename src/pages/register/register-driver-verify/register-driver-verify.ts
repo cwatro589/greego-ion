@@ -4,7 +4,6 @@ import { RegisterDriverBankPage } from '../register-driver-bank/register-driver-
 
 import { DriverInfo } from '../../../form/formData.model';
 import { FormDataService } from '../../../form/formData.service';
-import { Camera, CameraOptions } from '@ionic-native/camera';
 
 /**
  * Generated class for the RegisterDriverVerifyPage page.
@@ -17,9 +16,6 @@ import { Camera, CameraOptions } from '@ionic-native/camera';
 @Component({
   selector: 'page-register-driver-verify',
   templateUrl: 'register-driver-verify.html',
-  providers : [
-    Camera
-  ]
 })
 export class RegisterDriverVerifyPage {
 
@@ -33,7 +29,7 @@ export class RegisterDriverVerifyPage {
 
   valid:boolean = false;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private formDataService: FormDataService, private camera:Camera) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private formDataService: FormDataService) {
   }
 
   ngOnInit() {
@@ -42,7 +38,7 @@ export class RegisterDriverVerifyPage {
 
   ionViewDidLoad() {
   }
-
+  
   validationCheck() {
     if (this.driverLicense && this.driverIdentification && this.driverInsurance) {
       this.valid = true;
@@ -64,43 +60,40 @@ export class RegisterDriverVerifyPage {
   }
 
   selectPicture(name) {
-    let cameraOptions: CameraOptions = {
-      quality: 100,
-      destinationType: this.camera.DestinationType.FILE_URI,
-      sourceType: this.camera.PictureSourceType.CAMERA,
-      encodingType: this.camera.EncodingType.JPEG,
-      mediaType: this.camera.MediaType.PICTURE,
-      targetWidth : 500,
-      targetHeight : 500,
-      saveToPhotoAlbum : false,
-      correctOrientation: true
-    };
-
-    this.camera.getPicture(cameraOptions).then((imageData) => {
-      console.log(imageData);
-
-      switch (name) {
-        case "driverLicense":
-          if (this.driverLicense == false) {
-            this.driverInfo.driverLicense = imageData;
-            this.driverLicense = true;
-          }
-          break;
-        case "driverIdentification":
-          if (this.driverIdentification == false) {
-            this.driverInfo.driverIdentification = imageData;
-            this.driverIdentification = true;
-          }
-          break;
-        case "driverInsurance":
-          if (this.driverInsurance == false) {
-            this.driverInfo.driverInsurance = imageData;
-            this.driverInsurance = true;
-          }
-          break;
-      }
-      this.validationCheck();
-    });
+    switch (name) {
+      case "driverLicense":
+        if (this.driverLicense == false) {
+          this.driverInfo.driverLicense = 'photo1';
+          this.driverLicense = true;
+        }
+        else {
+          this.driverInfo.driverLicense = undefined;
+          this.driverLicense = false;
+        }
+        break;
+      case "driverIdentification":
+        if (this.driverIdentification == false) {
+          this.driverInfo.driverIdentification = 'photo2';
+          this.driverIdentification = true;
+        }
+        else {
+          this.driverInfo.driverIdentification = undefined;
+          this.driverIdentification = false;
+        }
+        break;
+      case "driverInsurance":
+        if (this.driverInsurance == false) {
+          this.driverInfo.driverInsurance = 'photo3';
+          this.driverInsurance = true;
+        }
+        else {
+          this.driverInfo.driverInsurance = undefined;
+          this.driverInsurance = false;
+        }
+        
+        break;
+    }
+    this.validationCheck();
   }
 
   goto() {

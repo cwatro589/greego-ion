@@ -19,11 +19,11 @@ import { RegisterFacephotoPage } from '../pages/register/register-facephoto/regi
 import { RegisterDriverVerifyPage } from '../pages/register/register-driver-verify/register-driver-verify';
 import { RegisterDriverPrefPage } from '../pages/register/register-driver-pref/register-driver-pref';
 import { RegisterDriverBankPage } from '../pages/register/register-driver-bank/register-driver-bank';
-import { RegisterDriverInfoPage } from '../pages/register/register-driver-info/register-driver-info';
 import { RegisterDriverAgreementPage, MathcesCategoryPipe } from '../pages/register/register-driver-agreement/register-driver-agreement';
 import { RegisterUserCompletedPage } from '../pages/register/register-user-completed/register-user-completed';
 import { TripcompletedPage } from '../pages/driver/tripcompleted/tripcompleted';
 import { TripcompletedDriverPage } from '../pages/driver/tripcompleted-driver/tripcompleted-driver';
+
 
 import { UserPage } from '../pages/user/user';
 import { DriverPage } from '../pages/driver/driver';
@@ -35,9 +35,11 @@ import { FormDataService }    from '../form/formData.service';
 import { RegisterFlowService }    from '../registerFlow/registerFlow.service';
 import { EqualValidator } from './directives/equal-validator';
 import { IonicStorageModule } from '@ionic/storage';
-import { Transfer } from '@ionic-native/transfer';
 import {PromotioninputPage} from "../pages/menu/promotion/promotioninput/promotioninput";
-import {AddcreditcardPage} from '../pages/menu/payments/addcreditcard/addcreditcard';
+import {AddcreditcardPage} from "../pages/menu/payments/addcreditcard/addcreditcard";
+import {Transfer} from "@ionic-native/transfer";
+import {MessagesentPage} from "../pages/menu/customersupport/messagesent/messagesent";
+
 
 @NgModule({
   declarations: [
@@ -54,7 +56,6 @@ import {AddcreditcardPage} from '../pages/menu/payments/addcreditcard/addcreditc
     RegisterDriverVerifyPage,
     RegisterDriverPrefPage,
     RegisterDriverBankPage,
-    RegisterDriverInfoPage,
     RegisterDriverAgreementPage,
     RegisterUserCompletedPage,
     MathcesCategoryPipe,
@@ -64,7 +65,8 @@ import {AddcreditcardPage} from '../pages/menu/payments/addcreditcard/addcreditc
     TripcompletedPage,
     TripcompletedDriverPage,
     PromotioninputPage,
-    AddcreditcardPage
+    AddcreditcardPage,
+    MessagesentPage
   ],
   imports: [
     BrowserModule,
@@ -88,7 +90,6 @@ import {AddcreditcardPage} from '../pages/menu/payments/addcreditcard/addcreditc
     RegisterDriverVerifyPage,
     RegisterDriverPrefPage,
     RegisterDriverBankPage,
-    RegisterDriverInfoPage,
     RegisterDriverAgreementPage,
     RegisterUserCompletedPage,
     UserPage,
@@ -96,7 +97,8 @@ import {AddcreditcardPage} from '../pages/menu/payments/addcreditcard/addcreditc
     TripcompletedPage,
     TripcompletedDriverPage,
     PromotioninputPage,
-    AddcreditcardPage
+    AddcreditcardPage,
+    MessagesentPage
   ],
   providers: [
     StatusBar,

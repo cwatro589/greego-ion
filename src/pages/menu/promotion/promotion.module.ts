@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { IonicPageModule } from 'ionic-angular';
 import { PromotionPage } from './promotion';
-import {PromotioninputPage} from "./promotioninput/promotioninput";
 
 @NgModule({
   declarations: [
@@ -9,6 +8,6 @@ import {PromotioninputPage} from "./promotioninput/promotioninput";
   ],
   imports: [
     IonicPageModule.forChild(PromotionPage),
-  ]
+  ],
 })
 export class PromotionPageModule {}

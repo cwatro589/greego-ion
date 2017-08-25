@@ -14,8 +14,8 @@
 
 
 <ion-content padding>
-   <ion-row class="noMargin">
-     <ion-col col-12>
+  <ion-row class="noMargin">
+    <ion-col col-12>
       <ion-item>
         <ion-label color="labelLight" stacked [hidden]="!creditcardnumber.valid">Credit Card Number</ion-label>
         <ion-input type="number" #creditcardnumber="ngModel" required id="creditcardnumber" name="creditcardnumber" [(ngModel)]="card.cardNum" placeholder="Credit Card Number"></ion-input>
@@ -43,7 +43,7 @@
   <ion-row>
     <ion-item>
       <ion-label>Set Default</ion-label>
-      <ion-checkbox></ion-checkbox>
+      <ion-checkbox [checked]="checked" (click)="checkbox()"></ion-checkbox>
     </ion-item>
   </ion-row>
   <ion-row>

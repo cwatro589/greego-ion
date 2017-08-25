@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { PhoneupdatePage } from '../phoneupdate/phoneupdate';
-import {Http} from "@angular/http";
-import {Domain} from "../../../form/formData.model";
-import {DriverPage} from "../../driver/driver";
 import {FormDataService} from "../../../form/formData.service";
+import {Domain} from "../../../form/formData.model";
+import {Http} from "@angular/http";
+import {DriverPage} from "../../driver/driver";
 
 /**
  * Generated class for the LoginVerifyPage page.
@@ -25,6 +25,7 @@ export class LoginVerifyPage {
   code: string;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public http: Http, private domain: Domain, private formDataService: FormDataService) {
+
   }
 
   ionViewDidLoad() {
@@ -41,35 +42,28 @@ export class LoginVerifyPage {
       phoneNum : this.formDataService.getPersonal().phone,
       code : this.code
     };
-    console.log(json);
-    this.http.post(this.domain.ip + "/api/users/test", {email : 'hbc8141@naver.com'}, {})
+
+    this.http.post(this.domain.ip + "/api/auth/verify", json, {})
       .map(res => res.json())
-      .subscribe(loginRes => {
-        console.log(loginRes);
-        this.navCtrl.setRoot(DriverPage, {
-          data : loginRes
-        });
-      })
-    // this.http.post(this.domain.ip + "/api/auth/verify", json, {})
-    //   .map(res => res.json())
-    //   .subscribe(verifyRes => {
-    //     if(verifyRes.success) {
-    //       const json = {
-    //         email : this.formDataService.getPersonal().email,
-    //         codeVerify : true,
-    //         userVerify : true
-    //       };
-    //
-    //       this.http.post(this.domain.ip + "/api/auth/login", json, {})
-    //         .map(res => res.json())
-    //         .subscribe(loginRes => {
-    //           if(loginRes.success) {
-    //             this.navCtrl.setRoot(DriverPage, {
-    //               data : loginRes
-    //             });
-    //           }
-    //         })
-    //     }
-    //   });
+      .subscribe(verifyRes => {
+        if(verifyRes.success) {
+          const json = {
+            email : this.formDataService.getPersonal().email,
+            codeVerify : true,
+            userVerify : true
+          };
+
+          this.http.post(this.domain.ip + "/api/auth/login", json, {})
+            .map(res => res.json())
+            .subscribe(loginRes => {
+              if(loginRes.success) {
+                console.log(loginRes, "loginRes");
+                this.navCtrl.setRoot(DriverPage, {
+                  data : loginRes
+                });
+              }
+            })
+        }
+      });
   }
 }

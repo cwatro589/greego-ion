@@ -67,7 +67,6 @@ export class RegisterDriverPrefPage implements OnInit {
 
   ngOnInit() {
       this.driverPref = this.formDataService.getDriver();
-      console.log(this.driverPref);
   }
 
   ionViewDidLoad() {
@@ -75,10 +74,9 @@ export class RegisterDriverPrefPage implements OnInit {
 
   goto() {
     this.formDataService.setDriver(this.driverPref);
-    console.log(this.driverPref);
     this.navCtrl.push(RegisterDriverVerifyPage);
   }
-
+  
   public trackByIndex(index: number, item) {
     return index;
   }

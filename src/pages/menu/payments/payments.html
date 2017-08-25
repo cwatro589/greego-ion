@@ -27,9 +27,9 @@
           </div>
           <div class="cardNumber">**** **** **** {{creditcard.last4}}</div>
         </div>
-        <i class="fa fa-trash-o deleteBtn" *ngIf="!changeCreditCard" (click)="removeCreditCard(creditcard.card)"></i>
+        <!--<i class="fa fa-trash-o deleteBtn" *ngIf="!changeCreditCard" (click)="removeCreditCard(creditcard.last4)"></i>-->
       </ion-label>
-      <!--<ion-radio [checked]="creditcard.default" value="{{creditcard.id}}" (click)="!changeCreditCard ? setDefault() : selectCreditCard()"></ion-radio>-->
+      <ion-radio id="{{creditcard.last4}}" [checked]="creditcard.default" value="{{creditcard.default}}" (click)="selectCreditCard(creditcard.last4)"></ion-radio>
     </ion-item>
   </ion-list>
   <ion-row *ngIf="!changeCreditCard">

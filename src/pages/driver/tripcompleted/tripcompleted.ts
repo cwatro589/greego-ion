@@ -21,8 +21,10 @@ export class TripcompletedPage {
 
   ratings:number = 0;
   ratingAvail:boolean = false;
+  list:any;
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
+    this.list = navParams.get('list');
   }
 
   ionViewDidLoad() {
